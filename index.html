@@ -1,135 +1,690 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LUCID — Politique de confidentialit&eacute; / Privacy Policy</title>
+    <title>LUCID &mdash; Strategic Hex Puzzle Game</title>
+    <meta name="description" content="LUCID is a tactical hex-grid puzzle game set in a neon cyberpunk dreamscape. Stabilize the grid, contain the Rift, master lucidity.">
+    <meta property="og:title" content="LUCID &mdash; Strategic Hex Puzzle">
+    <meta property="og:description" content="Tactical hex-grid puzzle in a neon cyberpunk dreamscape. Stabilize the grid, contain the Rift, master lucidity.">
+    <meta property="og:image" content="screenshots/Presentation.png">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;text y='.9em' font-size='90'&gt;&#11042;&lt;/text&gt;&lt;/svg&gt;">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap');
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0a14; color: #c8c8d0; line-height: 1.7; }
-        .container { max-width: 720px; margin: 0 auto; padding: 40px 24px; }
-        h1 { color: #00ffc8; font-size: 2em; margin-bottom: 8px; }
-        h2 { color: #00d4a8; font-size: 1.4em; margin-top: 36px; margin-bottom: 12px; border-bottom: 1px solid #1a1a2e; padding-bottom: 6px; }
-        h3 { color: #9090a0; font-size: 1.1em; margin-top: 24px; margin-bottom: 8px; }
-        p, li { margin-bottom: 10px; }
-        ul { padding-left: 24px; }
-        .lang-switch { text-align: right; margin-bottom: 24px; }
-        .lang-switch a { color: #00ffc8; text-decoration: none; padding: 6px 16px; border: 1px solid #00ffc8; border-radius: 4px; font-size: 0.9em; }
-        .lang-switch a:hover { background: #00ffc820; }
-        .section { margin-bottom: 32px; }
-        .highlight { background: #0f1a2a; border-left: 3px solid #00ffc8; padding: 16px 20px; border-radius: 4px; margin: 16px 0; }
-        .date { color: #606070; font-size: 0.85em; margin-top: 40px; }
-        hr { border: none; border-top: 1px solid #1a1a2e; margin: 48px 0; }
-        a { color: #00ffc8; }
+
+        :root {
+            --cyan: #00ffc8;
+            --cyan-dim: #00d4a8;
+            --magenta: #e000ff;
+            --violet: #8040ff;
+            --red: #ff1040;
+            --gold: #ffd700;
+            --bg-deep: #050510;
+            --bg-card: #0a0a1a;
+            --bg-card-hover: #0f0f25;
+            --text: #c8c8d8;
+            --text-dim: #707088;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-deep);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* === HERO === */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 24px;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 50% 40%, rgba(0,255,200,0.06) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 50% at 30% 70%, rgba(128,64,255,0.04) 0%, transparent 50%),
+                radial-gradient(ellipse 50% 40% at 70% 30%, rgba(224,0,255,0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        /* Animated grid background */
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            opacity: 0.04;
+            background-image:
+                linear-gradient(rgba(0,255,200,0.3) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,255,200,0.3) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: gridDrift 20s linear infinite;
+        }
+        @keyframes gridDrift {
+            from { transform: translate(0, 0); }
+            to { transform: translate(60px, 60px); }
+        }
+
+        .hero-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(4rem, 12vw, 8rem);
+            font-weight: 900;
+            letter-spacing: 0.15em;
+            color: var(--cyan);
+            text-shadow:
+                0 0 40px rgba(0,255,200,0.3),
+                0 0 80px rgba(0,255,200,0.15),
+                0 0 120px rgba(0,255,200,0.05);
+            position: relative;
+            z-index: 1;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+        @keyframes titleGlow {
+            from { text-shadow: 0 0 40px rgba(0,255,200,0.3), 0 0 80px rgba(0,255,200,0.15); }
+            to { text-shadow: 0 0 60px rgba(0,255,200,0.5), 0 0 120px rgba(0,255,200,0.25); }
+        }
+
+        .hero-subtitle {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+            font-weight: 400;
+            letter-spacing: 0.3em;
+            color: var(--text-dim);
+            margin-top: 16px;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-tagline {
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
+            color: var(--text);
+            margin-top: 32px;
+            max-width: 600px;
+            position: relative;
+            z-index: 1;
+            font-weight: 300;
+        }
+
+        .hero-cta {
+            margin-top: 48px;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 36px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .btn-primary {
+            background: var(--cyan);
+            color: var(--bg-deep);
+            box-shadow: 0 0 30px rgba(0,255,200,0.3), inset 0 0 30px rgba(255,255,255,0.1);
+        }
+        .btn-primary:hover {
+            box-shadow: 0 0 50px rgba(0,255,200,0.5), inset 0 0 30px rgba(255,255,255,0.15);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--cyan);
+            border: 1.5px solid rgba(0,255,200,0.4);
+        }
+        .btn-secondary:hover {
+            border-color: var(--cyan);
+            background: rgba(0,255,200,0.08);
+            transform: translateY(-2px);
+        }
+
+        /* Hero banner image */
+        .hero-banner {
+            position: relative;
+            z-index: 1;
+            margin-top: 48px;
+            max-width: 700px;
+            width: 90%;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(0,255,200,0.15);
+            box-shadow:
+                0 0 60px rgba(0,255,200,0.1),
+                0 20px 60px rgba(0,0,0,0.5);
+        }
+        .hero-banner img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--text-dim);
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            animation: bounce 2s ease-in-out infinite;
+        }
+        .scroll-hint::after {
+            content: '';
+            display: block;
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--text-dim), transparent);
+            margin: 12px auto 0;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(8px); }
+        }
+
+        /* === SECTIONS === */
+        section {
+            padding: 100px 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 16px;
+            color: #fff;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            margin-bottom: 64px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* === FEATURES === */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(0,255,200,0.08);
+            border-radius: 16px;
+            padding: 36px 28px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .feature-card:hover {
+            background: var(--bg-card-hover);
+            border-color: rgba(0,255,200,0.2);
+            transform: translateY(-4px);
+        }
+        .feature-card:hover::before { opacity: 1; }
+
+        .feature-icon {
+            font-size: 2.2rem;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .feature-card h3 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--cyan);
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* === GAMEPLAY === */
+        .gameplay {
+            background: linear-gradient(180deg, transparent, rgba(0,255,200,0.02), transparent);
+        }
+
+        .mechanics-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .mechanic {
+            text-align: center;
+            padding: 24px;
+        }
+
+        .mechanic-icon {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            position: relative;
+        }
+        .mechanic-icon::after {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 50%;
+            border: 1.5px solid;
+            opacity: 0.3;
+        }
+
+        .mechanic-node .mechanic-icon { background: rgba(0,255,200,0.1); }
+        .mechanic-node .mechanic-icon::after { border-color: var(--cyan); }
+        .mechanic-catalyst .mechanic-icon { background: rgba(255,215,0,0.1); }
+        .mechanic-catalyst .mechanic-icon::after { border-color: var(--gold); }
+        .mechanic-rift .mechanic-icon { background: rgba(224,0,255,0.1); }
+        .mechanic-rift .mechanic-icon::after { border-color: var(--magenta); }
+        .mechanic-lucidity .mechanic-icon { background: rgba(255,16,64,0.1); }
+        .mechanic-lucidity .mechanic-icon::after { border-color: var(--red); }
+
+        .mechanic h3 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1rem;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+        .mechanic p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        /* === MODES === */
+        .modes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .mode-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(128,64,255,0.15);
+            border-radius: 16px;
+            padding: 40px 32px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .mode-card:hover {
+            border-color: rgba(128,64,255,0.4);
+            transform: translateY(-4px);
+        }
+
+        .mode-card .level-name {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .mode-card .level-desc {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+        }
+
+        .mode-card.reve .level-name { color: #00b8ff; }
+        .mode-card.songe .level-name { color: var(--violet); }
+        .mode-card.lucide .level-name { color: var(--magenta); }
+        .mode-card.chain .level-name { color: var(--red); }
+
+        .mode-card .difficulty-bar {
+            height: 3px;
+            border-radius: 2px;
+            margin: 16px auto;
+            width: 80%;
+        }
+        .mode-card.reve .difficulty-bar { background: linear-gradient(90deg, #00b8ff 30%, transparent); }
+        .mode-card.songe .difficulty-bar { background: linear-gradient(90deg, var(--violet) 55%, transparent); }
+        .mode-card.lucide .difficulty-bar { background: linear-gradient(90deg, var(--magenta) 80%, transparent); }
+        .mode-card.chain .difficulty-bar { background: linear-gradient(90deg, var(--red) 100%); }
+
+        /* === SCREENSHOTS === */
+        .screenshots-scroll {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 20px 0;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+        .screenshots-scroll::-webkit-scrollbar { height: 4px; }
+        .screenshots-scroll::-webkit-scrollbar-track { background: var(--bg-card); border-radius: 2px; }
+        .screenshots-scroll::-webkit-scrollbar-thumb { background: var(--cyan-dim); border-radius: 2px; }
+
+        .screenshot-item {
+            min-width: 240px;
+            height: 420px;
+            border-radius: 16px;
+            scroll-snap-align: center;
+            flex-shrink: 0;
+            overflow: hidden;
+            border: 1px solid rgba(0,255,200,0.1);
+            transition: all 0.3s ease;
+        }
+        .screenshot-item:hover {
+            border-color: rgba(0,255,200,0.3);
+            transform: scale(1.02);
+        }
+        .screenshot-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* === DOWNLOAD === */
+        .download {
+            text-align: center;
+            padding: 120px 24px;
+            position: relative;
+        }
+        .download::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 70% 50% at 50% 50%, rgba(0,255,200,0.04), transparent);
+            pointer-events: none;
+        }
+
+        .download .section-title { margin-bottom: 24px; }
+        .download p { color: var(--text-dim); margin-bottom: 40px; font-size: 1.1rem; }
+
+        .price-tag {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.2rem;
+            color: var(--cyan);
+            margin-bottom: 8px;
+        }
+
+        /* === FOOTER === */
+        footer {
+            border-top: 1px solid rgba(0,255,200,0.08);
+            padding: 40px 24px;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+
+        footer a {
+            color: var(--cyan-dim);
+            text-decoration: none;
+            margin: 0 16px;
+        }
+        footer a:hover { color: var(--cyan); }
+
+        .footer-links { margin-bottom: 16px; }
+
+        /* === NAV === */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(5,5,16,0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0,255,200,0.06);
+            transition: all 0.3s;
+        }
+
+        .nav-logo {
+            font-family: 'Orbitron', monospace;
+            font-weight: 900;
+            font-size: 1.2rem;
+            color: var(--cyan);
+            text-decoration: none;
+            letter-spacing: 0.1em;
+        }
+
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            margin-left: 32px;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--cyan); }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 768px) {
+            nav { padding: 12px 16px; }
+            .nav-links a { margin-left: 16px; font-size: 0.8rem; }
+            section { padding: 64px 16px; }
+            .features-grid { grid-template-columns: 1fr; }
+            .modes-grid { grid-template-columns: 1fr; }
+            .hero-cta { flex-direction: column; align-items: center; }
+        }
     </style>
 </head>
 <body>
-<div class="container">
 
-<!-- ===================== FRANCAIS ===================== -->
-<div id="fr">
-    <div class="lang-switch"><a href="#en">English version below</a></div>
-
-    <h1>Politique de confidentialit&eacute;</h1>
-    <p><strong>LUCID</strong> &mdash; Jeu de puzzle hexagonal<br>
-    &Eacute;diteur : Californy Lana</p>
-
-    <h2>R&eacute;sum&eacute;</h2>
-    <div class="highlight">
-        <strong>LUCID ne collecte aucune donn&eacute;e personnelle.</strong><br>
-        Le jeu fonctionne enti&egrave;rement hors ligne. Aucune information n'est transmise &agrave; un serveur, un tiers ou l'&eacute;diteur.
+<!-- NAV -->
+<nav>
+    <a href="#" class="nav-logo">LUCID</a>
+    <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#gameplay">Gameplay</a>
+        <a href="#modes">Modes</a>
+        <a href="#download">Download</a>
+        <a href="support.html">Support</a>
     </div>
+</nav>
 
-    <h2>Donn&eacute;es stock&eacute;es localement</h2>
-    <p>LUCID enregistre uniquement des donn&eacute;es de gameplay sur votre appareil :</p>
-    <ul>
-        <li><strong>Pr&eacute;f&eacute;rences</strong> : son (on/off), vibrations (on/off), langue (FR/EN)</li>
-        <li><strong>Progression</strong> : le&ccedil;ons compl&eacute;t&eacute;es, niveaux d&eacute;bloqu&eacute;s</li>
-        <li><strong>Statistiques</strong> : parties jou&eacute;es, victoires, meilleurs scores, tours, temps par niveau</li>
-        <li><strong>Mode cha&icirc;ne</strong> : sauvegarde de la partie en cours, meilleur run</li>
-    </ul>
-    <p>Ces donn&eacute;es sont stock&eacute;es localement via le syst&egrave;me PlayerPrefs de Unity et ne quittent jamais votre appareil.</p>
-
-    <h2>Aucune collecte de donn&eacute;es personnelles</h2>
-    <p>LUCID ne collecte, ne stocke et ne transmet aucune donn&eacute;e personnelle, notamment :</p>
-    <ul>
-        <li>Aucun nom, email ou identifiant</li>
-        <li>Aucune donn&eacute;e de localisation</li>
-        <li>Aucun identifiant publicitaire</li>
-        <li>Aucune donn&eacute;e d'utilisation transmise &agrave; distance</li>
-    </ul>
-
-    <h2>Aucun acc&egrave;s r&eacute;seau</h2>
-    <p>Le jeu ne n&eacute;cessite pas de connexion Internet et ne communique avec aucun serveur. Il n'int&egrave;gre aucun SDK d'analytics, de publicit&eacute; ou de suivi.</p>
-
-    <h2>Suppression des donn&eacute;es</h2>
-    <p>Vous pouvez supprimer toutes les donn&eacute;es enregistr&eacute;es &agrave; tout moment :</p>
-    <ul>
-        <li>Dans le jeu : <strong>Statistiques &rarr; Effacer mes donn&eacute;es</strong></li>
-        <li>En d&eacute;sinstallant l'application (supprime automatiquement toutes les donn&eacute;es locales)</li>
-    </ul>
-
-    <h2>Enfants</h2>
-    <p>LUCID ne collectant aucune donn&eacute;e personnelle, il est compatible avec une utilisation par des enfants sans pr&eacute;occupation li&eacute;e &agrave; la vie priv&eacute;e.</p>
-
-    <h2>Contact</h2>
-    <p>Pour toute question : <strong>californylana@gmail.com</strong></p>
-</div>
-
-<hr id="en">
-
-<!-- ===================== ENGLISH ===================== -->
-<div>
-    <div class="lang-switch"><a href="#fr">Version fran&ccedil;aise ci-dessus</a></div>
-
-    <h1>Privacy Policy</h1>
-    <p><strong>LUCID</strong> &mdash; Hexagonal puzzle game<br>
-    Publisher: Californy Lana</p>
-
-    <h2>Summary</h2>
-    <div class="highlight">
-        <strong>LUCID does not collect any personal data.</strong><br>
-        The game works entirely offline. No information is sent to any server, third party, or the publisher.
+<!-- HERO -->
+<div class="hero">
+    <div class="hero-grid"></div>
+    <h1 class="hero-title">LUCID</h1>
+    <p class="hero-subtitle">Strategic Hex Puzzle</p>
+    <p class="hero-tagline">Your mind is fracturing. Stabilize the grid, contain the Rift, and master your lucidity before the chaos consumes everything.</p>
+    <div class="hero-cta">
+        <a href="#download" class="btn btn-primary">&#9654; Get on Google Play</a>
+        <a href="#gameplay" class="btn btn-secondary">Learn more</a>
     </div>
-
-    <h2>Data stored locally</h2>
-    <p>LUCID only saves gameplay data on your device:</p>
-    <ul>
-        <li><strong>Preferences</strong>: sound (on/off), haptics (on/off), language (FR/EN)</li>
-        <li><strong>Progression</strong>: completed lessons, unlocked levels</li>
-        <li><strong>Statistics</strong>: games played, wins, best scores, turns, times per level</li>
-        <li><strong>Chain mode</strong>: current run save, best run</li>
-    </ul>
-    <p>This data is stored locally using Unity's PlayerPrefs system and never leaves your device.</p>
-
-    <h2>No personal data collection</h2>
-    <p>LUCID does not collect, store, or transmit any personal data, including:</p>
-    <ul>
-        <li>No names, emails, or identifiers</li>
-        <li>No location data</li>
-        <li>No advertising identifiers</li>
-        <li>No remotely transmitted usage data</li>
-    </ul>
-
-    <h2>No network access</h2>
-    <p>The game does not require an Internet connection and does not communicate with any server. It does not include any analytics, advertising, or tracking SDK.</p>
-
-    <h2>Data deletion</h2>
-    <p>You can delete all saved data at any time:</p>
-    <ul>
-        <li>In-game: <strong>Statistics &rarr; Delete my data</strong></li>
-        <li>By uninstalling the app (automatically removes all local data)</li>
-    </ul>
-
-    <h2>Children</h2>
-    <p>Since LUCID does not collect any personal data, it is safe for use by children with no privacy concerns.</p>
-
-    <h2>Contact</h2>
-    <p>For any questions: <strong>californylana@gmail.com</strong></p>
+    <div class="hero-banner">
+        <img src="screenshots/Presentation.png" alt="LUCID - Stabilize the Dream">
+    </div>
+    <div class="scroll-hint">Scroll</div>
 </div>
 
-<p class="date">Derni&egrave;re mise &agrave; jour / Last updated: 2025-02-16</p>
+<!-- FEATURES -->
+<section id="features">
+    <h2 class="section-title">Features</h2>
+    <p class="section-subtitle">A pure tactical puzzle &mdash; no filler, no timers, no ads. Just you against the grid.</p>
 
-</div>
+    <div class="features-grid">
+        <div class="feature-card">
+            <span class="feature-icon">&#11042;</span>
+            <h3>Hex Grid Tactics</h3>
+            <p>Every cell on the hexagonal grid matters. Activate, move, or sacrifice Nodes to stabilize your surroundings and push back the entropy.</p>
+        </div>
+        <div class="feature-card">
+            <span class="feature-icon">&#9889;</span>
+            <h3>The Rift Fights Back</h3>
+            <p>The Rift retaliates against every move near it. Each stabilization triggers a counter-attack. Outsmart it or be overwhelmed.</p>
+        </div>
+        <div class="feature-card">
+            <span class="feature-icon">&#128279;</span>
+            <h3>Chain Reactions</h3>
+            <p>Catalysts invert their neighbors, stressed Nodes cascade instability. Master the chain reactions to turn chaos into order.</p>
+        </div>
+        <div class="feature-card">
+            <span class="feature-icon">&#127911;</span>
+            <h3>Synthwave Soundtrack</h3>
+            <p>Handcrafted procedural audio and synthwave music immerse you in a neon cyberpunk dreamscape.</p>
+        </div>
+        <div class="feature-card">
+            <span class="feature-icon">&#128274;</span>
+            <h3>100% Offline</h3>
+            <p>No accounts. No ads. No data collection. No internet required. Your game, your device, your privacy.</p>
+        </div>
+        <div class="feature-card">
+            <span class="feature-icon">&#127922;</span>
+            <h3>Seed Replay</h3>
+            <p>Every board has a unique seed. Share it with friends to challenge them on the exact same puzzle.</p>
+        </div>
+    </div>
+</section>
+
+<!-- GAMEPLAY -->
+<section id="gameplay" class="gameplay">
+    <h2 class="section-title">How It Works</h2>
+    <p class="section-subtitle">Four core mechanics. Infinite strategic depth.</p>
+
+    <div class="mechanics-list">
+        <div class="mechanic mechanic-node">
+            <div class="mechanic-icon">&#9678;</div>
+            <h3>Nodes</h3>
+            <p>Activate to stabilize neighbors. Move to reposition. Sacrifice to lock down threats &mdash; at a cost.</p>
+        </div>
+        <div class="mechanic mechanic-catalyst">
+            <div class="mechanic-icon">&#11209;</div>
+            <h3>Catalysts</h3>
+            <p>Single-use powerhouses. Invert the state of all adjacent cells. High risk, high reward.</p>
+        </div>
+        <div class="mechanic mechanic-rift">
+            <div class="mechanic-icon">&#9670;</div>
+            <h3>The Rift</h3>
+            <p>The source of chaos. Indestructible. Retaliates when you stabilize nearby. Contain it to win.</p>
+        </div>
+        <div class="mechanic mechanic-lucidity">
+            <div class="mechanic-icon">&#9673;</div>
+            <h3>Lucidity</h3>
+            <p>Every action costs Lucidity. Run out and your mind collapses. Efficient play earns bonuses.</p>
+        </div>
+    </div>
+</section>
+
+<!-- GAME MODES -->
+<section id="modes">
+    <h2 class="section-title">Game Modes</h2>
+    <p class="section-subtitle">From accessible to extreme. Find your challenge.</p>
+
+    <div class="modes-grid">
+        <div class="mode-card reve">
+            <div class="level-name">R&Ecirc;VE</div>
+            <div class="difficulty-bar"></div>
+            <p class="level-desc">Gentle introduction. Generous lucidity, few threats. Learn the fundamentals.</p>
+        </div>
+        <div class="mode-card songe">
+            <div class="level-name">SONGE</div>
+            <div class="difficulty-bar"></div>
+            <p class="level-desc">Tighter resources, more instability. Every move counts.</p>
+        </div>
+        <div class="mode-card lucide">
+            <div class="level-name">LUCIDE</div>
+            <div class="difficulty-bar"></div>
+            <p class="level-desc">Extreme difficulty. Minimal lucidity, maximum chaos. For the dedicated.</p>
+        </div>
+        <div class="mode-card chain">
+            <div class="level-name">CHAIN MODE</div>
+            <div class="difficulty-bar"></div>
+            <p class="level-desc">Infinite escalating arenas. One defeat ends it all. How far can you go?</p>
+        </div>
+    </div>
+</section>
+
+<!-- SCREENSHOTS -->
+<section id="screenshots">
+    <h2 class="section-title">Screenshots</h2>
+    <p class="section-subtitle">A glimpse into the dreamscape.</p>
+
+    <div class="screenshots-scroll">
+        <div class="screenshot-item"><img src="screenshots/menu.jpg" alt="LUCID Main Menu" loading="lazy"></div>
+        <div class="screenshot-item"><img src="screenshots/gameplay-1.jpg" alt="LUCID Gameplay - Hex Grid" loading="lazy"></div>
+        <div class="screenshot-item"><img src="screenshots/gameplay-2.jpg" alt="LUCID Gameplay - Actions" loading="lazy"></div>
+        <div class="screenshot-item"><img src="screenshots/victory.jpg" alt="LUCID Victory - Chain Mode" loading="lazy"></div>
+        <div class="screenshot-item"><img src="screenshots/defeat.jpg" alt="LUCID Defeat - Chain Recap" loading="lazy"></div>
+    </div>
+</section>
+
+<!-- DOWNLOAD -->
+<section id="download" class="download">
+    <h2 class="section-title">Ready to Enter the Dream?</h2>
+    <p>Free to play &mdash; unlock Chain Mode, Seeds &amp; Stats with a single purchase.</p>
+    <div class="hero-cta">
+        <a href="#" class="btn btn-primary">&#9654; Google Play</a>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="support.html">Support</a>
+        <a href="mailto:californylana@gmail.com">Contact</a>
+    </div>
+    <p>&copy; 2025 Californy Lana. All rights reserved.</p>
+</footer>
+
+<!-- Smooth scroll -->
+<script>
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+});
+</script>
+
 </body>
 </html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUCID &mdash; Support</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --cyan: #00ffc8;
+            --cyan-dim: #00d4a8;
+            --bg-deep: #050510;
+            --bg-card: #0a0a1a;
+            --text: #c8c8d8;
+            --text-dim: #707088;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-deep);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        nav {
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0,255,200,0.06);
+        }
+        .nav-logo {
+            font-family: 'Orbitron', monospace;
+            font-weight: 900;
+            font-size: 1.2rem;
+            color: var(--cyan);
+            text-decoration: none;
+            letter-spacing: 0.1em;
+        }
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.85rem;
+            margin-left: 32px;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--cyan); }
+
+        .container {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 60px 24px 80px;
+        }
+
+        h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: var(--text-dim);
+            font-size: 1.05rem;
+            margin-bottom: 48px;
+        }
+
+        h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--cyan);
+            margin-top: 40px;
+            margin-bottom: 12px;
+            letter-spacing: 0.03em;
+        }
+
+        p, li { margin-bottom: 12px; font-size: 0.95rem; }
+        ul { padding-left: 24px; }
+
+        .faq-item {
+            background: var(--bg-card);
+            border: 1px solid rgba(0,255,200,0.06);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+
+        .faq-item h3 {
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .faq-item p {
+            color: var(--text-dim);
+            margin-bottom: 0;
+        }
+
+        .highlight {
+            background: rgba(0,255,200,0.04);
+            border-left: 3px solid var(--cyan);
+            padding: 20px 24px;
+            border-radius: 8px;
+            margin: 24px 0;
+        }
+
+        .contact-box {
+            background: var(--bg-card);
+            border: 1px solid rgba(0,255,200,0.1);
+            border-radius: 16px;
+            padding: 36px;
+            text-align: center;
+            margin-top: 48px;
+        }
+
+        .contact-box h2 {
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+
+        .contact-box a {
+            color: var(--cyan);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        .contact-box a:hover { text-decoration: underline; }
+
+        footer {
+            border-top: 1px solid rgba(0,255,200,0.08);
+            padding: 40px 24px;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+        footer a {
+            color: var(--cyan-dim);
+            text-decoration: none;
+            margin: 0 16px;
+        }
+        footer a:hover { color: var(--cyan); }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="nav-logo">LUCID</a>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="mailto:californylana@gmail.com">Contact</a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <h1>Support</h1>
+    <p class="subtitle">Find answers to common questions or reach out to us.</p>
+
+    <h2>FAQ</h2>
+
+    <div class="faq-item">
+        <h3>How do I reset my progress?</h3>
+        <p>Go to Statistics from the main menu, then tap "Delete my data". This will reset all stats, unlocked levels, and saved chain progress.</p>
+    </div>
+
+    <div class="faq-item">
+        <h3>The game runs slowly on my device</h3>
+        <p>LUCID is designed to run smoothly on most Android devices. If you experience performance issues, try closing other apps running in the background. The game requires Android 7.1 (API 25) or higher.</p>
+    </div>
+
+    <div class="faq-item">
+        <h3>How do I unlock new difficulty levels?</h3>
+        <p>Win the previous level to unlock the next one. Beat R&Ecirc;VE to unlock SONGE, beat SONGE to unlock LUCIDE. Chain Mode unlocks after your first victory on any level.</p>
+    </div>
+
+    <div class="faq-item">
+        <h3>What is the Seed number?</h3>
+        <p>Every board is generated from a unique seed (shown as a hex code like #A3F2). Share it with friends so they can play the exact same puzzle and compare strategies.</p>
+    </div>
+
+    <div class="faq-item">
+        <h3>How does Chain Mode work?</h3>
+        <p>Chain Mode is an infinite gauntlet of escalating arenas. You play R&Ecirc;VE, then SONGE, then LUCIDE, then increasingly harder variants. One defeat ends your run. Your score accumulates across all arenas.</p>
+    </div>
+
+    <div class="faq-item">
+        <h3>Does the game require an internet connection?</h3>
+        <p>No. LUCID works 100% offline. No accounts, no ads, no data is ever sent anywhere. All your progress is stored locally on your device.</p>
+    </div>
+
+    <div class="faq-item">
+        <h3>How do I change the language?</h3>
+        <p>During a game, tap the pause button (II), then tap the FR/EN toggle to switch between French and English.</p>
+    </div>
+
+    <div class="faq-item">
+        <h3>I purchased the premium features but they&apos;re not showing</h3>
+        <p>Try restarting the app. If the issue persists, make sure your Google Play purchase was completed successfully by checking your purchase history in the Google Play app. Contact us if you need further help.</p>
+    </div>
+
+    <div class="highlight">
+        <strong>Tip:</strong> The tutorials teach you everything you need to know. If you're stuck, try replaying the lesson about the specific mechanic that's giving you trouble (Rift retaliation, chain reactions, or lucidity management).
+    </div>
+
+    <div class="contact-box">
+        <h2>Still need help?</h2>
+        <p>We're happy to assist. Send us an email and we'll get back to you as soon as possible.</p>
+        <br>
+        <a href="mailto:californylana@gmail.com">californylana@gmail.com</a>
+    </div>
+
+</div>
+
+<footer>
+    <a href="index.html">Home</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="mailto:californylana@gmail.com">Contact</a>
+    <br><br>
+    <p>&copy; 2025 Californy Lana. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
