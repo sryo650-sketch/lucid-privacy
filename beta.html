@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUCID &mdash; Devenir B&ecirc;ta-Testeur</title>
+    <meta name="description" content="Rejoignez le programme de test ferm&eacute; de LUCID sur Google Play. Testez le jeu en avant-premi&egrave;re !">
+    <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;text y='.9em' font-size='90'&gt;&#11042;&lt;/text&gt;&lt;/svg&gt;">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --cyan: #00ffc8;
+            --cyan-dim: #00d4a8;
+            --magenta: #e000ff;
+            --violet: #8040ff;
+            --bg-deep: #050510;
+            --bg-card: #0a0a1a;
+            --text: #c8c8d8;
+            --text-dim: #707088;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-deep);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Grid background */
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            opacity: 0.03;
+            background-image:
+                linear-gradient(rgba(0,255,200,0.3) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,255,200,0.3) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 40px 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Navigation */
+        .nav {
+            text-align: center;
+            padding: 20px 0 40px;
+        }
+        .nav a {
+            color: var(--cyan);
+            text-decoration: none;
+            font-family: 'Orbitron', monospace;
+            font-weight: 900;
+            font-size: 2rem;
+            letter-spacing: 0.15em;
+            text-shadow: 0 0 30px rgba(0,255,200,0.3);
+        }
+        .nav a:hover {
+            text-shadow: 0 0 50px rgba(0,255,200,0.5);
+        }
+
+        /* Hero section */
+        .hero-badge {
+            display: inline-block;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            color: var(--bg-deep);
+            background: var(--magenta);
+            padding: 6px 18px;
+            border-radius: 20px;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.8rem, 6vw, 2.5rem);
+            font-weight: 700;
+            color: var(--cyan);
+            text-shadow: 0 0 30px rgba(0,255,200,0.2);
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--text);
+            text-align: center;
+            margin-bottom: 48px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* What section */
+        .what-section {
+            background: var(--bg-card);
+            border: 1px solid rgba(0,255,200,0.1);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+
+        .what-section h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: var(--cyan);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 10px 0;
+            padding-left: 28px;
+            position: relative;
+            color: var(--text);
+            font-size: 0.95rem;
+        }
+
+        .feature-list li::before {
+            content: '\25C6';
+            position: absolute;
+            left: 0;
+            color: var(--magenta);
+            font-size: 0.8rem;
+        }
+
+        /* Steps */
+        .steps-section {
+            margin-bottom: 40px;
+        }
+
+        .steps-section h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: var(--cyan);
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(0,255,200,0.1);
+            border: 1px solid rgba(0,255,200,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--cyan);
+        }
+
+        .step-text {
+            padding-top: 6px;
+            font-size: 0.95rem;
+        }
+
+        /* Form */
+        .form-section {
+            background: var(--bg-card);
+            border: 1px solid rgba(224,0,255,0.15);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .form-section h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--magenta);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .form-section .form-note {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-dim);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--cyan);
+            box-shadow: 0 0 20px rgba(0,255,200,0.1);
+        }
+
+        .form-group input::placeholder {
+            color: var(--text-dim);
+        }
+
+        .submit-btn {
+            display: inline-block;
+            width: 100%;
+            padding: 16px 32px;
+            margin-top: 8px;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.1em;
+            color: var(--bg-deep);
+            background: var(--cyan);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            box-shadow: 0 0 30px rgba(0,255,200,0.2);
+        }
+
+        .submit-btn:hover {
+            background: #00ffdf;
+            box-shadow: 0 0 50px rgba(0,255,200,0.4);
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Success message */
+        .success-msg {
+            display: none;
+            padding: 20px;
+            background: rgba(0,255,200,0.08);
+            border: 1px solid rgba(0,255,200,0.3);
+            border-radius: 10px;
+            color: var(--cyan);
+            font-weight: 500;
+            margin-top: 16px;
+        }
+
+        /* Privacy note */
+        .privacy-note {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            text-align: center;
+            margin-top: 16px;
+        }
+
+        .privacy-note a {
+            color: var(--cyan-dim);
+            text-decoration: none;
+        }
+
+        .privacy-note a:hover {
+            text-decoration: underline;
+        }
+
+        /* FAQ */
+        .faq-section {
+            margin-bottom: 40px;
+        }
+
+        .faq-section h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: var(--cyan);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .faq-item {
+            margin-bottom: 16px;
+        }
+
+        .faq-item dt {
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .faq-item dd {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            padding-left: 16px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 0 20px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .footer a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.85rem;
+            margin: 0 12px;
+        }
+
+        .footer a:hover {
+            color: var(--cyan);
+        }
+
+        /* Counter */
+        .counter {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: rgba(224,0,255,0.05);
+            border: 1px solid rgba(224,0,255,0.1);
+            border-radius: 12px;
+        }
+
+        .counter-number {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--magenta);
+            text-shadow: 0 0 30px rgba(224,0,255,0.3);
+        }
+
+        .counter-label {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+
+    <div class="container">
+        <nav class="nav">
+            <a href="index.html">LUCID</a>
+        </nav>
+
+        <div style="text-align:center">
+            <span class="hero-badge">Test Ferm&eacute;</span>
+        </div>
+
+        <h1>Devenez B&ecirc;ta-Testeur</h1>
+        <p class="subtitle">
+            Acc&eacute;dez &agrave; LUCID en avant-premi&egrave;re sur Google Play.
+            Aidez-nous &agrave; peaufiner le jeu avant son lancement public.
+        </p>
+
+        <div class="what-section">
+            <h2>Ce que vous obtenez</h2>
+            <ul class="feature-list">
+                <li>Acc&egrave;s anticip&eacute; au jeu complet sur Google Play</li>
+                <li>3 niveaux de difficult&eacute; + 4 le&ccedil;ons tutorielles</li>
+                <li>Mode Encha&icirc;nement infini, Seeds, Statistiques</li>
+                <li>Musique synth&eacute;tique originale + effets visuels n&eacute;on</li>
+                <li>Z&eacute;ro pub, z&eacute;ro tracking, 100% hors-ligne</li>
+            </ul>
+        </div>
+
+        <div class="steps-section">
+            <h2>Comment &ccedil;a marche</h2>
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-text">Inscrivez votre email Google ci-dessous</div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-text">Vous recevrez un lien d'invitation Google Play par email</div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-text">Acceptez l'invitation et t&eacute;l&eacute;chargez LUCID</div>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-text">Jouez et partagez vos retours !</div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h2>S'inscrire</h2>
+            <p class="form-note">Utilisez l'adresse Gmail / Google associ&eacute;e &agrave; votre appareil Android.</p>
+
+            <form id="betaForm" onsubmit="return submitForm(event)">
+                <div class="form-group">
+                    <label for="email">Adresse email Google</label>
+                    <input type="email" id="email" name="email" placeholder="votre.nom@gmail.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="pseudo">Pseudo / pr&eacute;nom (optionnel)</label>
+                    <input type="text" id="pseudo" name="pseudo" placeholder="Comment vous appeler ?">
+                </div>
+                <button type="submit" class="submit-btn" id="submitBtn">Rejoindre le test</button>
+            </form>
+
+            <div class="success-msg" id="successMsg">
+                Merci ! Vous recevrez votre invitation Google Play sous 48h.
+            </div>
+
+            <p class="privacy-note">
+                Votre email sera uniquement utilis&eacute; pour l'invitation Google Play.
+                <a href="privacy.html">Politique de confidentialit&eacute;</a>
+            </p>
+        </div>
+
+        <div class="faq-section">
+            <h2>Questions fr&eacute;quentes</h2>
+            <dl>
+                <div class="faq-item">
+                    <dt>Faut-il un appareil Android ?</dt>
+                    <dd>Oui, LUCID est disponible uniquement sur Android pour le moment.</dd>
+                </div>
+                <div class="faq-item">
+                    <dt>C'est gratuit ?</dt>
+                    <dd>Oui, le test est enti&egrave;rement gratuit. Le jeu final sera freemium avec un achat unique optionnel.</dd>
+                </div>
+                <div class="faq-item">
+                    <dt>Combien de temps dure le test ?</dt>
+                    <dd>Au minimum 14 jours. Vous gardez l'acc&egrave;s au jeu m&ecirc;me apr&egrave;s.</dd>
+                </div>
+                <div class="faq-item">
+                    <dt>Mes donn&eacute;es sont-elles collect&eacute;es ?</dt>
+                    <dd>Non. LUCID ne collecte aucune donn&eacute;e personnelle, fonctionne 100% hors-ligne et n'a aucun tracker.</dd>
+                </div>
+            </dl>
+        </div>
+
+        <footer class="footer">
+            <a href="index.html">Accueil</a>
+            <a href="support.html">Support</a>
+            <a href="privacy.html">Confidentialit&eacute;</a>
+            <a href="mailto:californylana@gmail.com">Contact</a>
+        </footer>
+    </div>
+
+    <script>
+    // Simple form submission via mailto fallback + localStorage counter
+    // For production, replace with Google Forms or a real backend
+
+    function submitForm(e) {
+        e.preventDefault();
+        var email = document.getElementById('email').value.trim();
+        var pseudo = document.getElementById('pseudo').value.trim();
+
+        if (!email) return false;
+
+        // Send via mailto (dev will receive and add to Play Console)
+        var subject = encodeURIComponent('LUCID Beta - Nouveau testeur');
+        var body = encodeURIComponent('Email: ' + email + '\nPseudo: ' + (pseudo || '(non renseign\u00e9)'));
+        window.location.href = 'mailto:californylana@gmail.com?subject=' + subject + '&body=' + body;
+
+        // Show success
+        document.getElementById('betaForm').style.display = 'none';
+        document.getElementById('successMsg').style.display = 'block';
+
+        return false;
+    }
+    </script>
+</body>
+</html>
