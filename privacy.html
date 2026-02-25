@@ -1,35 +1,57 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LUCID — Politique de confidentialit&eacute; / Privacy Policy</title>
+    <title>LUCID &mdash; Politique de confidentialit&eacute; / Privacy Policy</title>
+    <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;text y='.9em' font-size='90'&gt;&#11042;&lt;/text&gt;&lt;/svg&gt;">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;500&display=swap');
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0a14; color: #c8c8d0; line-height: 1.7; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #0a0a14; color: #c8c8d0; line-height: 1.7; }
+
+        /* Nav */
+        .nav { position: sticky; top: 0; background: #0a0a14ee; backdrop-filter: blur(10px); border-bottom: 1px solid #1a1a2e; padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; z-index: 10; }
+        .nav-logo { font-family: 'Orbitron', monospace; font-weight: 700; font-size: 1.3em; color: #00ffc8; text-decoration: none; }
+        .nav-right { display: flex; align-items: center; gap: 16px; }
+        .nav-right a { color: #707088; text-decoration: none; font-size: 0.85em; transition: color 0.2s; }
+        .nav-right a:hover { color: #00ffc8; }
+        .lang-toggle { background: none; border: 1px solid #00ffc8; color: #00ffc8; padding: 4px 14px; border-radius: 4px; font-family: 'Orbitron', monospace; font-size: 0.8em; font-weight: 700; cursor: pointer; transition: background 0.2s; }
+        .lang-toggle:hover { background: #00ffc820; }
+
+        /* Content */
         .container { max-width: 720px; margin: 0 auto; padding: 40px 24px; }
-        h1 { color: #00ffc8; font-size: 2em; margin-bottom: 8px; }
+        h1 { font-family: 'Orbitron', monospace; color: #00ffc8; font-size: 2em; margin-bottom: 8px; }
         h2 { color: #00d4a8; font-size: 1.4em; margin-top: 36px; margin-bottom: 12px; border-bottom: 1px solid #1a1a2e; padding-bottom: 6px; }
-        h3 { color: #9090a0; font-size: 1.1em; margin-top: 24px; margin-bottom: 8px; }
         p, li { margin-bottom: 10px; }
         ul { padding-left: 24px; }
-        .lang-switch { text-align: right; margin-bottom: 24px; }
-        .lang-switch a { color: #00ffc8; text-decoration: none; padding: 6px 16px; border: 1px solid #00ffc8; border-radius: 4px; font-size: 0.9em; }
-        .lang-switch a:hover { background: #00ffc820; }
-        .section { margin-bottom: 32px; }
         .highlight { background: #0f1a2a; border-left: 3px solid #00ffc8; padding: 16px 20px; border-radius: 4px; margin: 16px 0; }
         .date { color: #606070; font-size: 0.85em; margin-top: 40px; }
-        hr { border: none; border-top: 1px solid #1a1a2e; margin: 48px 0; }
         a { color: #00ffc8; }
+
+        /* Footer */
+        .footer { text-align: center; padding: 32px 24px; border-top: 1px solid #1a1a2e; margin-top: 48px; }
+        .footer a { color: #707088; text-decoration: none; margin: 0 12px; font-size: 0.85em; }
+        .footer a:hover { color: #00ffc8; }
     </style>
 </head>
 <body>
+
+<!-- Nav -->
+<nav class="nav">
+    <a href="index.html" class="nav-logo">LUCID</a>
+    <div class="nav-right">
+        <a href="index.html">Home</a>
+        <a href="support.html">Support</a>
+        <button id="langBtn" class="lang-toggle" onclick="toggleLang()">FR</button>
+    </div>
+</nav>
+
 <div class="container">
 
 <!-- ===================== FRANCAIS ===================== -->
 <div id="fr">
-    <div class="lang-switch"><a href="#en">English version below</a></div>
-
     <h1>Politique de confidentialit&eacute;</h1>
     <p><strong>LUCID</strong> &mdash; Jeu de puzzle hexagonal<br>
     &Eacute;diteur : Californy Lana</p>
@@ -74,14 +96,12 @@
 
     <h2>Contact</h2>
     <p>Pour toute question : <strong>californylana@gmail.com</strong></p>
+
+    <p class="date">Derni&egrave;re mise &agrave; jour : 2025-02-16</p>
 </div>
 
-<hr id="en">
-
 <!-- ===================== ENGLISH ===================== -->
-<div>
-    <div class="lang-switch"><a href="#fr">Version fran&ccedil;aise ci-dessus</a></div>
-
+<div id="en">
     <h1>Privacy Policy</h1>
     <p><strong>LUCID</strong> &mdash; Hexagonal puzzle game<br>
     Publisher: Californy Lana</p>
@@ -126,10 +146,35 @@
 
     <h2>Contact</h2>
     <p>For any questions: <strong>californylana@gmail.com</strong></p>
+
+    <p class="date">Last updated: 2025-02-16</p>
 </div>
 
-<p class="date">Derni&egrave;re mise &agrave; jour / Last updated: 2025-02-16</p>
-
 </div>
+
+<!-- Footer -->
+<div class="footer">
+    <a href="index.html">Home</a>
+    <a href="support.html">Support</a>
+    <a href="mailto:californylana@gmail.com">Contact</a>
+</div>
+
+<script>
+var currentLang = navigator.language.startsWith('fr') ? 'fr' : 'en';
+
+function setLang(lang) {
+    currentLang = lang;
+    document.getElementById('fr').style.display = lang === 'fr' ? 'block' : 'none';
+    document.getElementById('en').style.display = lang === 'en' ? 'block' : 'none';
+    document.getElementById('langBtn').textContent = lang === 'en' ? 'FR' : 'EN';
+    document.documentElement.lang = lang;
+}
+
+function toggleLang() {
+    setLang(currentLang === 'en' ? 'fr' : 'en');
+}
+
+setLang(currentLang);
+</script>
 </body>
 </html>
