@@ -504,11 +504,33 @@
         }
         .nav-links a:hover { color: var(--cyan); }
 
+        /* === LANG TOGGLE === */
+        .lang-toggle {
+            background: transparent;
+            border: 1px solid rgba(0,255,200,0.3);
+            color: var(--cyan);
+            font-family: 'Orbitron', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 24px;
+            flex-shrink: 0;
+        }
+        .lang-toggle:hover {
+            background: rgba(0,255,200,0.1);
+            border-color: var(--cyan);
+        }
+
         /* === RESPONSIVE === */
         @media (max-width: 768px) {
             nav { padding: 12px 16px; flex-wrap: wrap; }
             .nav-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 0; }
             .nav-links a { margin-left: 16px; font-size: 0.8rem; }
+            .lang-toggle { margin-left: 16px; }
             .hero { padding-top: 120px; }
             section { padding: 64px 16px; }
             .features-grid { grid-template-columns: 1fr; }
@@ -523,12 +545,13 @@
 <nav>
     <a href="#" class="nav-logo">LUCID</a>
     <div class="nav-links">
-        <a href="#features">Features</a>
-        <a href="#gameplay">Gameplay</a>
-        <a href="#modes">Modes</a>
-        <a href="#download">Download</a>
+        <a href="#features" data-i18n="nav.features">Features</a>
+        <a href="#gameplay" data-i18n="nav.gameplay">Gameplay</a>
+        <a href="#modes" data-i18n="nav.modes">Modes</a>
+        <a href="#download" data-i18n="nav.download">Download</a>
         <a href="beta.html" style="color:#e000ff">Beta</a>
         <a href="support.html">Support</a>
+        <button class="lang-toggle" onclick="toggleLang()">FR</button>
     </div>
 </nav>
 
@@ -536,119 +559,119 @@
 <div class="hero">
     <div class="hero-grid"></div>
     <h1 class="hero-title">LUCID</h1>
-    <p class="hero-subtitle">Strategic Hex Puzzle</p>
-    <p class="hero-tagline">Your mind is fracturing. Stabilize the grid, contain the Rift, and master your lucidity before the chaos consumes everything.</p>
+    <p class="hero-subtitle" data-i18n="hero.subtitle">Strategic Hex Puzzle</p>
+    <p class="hero-tagline" data-i18n="hero.tagline">Your mind is fracturing. Stabilize the grid, contain the Rift, and master your lucidity before the chaos consumes everything.</p>
     <div class="hero-cta">
-        <a href="#download" class="btn btn-primary">&#9654; Get on Google Play</a>
-        <a href="#gameplay" class="btn btn-secondary">Learn more</a>
+        <a href="#download" class="btn btn-primary" data-i18n="hero.cta">&#9654; Get on Google Play</a>
+        <a href="#gameplay" class="btn btn-secondary" data-i18n="hero.learn">Learn more</a>
     </div>
     <div class="hero-banner">
         <img src="screenshots/Presentation.png" alt="LUCID - Stabilize the Dream">
     </div>
-    <div class="scroll-hint">Scroll</div>
+    <div class="scroll-hint" data-i18n="hero.scroll">Scroll</div>
 </div>
 
 <!-- FEATURES -->
 <section id="features">
-    <h2 class="section-title">Features</h2>
-    <p class="section-subtitle">A pure tactical puzzle &mdash; no filler, no timers, no ads. Just you against the grid.</p>
+    <h2 class="section-title" data-i18n="features.title">Features</h2>
+    <p class="section-subtitle" data-i18n="features.subtitle">A pure tactical puzzle &mdash; no filler, no timers, no ads. Just you against the grid.</p>
 
     <div class="features-grid">
         <div class="feature-card">
             <span class="feature-icon">&#11042;</span>
-            <h3>Hex Grid Tactics</h3>
-            <p>Every cell on the hexagonal grid matters. Activate, move, or sacrifice Nodes to stabilize your surroundings and push back the entropy.</p>
+            <h3 data-i18n="features.hex.title">Hex Grid Tactics</h3>
+            <p data-i18n="features.hex.desc">Every cell on the hexagonal grid matters. Activate, move, or sacrifice Nodes to stabilize your surroundings and push back the entropy.</p>
         </div>
         <div class="feature-card">
             <span class="feature-icon">&#9889;</span>
-            <h3>The Rift Fights Back</h3>
-            <p>The Rift retaliates against every move near it. Each stabilization triggers a counter-attack. Outsmart it or be overwhelmed.</p>
+            <h3 data-i18n="features.rift.title">The Rift Fights Back</h3>
+            <p data-i18n="features.rift.desc">The Rift retaliates against every move near it. Each stabilization triggers a counter-attack. Outsmart it or be overwhelmed.</p>
         </div>
         <div class="feature-card">
             <span class="feature-icon">&#128279;</span>
-            <h3>Chain Reactions</h3>
-            <p>Catalysts invert their neighbors, stressed Nodes cascade instability. Master the chain reactions to turn chaos into order.</p>
+            <h3 data-i18n="features.chain.title">Chain Reactions</h3>
+            <p data-i18n="features.chain.desc">Catalysts invert their neighbors, stressed Nodes cascade instability. Master the chain reactions to turn chaos into order.</p>
         </div>
         <div class="feature-card">
             <span class="feature-icon">&#127911;</span>
-            <h3>Synthwave Soundtrack</h3>
-            <p>Handcrafted procedural audio and synthwave music immerse you in a neon cyberpunk dreamscape.</p>
+            <h3 data-i18n="features.audio.title">Synthwave Soundtrack</h3>
+            <p data-i18n="features.audio.desc">Handcrafted procedural audio and synthwave music immerse you in a neon cyberpunk dreamscape.</p>
         </div>
         <div class="feature-card">
             <span class="feature-icon">&#128274;</span>
-            <h3>100% Offline</h3>
-            <p>No accounts. No ads. No data collection. No internet required. Your game, your device, your privacy.</p>
+            <h3 data-i18n="features.offline.title">100% Offline</h3>
+            <p data-i18n="features.offline.desc">No accounts. No ads. No data collection. No internet required. Your game, your device, your privacy.</p>
         </div>
         <div class="feature-card">
             <span class="feature-icon">&#127922;</span>
-            <h3>Seed Replay</h3>
-            <p>Every board has a unique seed. Share it with friends to challenge them on the exact same puzzle.</p>
+            <h3 data-i18n="features.seed.title">Seed Replay</h3>
+            <p data-i18n="features.seed.desc">Every board has a unique seed. Share it with friends to challenge them on the exact same puzzle.</p>
         </div>
     </div>
 </section>
 
 <!-- GAMEPLAY -->
 <section id="gameplay" class="gameplay">
-    <h2 class="section-title">How It Works</h2>
-    <p class="section-subtitle">Four core mechanics. Infinite strategic depth.</p>
+    <h2 class="section-title" data-i18n="gameplay.title">How It Works</h2>
+    <p class="section-subtitle" data-i18n="gameplay.subtitle">Four core mechanics. Infinite strategic depth.</p>
 
     <div class="mechanics-list">
         <div class="mechanic mechanic-node">
             <div class="mechanic-icon">&#9678;</div>
-            <h3>Nodes</h3>
-            <p>Activate to stabilize neighbors. Move to reposition. Sacrifice to lock down threats &mdash; at a cost.</p>
+            <h3 data-i18n="gameplay.node.title">Nodes</h3>
+            <p data-i18n="gameplay.node.desc">Activate to stabilize neighbors. Move to reposition. Sacrifice to lock down threats &mdash; at a cost.</p>
         </div>
         <div class="mechanic mechanic-catalyst">
             <div class="mechanic-icon">&#10022;</div>
-            <h3>Catalysts</h3>
-            <p>Single-use powerhouses. Invert the state of all adjacent cells. High risk, high reward.</p>
+            <h3 data-i18n="gameplay.catalyst.title">Catalysts</h3>
+            <p data-i18n="gameplay.catalyst.desc">Single-use powerhouses. Invert the state of all adjacent cells. High risk, high reward.</p>
         </div>
         <div class="mechanic mechanic-rift">
             <div class="mechanic-icon">&#9670;</div>
-            <h3>The Rift</h3>
-            <p>The source of chaos. Indestructible. Retaliates when you stabilize nearby. Contain it to win.</p>
+            <h3 data-i18n="gameplay.rift.title">The Rift</h3>
+            <p data-i18n="gameplay.rift.desc">The source of chaos. Indestructible. Retaliates when you stabilize nearby. Contain it to win.</p>
         </div>
         <div class="mechanic mechanic-lucidity">
             <div class="mechanic-icon">&#9673;</div>
-            <h3>Lucidity</h3>
-            <p>Every action costs Lucidity. Run out and your mind collapses. Efficient play earns bonuses.</p>
+            <h3 data-i18n="gameplay.lucidity.title">Lucidity</h3>
+            <p data-i18n="gameplay.lucidity.desc">Every action costs Lucidity. Run out and your mind collapses. Efficient play earns bonuses.</p>
         </div>
     </div>
 </section>
 
 <!-- GAME MODES -->
 <section id="modes">
-    <h2 class="section-title">Game Modes</h2>
-    <p class="section-subtitle">From accessible to extreme. Find your challenge.</p>
+    <h2 class="section-title" data-i18n="modes.title">Game Modes</h2>
+    <p class="section-subtitle" data-i18n="modes.subtitle">From accessible to extreme. Find your challenge.</p>
 
     <div class="modes-grid">
         <div class="mode-card reve">
-            <div class="level-name">DREAM</div>
+            <div class="level-name" data-i18n="modes.reve.name">DREAM</div>
             <div class="difficulty-bar"></div>
-            <p class="level-desc">Gentle introduction. Generous lucidity, few threats. Learn the fundamentals.</p>
+            <p class="level-desc" data-i18n="modes.reve.desc">Gentle introduction. Generous lucidity, few threats. Learn the fundamentals.</p>
         </div>
         <div class="mode-card songe">
-            <div class="level-name">REVERIE</div>
+            <div class="level-name" data-i18n="modes.songe.name">REVERIE</div>
             <div class="difficulty-bar"></div>
-            <p class="level-desc">Tighter resources, more instability. Every move counts.</p>
+            <p class="level-desc" data-i18n="modes.songe.desc">Tighter resources, more instability. Every move counts.</p>
         </div>
         <div class="mode-card lucide">
-            <div class="level-name">LUCID</div>
+            <div class="level-name" data-i18n="modes.lucide.name">LUCID</div>
             <div class="difficulty-bar"></div>
-            <p class="level-desc">Extreme difficulty. Minimal lucidity, maximum chaos. For the dedicated.</p>
+            <p class="level-desc" data-i18n="modes.lucide.desc">Extreme difficulty. Minimal lucidity, maximum chaos. For the dedicated.</p>
         </div>
         <div class="mode-card chain">
-            <div class="level-name">CHAIN MODE</div>
+            <div class="level-name" data-i18n="modes.chain.name">CHAIN MODE</div>
             <div class="difficulty-bar"></div>
-            <p class="level-desc">Infinite escalating arenas. One defeat ends it all. How far can you go?</p>
+            <p class="level-desc" data-i18n="modes.chain.desc">Infinite escalating arenas. One defeat ends it all. How far can you go?</p>
         </div>
     </div>
 </section>
 
 <!-- SCREENSHOTS -->
 <section id="screenshots">
-    <h2 class="section-title">Screenshots</h2>
-    <p class="section-subtitle">A glimpse into the dreamscape.</p>
+    <h2 class="section-title" data-i18n="screenshots.title">Screenshots</h2>
+    <p class="section-subtitle" data-i18n="screenshots.subtitle">A glimpse into the dreamscape.</p>
 
     <div class="screenshots-scroll">
         <div class="screenshot-item"><img src="screenshots/menu.jpg" alt="LUCID Main Menu" loading="lazy"></div>
@@ -661,8 +684,8 @@
 
 <!-- DOWNLOAD -->
 <section id="download" class="download">
-    <h2 class="section-title">Ready to Enter the Dream?</h2>
-    <p>Free to play &mdash; unlock Chain Mode, Seeds &amp; Stats with a single purchase.</p>
+    <h2 class="section-title" data-i18n="download.title">Ready to Enter the Dream?</h2>
+    <p data-i18n="download.desc">Free to play &mdash; unlock Chain Mode, Seeds &amp; Stats with a single purchase.</p>
     <div class="hero-cta">
         <a href="#" class="btn btn-primary">&#9654; Google Play</a>
     </div>
@@ -671,15 +694,138 @@
 <!-- FOOTER -->
 <footer>
     <div class="footer-links">
-        <a href="privacy.html">Privacy Policy</a>
+        <a href="privacy.html" data-i18n="footer.privacy">Privacy Policy</a>
         <a href="support.html">Support</a>
         <a href="mailto:californylana@gmail.com">Contact</a>
     </div>
-    <p>&copy; 2025 Californy Lana. All rights reserved.</p>
+    <p data-i18n="footer.copy">&copy; 2025 Californy Lana. All rights reserved.</p>
 </footer>
 
-<!-- Smooth scroll -->
 <script>
+const i18n = {
+    fr: {
+        'nav.features': 'Fonctionnalit\u00e9s',
+        'nav.gameplay': 'Gameplay',
+        'nav.modes': 'Modes',
+        'nav.download': 'T\u00e9l\u00e9charger',
+        'hero.subtitle': 'Puzzle Hex Strat\u00e9gique',
+        'hero.tagline': 'Votre esprit se fracture. Stabilisez la grille, contenez la Faille, et ma\u00eetrisez votre lucidit\u00e9 avant que le chaos ne consume tout.',
+        'hero.cta': '\u25b6 T\u00e9l\u00e9charger sur Google Play',
+        'hero.learn': 'En savoir plus',
+        'hero.scroll': 'D\u00e9filer',
+        'features.title': 'Fonctionnalit\u00e9s',
+        'features.subtitle': 'Un pur puzzle tactique \u2014 pas de remplissage, pas de chrono, pas de pubs. Juste vous contre la grille.',
+        'features.hex.title': 'Tactique Hexagonale',
+        'features.hex.desc': 'Chaque cellule de la grille hexagonale compte. Activez, d\u00e9placez ou sacrifiez des N\u0153uds pour stabiliser votre environnement et repousser l\u2019entropie.',
+        'features.rift.title': 'La Faille Riposte',
+        'features.rift.desc': 'La Faille riposte \u00e0 chaque action \u00e0 proximit\u00e9. Chaque stabilisation d\u00e9clenche une contre-attaque. D\u00e9jouez-la ou soyez submerg\u00e9.',
+        'features.chain.title': 'R\u00e9actions en Cha\u00eene',
+        'features.chain.desc': 'Les Catalyseurs inversent leurs voisins, les N\u0153uds stress\u00e9s propagent l\u2019instabilit\u00e9. Ma\u00eetrisez les r\u00e9actions en cha\u00eene pour transformer le chaos en ordre.',
+        'features.audio.title': 'Bande-son Synthwave',
+        'features.audio.desc': 'Audio proc\u00e9dural artisanal et musique synthwave pour une immersion dans un paysage onirique cyberpunk n\u00e9on.',
+        'features.offline.title': '100% Hors-ligne',
+        'features.offline.desc': 'Pas de compte. Pas de pub. Pas de collecte de donn\u00e9es. Pas d\u2019internet requis. Votre jeu, votre appareil, votre vie priv\u00e9e.',
+        'features.seed.title': 'Rejouer par Seed',
+        'features.seed.desc': 'Chaque plateau a un seed unique. Partagez-le avec vos amis pour les d\u00e9fier sur exactement le m\u00eame puzzle.',
+        'gameplay.title': 'Comment \u00e7a marche',
+        'gameplay.subtitle': 'Quatre m\u00e9caniques fondamentales. Une profondeur strat\u00e9gique infinie.',
+        'gameplay.node.title': 'N\u0153uds',
+        'gameplay.node.desc': 'Activez pour stabiliser les voisins. D\u00e9placez pour repositionner. Sacrifiez pour verrouiller les menaces \u2014 au prix fort.',
+        'gameplay.catalyst.title': 'Catalyseurs',
+        'gameplay.catalyst.desc': 'Puissants \u00e0 usage unique. Inversent l\u2019\u00e9tat de toutes les cellules adjacentes. Risque \u00e9lev\u00e9, r\u00e9compense \u00e9lev\u00e9e.',
+        'gameplay.rift.title': 'La Faille',
+        'gameplay.rift.desc': 'La source du chaos. Indestructible. Riposte quand vous stabilisez \u00e0 proximit\u00e9. Contenez-la pour gagner.',
+        'gameplay.lucidity.title': 'Lucidit\u00e9',
+        'gameplay.lucidity.desc': 'Chaque action co\u00fbte de la Lucidit\u00e9. \u00c0 court, votre esprit s\u2019effondre. Un jeu efficace rapporte des bonus.',
+        'modes.title': 'Modes de Jeu',
+        'modes.subtitle': 'De l\u2019accessible \u00e0 l\u2019extr\u00eame. Trouvez votre d\u00e9fi.',
+        'modes.reve.name': 'R\u00caVE',
+        'modes.reve.desc': 'Introduction douce. Lucidit\u00e9 g\u00e9n\u00e9reuse, peu de menaces. Apprenez les bases.',
+        'modes.songe.name': 'SONGE',
+        'modes.songe.desc': 'Ressources limit\u00e9es, plus d\u2019instabilit\u00e9. Chaque coup compte.',
+        'modes.lucide.name': 'LUCIDE',
+        'modes.lucide.desc': 'Difficult\u00e9 extr\u00eame. Lucidit\u00e9 minimale, chaos maximal. Pour les acharn\u00e9s.',
+        'modes.chain.name': 'MODE CHA\u00ceNE',
+        'modes.chain.desc': 'Ar\u00e8nes infinies et croissantes. Une d\u00e9faite et tout s\u2019arr\u00eate. Jusqu\u2019o\u00f9 irez-vous ?',
+        'screenshots.title': 'Captures d\u2019\u00e9cran',
+        'screenshots.subtitle': 'Un aper\u00e7u du paysage onirique.',
+        'download.title': 'Pr\u00eat \u00e0 entrer dans le r\u00eave ?',
+        'download.desc': 'Gratuit \u2014 d\u00e9bloquez le Mode Cha\u00eene, les Seeds et les Stats avec un seul achat.',
+        'footer.privacy': 'Politique de confidentialit\u00e9',
+        'footer.copy': '\u00a9 2025 Californy Lana. Tous droits r\u00e9serv\u00e9s.'
+    },
+    en: {
+        'nav.features': 'Features',
+        'nav.gameplay': 'Gameplay',
+        'nav.modes': 'Modes',
+        'nav.download': 'Download',
+        'hero.subtitle': 'Strategic Hex Puzzle',
+        'hero.tagline': 'Your mind is fracturing. Stabilize the grid, contain the Rift, and master your lucidity before the chaos consumes everything.',
+        'hero.cta': '\u25b6 Get on Google Play',
+        'hero.learn': 'Learn more',
+        'hero.scroll': 'Scroll',
+        'features.title': 'Features',
+        'features.subtitle': 'A pure tactical puzzle \u2014 no filler, no timers, no ads. Just you against the grid.',
+        'features.hex.title': 'Hex Grid Tactics',
+        'features.hex.desc': 'Every cell on the hexagonal grid matters. Activate, move, or sacrifice Nodes to stabilize your surroundings and push back the entropy.',
+        'features.rift.title': 'The Rift Fights Back',
+        'features.rift.desc': 'The Rift retaliates against every move near it. Each stabilization triggers a counter-attack. Outsmart it or be overwhelmed.',
+        'features.chain.title': 'Chain Reactions',
+        'features.chain.desc': 'Catalysts invert their neighbors, stressed Nodes cascade instability. Master the chain reactions to turn chaos into order.',
+        'features.audio.title': 'Synthwave Soundtrack',
+        'features.audio.desc': 'Handcrafted procedural audio and synthwave music immerse you in a neon cyberpunk dreamscape.',
+        'features.offline.title': '100% Offline',
+        'features.offline.desc': 'No accounts. No ads. No data collection. No internet required. Your game, your device, your privacy.',
+        'features.seed.title': 'Seed Replay',
+        'features.seed.desc': 'Every board has a unique seed. Share it with friends to challenge them on the exact same puzzle.',
+        'gameplay.title': 'How It Works',
+        'gameplay.subtitle': 'Four core mechanics. Infinite strategic depth.',
+        'gameplay.node.title': 'Nodes',
+        'gameplay.node.desc': 'Activate to stabilize neighbors. Move to reposition. Sacrifice to lock down threats \u2014 at a cost.',
+        'gameplay.catalyst.title': 'Catalysts',
+        'gameplay.catalyst.desc': 'Single-use powerhouses. Invert the state of all adjacent cells. High risk, high reward.',
+        'gameplay.rift.title': 'The Rift',
+        'gameplay.rift.desc': 'The source of chaos. Indestructible. Retaliates when you stabilize nearby. Contain it to win.',
+        'gameplay.lucidity.title': 'Lucidity',
+        'gameplay.lucidity.desc': 'Every action costs Lucidity. Run out and your mind collapses. Efficient play earns bonuses.',
+        'modes.title': 'Game Modes',
+        'modes.subtitle': 'From accessible to extreme. Find your challenge.',
+        'modes.reve.name': 'DREAM',
+        'modes.reve.desc': 'Gentle introduction. Generous lucidity, few threats. Learn the fundamentals.',
+        'modes.songe.name': 'REVERIE',
+        'modes.songe.desc': 'Tighter resources, more instability. Every move counts.',
+        'modes.lucide.name': 'LUCID',
+        'modes.lucide.desc': 'Extreme difficulty. Minimal lucidity, maximum chaos. For the dedicated.',
+        'modes.chain.name': 'CHAIN MODE',
+        'modes.chain.desc': 'Infinite escalating arenas. One defeat ends it all. How far can you go?',
+        'screenshots.title': 'Screenshots',
+        'screenshots.subtitle': 'A glimpse into the dreamscape.',
+        'download.title': 'Ready to Enter the Dream?',
+        'download.desc': 'Free to play \u2014 unlock Chain Mode, Seeds & Stats with a single purchase.',
+        'footer.privacy': 'Privacy Policy',
+        'footer.copy': '\u00a9 2025 Californy Lana. All rights reserved.'
+    }
+};
+
+let currentLang = localStorage.getItem('lucid-lang') || (navigator.language.startsWith('fr') ? 'fr' : 'en');
+
+function applyLang(lang) {
+    currentLang = lang;
+    localStorage.setItem('lucid-lang', lang);
+    document.documentElement.lang = lang;
+    document.querySelector('.lang-toggle').textContent = lang === 'en' ? 'FR' : 'EN';
+    const strings = i18n[lang];
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (strings[key]) el.textContent = strings[key];
+    });
+}
+
+function toggleLang() {
+    applyLang(currentLang === 'en' ? 'fr' : 'en');
+}
+
+// Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
         e.preventDefault();
@@ -687,6 +833,9 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
         if (target) target.scrollIntoView({ behavior: 'smooth' });
     });
 });
+
+// Apply saved or detected language on load
+applyLang(currentLang);
 </script>
 
 </body>
