@@ -150,6 +150,56 @@
     <p class="date">Last updated: 2025-02-16</p>
 </div>
 
+<!-- ===================== ESPA&Ntilde;OL ===================== -->
+<div id="es">
+    <h1>Pol&iacute;tica de Privacidad</h1>
+    <p><strong>LUCID</strong> &mdash; Juego de puzzle hexagonal<br>
+    Editor: Californy Lana</p>
+
+    <h2>Resumen</h2>
+    <div class="highlight">
+        <strong>LUCID no recopila ning&uacute;n dato personal.</strong><br>
+        El juego funciona completamente sin conexi&oacute;n. Ninguna informaci&oacute;n se env&iacute;a a ning&uacute;n servidor, tercero o al editor.
+    </div>
+
+    <h2>Datos almacenados localmente</h2>
+    <p>LUCID solo guarda datos de juego en tu dispositivo:</p>
+    <ul>
+        <li><strong>Preferencias</strong>: sonido (on/off), vibraci&oacute;n (on/off), idioma (FR/EN/ES)</li>
+        <li><strong>Progreso</strong>: lecciones completadas, niveles desbloqueados</li>
+        <li><strong>Estad&iacute;sticas</strong>: partidas jugadas, victorias, mejores puntuaciones, turnos, tiempos por nivel</li>
+        <li><strong>Modo cadena</strong>: partida en curso guardada, mejor run</li>
+    </ul>
+    <p>Estos datos se almacenan localmente mediante el sistema PlayerPrefs de Unity y nunca salen de tu dispositivo.</p>
+
+    <h2>Sin recolecci&oacute;n de datos personales</h2>
+    <p>LUCID no recopila, almacena ni transmite ning&uacute;n dato personal, incluyendo:</p>
+    <ul>
+        <li>Ning&uacute;n nombre, email o identificador</li>
+        <li>Ning&uacute;n dato de ubicaci&oacute;n</li>
+        <li>Ning&uacute;n identificador publicitario</li>
+        <li>Ning&uacute;n dato de uso transmitido remotamente</li>
+    </ul>
+
+    <h2>Sin acceso a red</h2>
+    <p>El juego no requiere conexi&oacute;n a Internet y no se comunica con ning&uacute;n servidor. No incluye ning&uacute;n SDK de an&aacute;lisis, publicidad o rastreo.</p>
+
+    <h2>Eliminaci&oacute;n de datos</h2>
+    <p>Puedes eliminar todos los datos guardados en cualquier momento:</p>
+    <ul>
+        <li>En el juego: <strong>Estad&iacute;sticas &rarr; Borrar mis datos</strong></li>
+        <li>Desinstalando la aplicaci&oacute;n (elimina autom&aacute;ticamente todos los datos locales)</li>
+    </ul>
+
+    <h2>Ni&ntilde;os</h2>
+    <p>Como LUCID no recopila ning&uacute;n dato personal, es seguro para el uso por ni&ntilde;os sin preocupaciones de privacidad.</p>
+
+    <h2>Contacto</h2>
+    <p>Para cualquier pregunta: <strong>californylana@gmail.com</strong></p>
+
+    <p class="date">&Uacute;ltima actualizaci&oacute;n: 2025-02-16</p>
+</div>
+
 </div>
 
 <!-- Footer -->
@@ -160,18 +210,33 @@
 </div>
 
 <script>
-var currentLang = navigator.language.startsWith('fr') ? 'fr' : 'en';
+var langCycle = ['fr', 'en', 'es'];
+
+function detectLang() {
+    var saved = localStorage.getItem('lucid-lang');
+    if (saved && langCycle.indexOf(saved) !== -1) return saved;
+    var nav = navigator.language.toLowerCase();
+    if (nav.startsWith('fr')) return 'fr';
+    if (nav.startsWith('es')) return 'es';
+    return 'en';
+}
+
+var currentLang = detectLang();
 
 function setLang(lang) {
     currentLang = lang;
-    document.getElementById('fr').style.display = lang === 'fr' ? 'block' : 'none';
-    document.getElementById('en').style.display = lang === 'en' ? 'block' : 'none';
-    document.getElementById('langBtn').textContent = lang === 'en' ? 'FR' : 'EN';
+    localStorage.setItem('lucid-lang', lang);
+    langCycle.forEach(function(l) {
+        var el = document.getElementById(l);
+        if (el) el.style.display = l === lang ? 'block' : 'none';
+    });
+    document.getElementById('langBtn').textContent = lang.toUpperCase();
     document.documentElement.lang = lang;
 }
 
 function toggleLang() {
-    setLang(currentLang === 'en' ? 'fr' : 'en');
+    var idx = langCycle.indexOf(currentLang);
+    setLang(langCycle[(idx + 1) % langCycle.length]);
 }
 
 setLang(currentLang);

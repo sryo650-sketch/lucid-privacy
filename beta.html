@@ -559,14 +559,69 @@
             nav_privacy: "Confidentialit\u00e9",
             mail_subject: "LUCID Beta - Nouveau testeur",
             mail_none: "(non renseign\u00e9)"
+        },
+        es: {
+            badge: "Beta Cerrada",
+            title: "Convi\u00e9rtete en Beta Tester",
+            subtitle: "Accede a LUCID en primicia en Google Play. Ay\u00fadanos a pulir el juego antes del lanzamiento.",
+            what_title: "Lo que obtienes",
+            f1: "Acceso anticipado al juego completo en Google Play",
+            f2: "3 niveles de dificultad + 4 lecciones tutoriales",
+            f3: "Modo Cadena infinito, Seeds, Estad\u00edsticas",
+            f4: "M\u00fasica synthwave original + efectos visuales ne\u00f3n",
+            f5: "Sin anuncios, sin rastreo, 100% sin conexi\u00f3n",
+            how_title: "C\u00f3mo funciona",
+            s1: "Introduce tu email de Google abajo",
+            s2: "Recibir\u00e1s una invitaci\u00f3n de Google Play por email",
+            s3: "Acepta la invitaci\u00f3n y descarga LUCID",
+            s4: "\u00a1Juega y comparte tu opini\u00f3n!",
+            form_title: "Registrarse",
+            form_note: "Usa la direcci\u00f3n Gmail / Google vinculada a tu dispositivo Android.",
+            label_email: "Direcci\u00f3n de email Google",
+            ph_email: "tu.nombre@gmail.com",
+            label_pseudo: "Apodo (opcional)",
+            ph_pseudo: "\u00bfC\u00f3mo te llamamos?",
+            submit: "Unirse a la beta",
+            success: "\u00a1Gracias! Recibir\u00e1s tu invitaci\u00f3n de Google Play en 48h.",
+            privacy_note: "Tu email solo se usar\u00e1 para la invitaci\u00f3n de Google Play. ",
+            privacy_link: "Pol\u00edtica de Privacidad",
+            faq_title: "Preguntas Frecuentes",
+            q1: "\u00bfNecesito un dispositivo Android?",
+            a1: "S\u00ed, LUCID solo est\u00e1 disponible en Android por ahora.",
+            q2: "\u00bfEs gratis?",
+            a2: "S\u00ed, la beta es completamente gratuita. El juego final ser\u00e1 freemium con una compra \u00fanica opcional.",
+            q3: "\u00bfCu\u00e1nto dura la prueba?",
+            a3: "M\u00ednimo 14 d\u00edas. Mantienes acceso al juego incluso despu\u00e9s.",
+            q4: "\u00bfSe recopilan mis datos?",
+            a4: "No. LUCID no recopila datos personales, funciona 100% sin conexi\u00f3n y no tiene rastreadores.",
+            nav_home: "Inicio",
+            nav_features: "Caracter\u00edsticas",
+            nav_download: "Descargar",
+            nav_support: "Soporte",
+            nav_privacy: "Privacidad",
+            mail_subject: "LUCID Beta - Nuevo tester",
+            mail_none: "(no indicado)"
         }
     };
 
-    var currentLang = navigator.language.startsWith('fr') ? 'fr' : 'en';
+    var langCycle = ['fr', 'en', 'es'];
+
+    function detectLang() {
+        var saved = localStorage.getItem('lucid-lang');
+        if (saved && langCycle.indexOf(saved) !== -1) return saved;
+        var nav = navigator.language.toLowerCase();
+        if (nav.startsWith('fr')) return 'fr';
+        if (nav.startsWith('es')) return 'es';
+        return 'en';
+    }
+
+    var currentLang = detectLang();
 
     function setLang(lang) {
         currentLang = lang;
+        localStorage.setItem('lucid-lang', lang);
         var t = texts[lang];
+        if (!t) return;
         document.querySelectorAll('[data-i18n]').forEach(function(el) {
             var key = el.getAttribute('data-i18n');
             if (t[key]) el.textContent = t[key];
@@ -575,12 +630,13 @@
             var key = el.getAttribute('data-ph');
             if (t[key]) el.placeholder = t[key];
         });
-        document.getElementById('langBtn').textContent = lang === 'en' ? 'FR' : 'EN';
+        document.getElementById('langBtn').textContent = lang.toUpperCase();
         document.documentElement.lang = lang;
     }
 
     function toggleLang() {
-        setLang(currentLang === 'en' ? 'fr' : 'en');
+        var idx = langCycle.indexOf(currentLang);
+        setLang(langCycle[(idx + 1) % langCycle.length]);
     }
 
     function submitForm(e) {

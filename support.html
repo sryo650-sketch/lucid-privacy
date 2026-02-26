@@ -48,6 +48,8 @@
             transition: color 0.2s;
         }
         .nav-links a:hover { color: var(--cyan); }
+        .lang-toggle { background: transparent; border: 1px solid rgba(0,255,200,0.3); color: var(--cyan); font-family: 'Orbitron', monospace; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; padding: 6px 12px; border-radius: 20px; cursor: pointer; transition: all 0.3s ease; margin-left: 24px; }
+        .lang-toggle:hover { background: rgba(0,255,200,0.1); border-color: var(--cyan); }
 
         .container {
             max-width: 760px;
@@ -152,81 +154,82 @@
 <nav>
     <a href="index.html" class="nav-logo">LUCID</a>
     <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="privacy.html">Privacy</a>
+        <a href="index.html" data-i18n="nav.home">Home</a>
+        <a href="privacy.html" data-i18n="nav.privacy">Privacy</a>
         <a href="mailto:californylana@gmail.com">Contact</a>
+        <button class="lang-toggle" onclick="toggleLang()">FR</button>
     </div>
 </nav>
 
 <div class="container">
 
-    <h1>Support</h1>
-    <p class="subtitle">Find answers to common questions or reach out to us.</p>
+    <h1 data-i18n="title">Support</h1>
+    <p class="subtitle" data-i18n="subtitle">Find answers to common questions or reach out to us.</p>
 
-    <h2>FAQ</h2>
+    <h2 data-i18n="faq">FAQ</h2>
 
     <div class="faq-item">
-        <h3>How do I reset my progress?</h3>
-        <p>Go to Statistics from the main menu, then tap "Delete my data". This will reset all stats, unlocked levels, and saved chain progress.</p>
+        <h3 data-i18n="q1">How do I reset my progress?</h3>
+        <p data-i18n="a1">Go to Statistics from the main menu, then tap "Delete my data". This will reset all stats, unlocked levels, and saved chain progress.</p>
     </div>
 
     <div class="faq-item">
-        <h3>The game runs slowly on my device</h3>
-        <p>LUCID is designed to run smoothly on most Android devices. If you experience performance issues, try closing other apps running in the background. The game requires Android 7.1 (API 25) or higher.</p>
+        <h3 data-i18n="q2">The game runs slowly on my device</h3>
+        <p data-i18n="a2">LUCID is designed to run smoothly on most Android devices. If you experience performance issues, try closing other apps running in the background. The game requires Android 7.1 (API 25) or higher.</p>
     </div>
 
     <div class="faq-item">
-        <h3>How do I unlock new difficulty levels?</h3>
-        <p>Win the previous level to unlock the next one. Beat R&Ecirc;VE to unlock SONGE, beat SONGE to unlock LUCIDE. Chain Mode unlocks after your first victory on any level.</p>
+        <h3 data-i18n="q3">How do I unlock new difficulty levels?</h3>
+        <p data-i18n="a3">Win the previous level to unlock the next one. Beat DREAM to unlock REVERIE, beat REVERIE to unlock LUCID. Chain Mode unlocks after your first victory on any level.</p>
     </div>
 
     <div class="faq-item">
-        <h3>What is the Seed number?</h3>
-        <p>Every board is generated from a unique seed (shown as a hex code like #A3F2). Share it with friends so they can play the exact same puzzle and compare strategies.</p>
+        <h3 data-i18n="q4">What is the Seed number?</h3>
+        <p data-i18n="a4">Every board is generated from a unique seed (shown as a hex code like #A3F2). Share it with friends so they can play the exact same puzzle and compare strategies.</p>
     </div>
 
     <div class="faq-item">
-        <h3>How does Chain Mode work?</h3>
-        <p>Chain Mode is an infinite gauntlet of escalating arenas. You play R&Ecirc;VE, then SONGE, then LUCIDE, then increasingly harder variants. One defeat ends your run. Your score accumulates across all arenas.</p>
+        <h3 data-i18n="q5">How does Chain Mode work?</h3>
+        <p data-i18n="a5">Chain Mode is an infinite gauntlet of escalating arenas. You play DREAM, then REVERIE, then LUCID, then increasingly harder variants. One defeat ends your run. Your score accumulates across all arenas.</p>
     </div>
 
     <div class="faq-item">
-        <h3>Does the game require an internet connection?</h3>
-        <p>No. LUCID works 100% offline. No accounts, no ads, no data is ever sent anywhere. All your progress is stored locally on your device.</p>
+        <h3 data-i18n="q6">Does the game require an internet connection?</h3>
+        <p data-i18n="a6">No. LUCID works 100% offline. No accounts, no ads, no data is ever sent anywhere. All your progress is stored locally on your device.</p>
     </div>
 
     <div class="faq-item">
-        <h3>How do I change the language?</h3>
-        <p>During a game, tap the pause button (II), then tap the FR/EN toggle to switch between French and English.</p>
+        <h3 data-i18n="q7">How do I change the language?</h3>
+        <p data-i18n="a7">During a game, tap the pause button (II), then tap the language toggle to switch between French, English and Spanish.</p>
     </div>
 
     <div class="faq-item">
-        <h3>How does the Daily Challenge work?</h3>
-        <p>Every day, three fresh puzzles are generated &mdash; one per difficulty level (R&Ecirc;VE, SONGE, LUCIDE). All players worldwide get the same boards. You can play each level once per day. Your daily streak tracks how many consecutive days you've completed at least one challenge.</p>
+        <h3 data-i18n="q8">How does the Daily Challenge work?</h3>
+        <p data-i18n="a8">Every day, three fresh puzzles are generated &mdash; one per difficulty level. All players worldwide get the same boards. You can play each level once per day. Your daily streak tracks how many consecutive days you've completed at least one challenge.</p>
     </div>
 
     <div class="faq-item">
-        <h3>Can I share my Daily Challenge results?</h3>
-        <p>Yes! After completing any game, tap the Share button on the end screen. Your result is copied to the clipboard as a short text summary (turns, lucidity, level) that you can paste anywhere &mdash; no spoilers included.</p>
+        <h3 data-i18n="q9">Can I share my Daily Challenge results?</h3>
+        <p data-i18n="a9">Yes! After completing any game, tap the Share button on the end screen. Your result is copied to the clipboard as a short text summary that you can paste anywhere.</p>
     </div>
 
     <div class="faq-item">
-        <h3>What are badges (achievements)?</h3>
-        <p>There are 10 badges to unlock, tracking milestones like your first win, speedruns, economy plays, lesson completion, and daily challenge streaks. Check your progress in the Statistics screen.</p>
+        <h3 data-i18n="q10">What are badges (achievements)?</h3>
+        <p data-i18n="a10">There are 100 badges to unlock, tracking milestones like your first win, speedruns, economy plays, lesson completion, and daily challenge streaks. Check your progress in the Statistics screen.</p>
     </div>
 
     <div class="faq-item">
-        <h3>I purchased the premium features but they&apos;re not showing</h3>
-        <p>Try restarting the app. If the issue persists, make sure your Google Play purchase was completed successfully by checking your purchase history in the Google Play app. Contact us if you need further help.</p>
+        <h3 data-i18n="q11">I purchased the premium features but they're not showing</h3>
+        <p data-i18n="a11">Try restarting the app. If the issue persists, make sure your Google Play purchase was completed successfully by checking your purchase history in the Google Play app. Contact us if you need further help.</p>
     </div>
 
     <div class="highlight">
-        <strong>Tip:</strong> The tutorials teach you everything you need to know. If you're stuck, try replaying the lesson about the specific mechanic that's giving you trouble (Rift retaliation, chain reactions, or lucidity management).
+        <span data-i18n="tip"><strong>Tip:</strong> The tutorials teach you everything you need to know. If you're stuck, try replaying the lesson about the specific mechanic that's giving you trouble (Rift retaliation, chain reactions, or lucidity management).</span>
     </div>
 
     <div class="contact-box">
-        <h2>Still need help?</h2>
-        <p>We're happy to assist. Send us an email and we'll get back to you as soon as possible.</p>
+        <h2 data-i18n="contact_title">Still need help?</h2>
+        <p data-i18n="contact_desc">We're happy to assist. Send us an email and we'll get back to you as soon as possible.</p>
         <br>
         <a href="mailto:californylana@gmail.com">californylana@gmail.com</a>
     </div>
@@ -234,12 +237,137 @@
 </div>
 
 <footer>
-    <a href="index.html">Home</a>
-    <a href="privacy.html">Privacy Policy</a>
+    <a href="index.html" data-i18n="nav.home">Home</a>
+    <a href="privacy.html" data-i18n="footer.privacy">Privacy Policy</a>
     <a href="mailto:californylana@gmail.com">Contact</a>
     <br><br>
-    <p>&copy; 2025-2026 Californy Lana. All rights reserved.</p>
+    <p data-i18n="footer.copy">&copy; 2025-2026 Californy Lana. All rights reserved.</p>
 </footer>
+
+<script>
+var texts = {
+    en: {
+        'nav.home': 'Home', 'nav.privacy': 'Privacy',
+        'title': 'Support', 'subtitle': 'Find answers to common questions or reach out to us.', 'faq': 'FAQ',
+        'q1': 'How do I reset my progress?',
+        'a1': 'Go to Statistics from the main menu, then tap "Delete my data". This will reset all stats, unlocked levels, and saved chain progress.',
+        'q2': 'The game runs slowly on my device',
+        'a2': 'LUCID is designed to run smoothly on most Android devices. If you experience performance issues, try closing other apps running in the background. The game requires Android 7.1 (API 25) or higher.',
+        'q3': 'How do I unlock new difficulty levels?',
+        'a3': 'Win the previous level to unlock the next one. Beat DREAM to unlock REVERIE, beat REVERIE to unlock LUCID. Chain Mode unlocks after your first victory on any level.',
+        'q4': 'What is the Seed number?',
+        'a4': 'Every board is generated from a unique seed (shown as a hex code like #A3F2). Share it with friends so they can play the exact same puzzle and compare strategies.',
+        'q5': 'How does Chain Mode work?',
+        'a5': 'Chain Mode is an infinite gauntlet of escalating arenas. You play DREAM, then REVERIE, then LUCID, then increasingly harder variants. One defeat ends your run. Your score accumulates across all arenas.',
+        'q6': 'Does the game require an internet connection?',
+        'a6': 'No. LUCID works 100% offline. No accounts, no ads, no data is ever sent anywhere. All your progress is stored locally on your device.',
+        'q7': 'How do I change the language?',
+        'a7': 'During a game, tap the pause button (II), then tap the language toggle to switch between French, English and Spanish.',
+        'q8': 'How does the Daily Challenge work?',
+        'a8': "Every day, three fresh puzzles are generated \u2014 one per difficulty level. All players worldwide get the same boards. You can play each level once per day. Your daily streak tracks how many consecutive days you've completed at least one challenge.",
+        'q9': 'Can I share my Daily Challenge results?',
+        'a9': 'Yes! After completing any game, tap the Share button on the end screen. Your result is copied to the clipboard as a short text summary that you can paste anywhere.',
+        'q10': 'What are badges (achievements)?',
+        'a10': 'There are 100 badges to unlock, tracking milestones like your first win, speedruns, economy plays, lesson completion, and daily challenge streaks. Check your progress in the Statistics screen.',
+        'q11': "I purchased the premium features but they're not showing",
+        'a11': 'Try restarting the app. If the issue persists, make sure your Google Play purchase was completed successfully by checking your purchase history in the Google Play app. Contact us if you need further help.',
+        'tip': 'Tip: The tutorials teach you everything you need to know. If you\'re stuck, try replaying the lesson about the specific mechanic that\'s giving you trouble (Rift retaliation, chain reactions, or lucidity management).',
+        'contact_title': 'Still need help?', 'contact_desc': "We're happy to assist. Send us an email and we'll get back to you as soon as possible.",
+        'footer.privacy': 'Privacy Policy', 'footer.copy': '\u00a9 2025-2026 Californy Lana. All rights reserved.'
+    },
+    fr: {
+        'nav.home': 'Accueil', 'nav.privacy': 'Confidentialit\u00e9',
+        'title': 'Support', 'subtitle': 'Trouvez des r\u00e9ponses aux questions fr\u00e9quentes ou contactez-nous.', 'faq': 'FAQ',
+        'q1': 'Comment r\u00e9initialiser ma progression ?',
+        'a1': 'Allez dans Statistiques depuis le menu principal, puis appuyez sur \u00ab Effacer mes donn\u00e9es \u00bb. Cela r\u00e9initialisera toutes les stats, niveaux d\u00e9bloqu\u00e9s et la progression de cha\u00eene.',
+        'q2': 'Le jeu est lent sur mon appareil',
+        'a2': 'LUCID est con\u00e7u pour tourner sur la plupart des appareils Android. En cas de probl\u00e8me de performance, fermez les autres applications en arri\u00e8re-plan. Le jeu requiert Android 7.1 (API 25) ou sup\u00e9rieur.',
+        'q3': 'Comment d\u00e9bloquer de nouveaux niveaux ?',
+        'a3': 'Gagnez le niveau pr\u00e9c\u00e9dent pour d\u00e9bloquer le suivant. Battez R\u00caVE pour d\u00e9bloquer SONGE, battez SONGE pour d\u00e9bloquer LUCIDE. Le Mode Cha\u00eene se d\u00e9bloque apr\u00e8s votre premi\u00e8re victoire.',
+        'q4': 'Qu\u2019est-ce que le num\u00e9ro Seed ?',
+        'a4': 'Chaque plateau est g\u00e9n\u00e9r\u00e9 \u00e0 partir d\u2019un seed unique (affich\u00e9 comme un code hex #A3F2). Partagez-le avec vos amis pour jouer exactement le m\u00eame puzzle.',
+        'q5': 'Comment fonctionne le Mode Cha\u00eene ?',
+        'a5': 'Le Mode Cha\u00eene est un d\u00e9fi infini d\u2019ar\u00e8nes croissantes. Vous jouez R\u00caVE, puis SONGE, puis LUCIDE, puis des variantes de plus en plus dures. Une d\u00e9faite met fin \u00e0 votre run. Le score s\u2019accumule.',
+        'q6': 'Le jeu n\u00e9cessite-t-il une connexion internet ?',
+        'a6': 'Non. LUCID fonctionne 100% hors-ligne. Aucun compte, aucune pub, aucune donn\u00e9e n\u2019est envoy\u00e9e. Votre progression est stock\u00e9e localement.',
+        'q7': 'Comment changer la langue ?',
+        'a7': 'En partie, appuyez sur pause (II), puis sur le bouton de langue pour basculer entre fran\u00e7ais, anglais et espagnol.',
+        'q8': 'Comment fonctionne le D\u00e9fi Quotidien ?',
+        'a8': 'Chaque jour, trois puzzles sont g\u00e9n\u00e9r\u00e9s \u2014 un par niveau de difficult\u00e9. Tous les joueurs ont les m\u00eames plateaux. Vous pouvez jouer chaque niveau une fois par jour. Votre s\u00e9rie suit les jours cons\u00e9cutifs.',
+        'q9': 'Puis-je partager mes r\u00e9sultats du D\u00e9fi Quotidien ?',
+        'a9': 'Oui ! Apr\u00e8s une partie, appuyez sur Partager sur l\u2019\u00e9cran de fin. Votre r\u00e9sultat est copi\u00e9 dans le presse-papiers sous forme de texte court que vous pouvez coller n\u2019importe o\u00f9.',
+        'q10': 'Que sont les badges (succ\u00e8s) ?',
+        'a10': '100 badges \u00e0 d\u00e9bloquer, suivant des jalons comme votre premi\u00e8re victoire, speedruns, \u00e9conomie, le\u00e7ons et s\u00e9ries quotidiennes. V\u00e9rifiez votre progression dans Statistiques.',
+        'q11': 'J\u2019ai achet\u00e9 le contenu premium mais il ne s\u2019affiche pas',
+        'a11': 'Essayez de red\u00e9marrer l\u2019application. Si le probl\u00e8me persiste, v\u00e9rifiez que votre achat Google Play a bien \u00e9t\u00e9 finalis\u00e9 dans l\u2019historique des achats. Contactez-nous si besoin.',
+        'tip': 'Astuce : Les tutoriels vous apprennent tout ce qu\u2019il faut savoir. Si vous \u00eates bloqu\u00e9, rejouez la le\u00e7on sur la m\u00e9canique qui vous pose probl\u00e8me (riposte de la Faille, r\u00e9actions en cha\u00eene ou gestion de la Lucidit\u00e9).',
+        'contact_title': 'Besoin d\u2019aide ?', 'contact_desc': 'Nous sommes l\u00e0 pour vous aider. Envoyez-nous un email et nous vous r\u00e9pondrons d\u00e8s que possible.',
+        'footer.privacy': 'Politique de confidentialit\u00e9', 'footer.copy': '\u00a9 2025-2026 Californy Lana. Tous droits r\u00e9serv\u00e9s.'
+    },
+    es: {
+        'nav.home': 'Inicio', 'nav.privacy': 'Privacidad',
+        'title': 'Soporte', 'subtitle': 'Encuentra respuestas a preguntas frecuentes o cont\u00e1ctanos.', 'faq': 'FAQ',
+        'q1': '\u00bfC\u00f3mo reinicio mi progreso?',
+        'a1': 'Ve a Estad\u00edsticas desde el men\u00fa principal y pulsa \u00ab Borrar mis datos \u00bb. Esto reiniciar\u00e1 todas las estad\u00edsticas, niveles desbloqueados y el progreso de cadena.',
+        'q2': 'El juego va lento en mi dispositivo',
+        'a2': 'LUCID est\u00e1 dise\u00f1ado para funcionar bien en la mayor\u00eda de dispositivos Android. Si tienes problemas de rendimiento, cierra otras aplicaciones en segundo plano. El juego requiere Android 7.1 (API 25) o superior.',
+        'q3': '\u00bfC\u00f3mo desbloqueo nuevos niveles de dificultad?',
+        'a3': 'Gana el nivel anterior para desbloquear el siguiente. Supera SUE\u00d1O para desbloquear ENSUE\u00d1O, supera ENSUE\u00d1O para desbloquear L\u00daCIDO. El Modo Cadena se desbloquea tras tu primera victoria.',
+        'q4': '\u00bfQu\u00e9 es el n\u00famero Seed?',
+        'a4': 'Cada tablero se genera a partir de un seed \u00fanico (mostrado como c\u00f3digo hex #A3F2). Comp\u00e1rtelo con amigos para jugar exactamente el mismo puzzle.',
+        'q5': '\u00bfC\u00f3mo funciona el Modo Cadena?',
+        'a5': 'El Modo Cadena es un desaf\u00edo infinito de arenas crecientes. Juegas SUE\u00d1O, luego ENSUE\u00d1O, luego L\u00daCIDO, y variantes cada vez m\u00e1s dif\u00edciles. Una derrota termina tu run. La puntuaci\u00f3n se acumula.',
+        'q6': '\u00bfEl juego necesita conexi\u00f3n a internet?',
+        'a6': 'No. LUCID funciona 100% sin conexi\u00f3n. Sin cuentas, sin anuncios, ning\u00fan dato se env\u00eda a ning\u00fan sitio. Tu progreso se almacena localmente.',
+        'q7': '\u00bfC\u00f3mo cambio el idioma?',
+        'a7': 'Durante una partida, pulsa pausa (II) y luego el bot\u00f3n de idioma para alternar entre franc\u00e9s, ingl\u00e9s y espa\u00f1ol.',
+        'q8': '\u00bfC\u00f3mo funciona el Desaf\u00edo Diario?',
+        'a8': 'Cada d\u00eda se generan tres puzzles \u2014 uno por nivel de dificultad. Todos los jugadores del mundo tienen los mismos tableros. Puedes jugar cada nivel una vez al d\u00eda. Tu racha cuenta los d\u00edas consecutivos.',
+        'q9': '\u00bfPuedo compartir mis resultados del Desaf\u00edo Diario?',
+        'a9': '\u00a1S\u00ed! Tras completar una partida, pulsa Compartir en la pantalla de fin. Tu resultado se copia al portapapeles como un breve texto que puedes pegar en cualquier sitio.',
+        'q10': '\u00bfQu\u00e9 son las insignias (logros)?',
+        'a10': 'Hay 100 insignias para desbloquear, siguiendo hitos como tu primera victoria, speedruns, econom\u00eda, lecciones y rachas diarias. Consulta tu progreso en Estad\u00edsticas.',
+        'q11': 'Compr\u00e9 el contenido premium pero no aparece',
+        'a11': 'Prueba reiniciando la app. Si el problema persiste, verifica que tu compra en Google Play se complet\u00f3 correctamente en el historial de compras. Cont\u00e1ctanos si necesitas m\u00e1s ayuda.',
+        'tip': 'Consejo: Los tutoriales te ense\u00f1an todo lo que necesitas saber. Si est\u00e1s atascado, repite la lecci\u00f3n sobre la mec\u00e1nica que te da problemas (represalia de la Fisura, reacciones en cadena o gesti\u00f3n de la Lucidez).',
+        'contact_title': '\u00bfA\u00fan necesitas ayuda?', 'contact_desc': 'Estaremos encantados de ayudarte. Env\u00edanos un email y te responderemos lo antes posible.',
+        'footer.privacy': 'Pol\u00edtica de Privacidad', 'footer.copy': '\u00a9 2025-2026 Californy Lana. Todos los derechos reservados.'
+    }
+};
+
+var langCycle = ['fr', 'en', 'es'];
+
+function detectLang() {
+    var saved = localStorage.getItem('lucid-lang');
+    if (saved && langCycle.indexOf(saved) !== -1) return saved;
+    var nav = navigator.language.toLowerCase();
+    if (nav.startsWith('fr')) return 'fr';
+    if (nav.startsWith('es')) return 'es';
+    return 'en';
+}
+
+var currentLang = detectLang();
+
+function applyLang(lang) {
+    currentLang = lang;
+    localStorage.setItem('lucid-lang', lang);
+    document.documentElement.lang = lang;
+    document.querySelector('.lang-toggle').textContent = lang.toUpperCase();
+    var t = texts[lang];
+    if (!t) return;
+    document.querySelectorAll('[data-i18n]').forEach(function(el) {
+        var key = el.getAttribute('data-i18n');
+        if (t[key]) el.textContent = t[key];
+    });
+}
+
+function toggleLang() {
+    var idx = langCycle.indexOf(currentLang);
+    applyLang(langCycle[(idx + 1) % langCycle.length]);
+}
+
+applyLang(currentLang);
+</script>
 
 </body>
 </html>
