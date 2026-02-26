@@ -550,7 +550,7 @@
 
 <!-- NAV -->
 <nav>
-    <a href="#" class="nav-logo">LUCID</a>
+    <a href="index.html" class="nav-logo">LUCID</a>
     <div class="nav-links">
         <a href="#features" data-i18n="nav.features">Features</a>
         <a href="#gameplay" data-i18n="nav.gameplay">Gameplay</a>
@@ -980,9 +980,11 @@ function toggleLang() {
 
 // Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(a => {
+    const href = a.getAttribute('href');
+    if (href === '#') return; // Skip bare '#' (invalid selector)
     a.addEventListener('click', e => {
         e.preventDefault();
-        const target = document.querySelector(a.getAttribute('href'));
+        const target = document.querySelector(href);
         if (target) target.scrollIntoView({ behavior: 'smooth' });
     });
 });
