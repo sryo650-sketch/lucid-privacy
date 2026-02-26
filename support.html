@@ -271,7 +271,7 @@ var texts = {
         'a10': 'There are 100 badges to unlock, tracking milestones like your first win, speedruns, economy plays, lesson completion, and daily challenge streaks. Check your progress in the Statistics screen.',
         'q11': "I purchased the premium features but they're not showing",
         'a11': 'Try restarting the app. If the issue persists, make sure your Google Play purchase was completed successfully by checking your purchase history in the Google Play app. Contact us if you need further help.',
-        'tip': 'Tip: The tutorials teach you everything you need to know. If you\'re stuck, try replaying the lesson about the specific mechanic that\'s giving you trouble (Rift retaliation, chain reactions, or lucidity management).',
+        'tip': '<strong>Tip:</strong> The tutorials teach you everything you need to know. If you\'re stuck, try replaying the lesson about the specific mechanic that\'s giving you trouble (Rift retaliation, chain reactions, or lucidity management).',
         'contact_title': 'Still need help?', 'contact_desc': "We're happy to assist. Send us an email and we'll get back to you as soon as possible.",
         'footer.privacy': 'Privacy Policy', 'footer.copy': '\u00a9 2025-2026 Californy Lana. All rights reserved.'
     },
@@ -300,7 +300,7 @@ var texts = {
         'a10': '100 badges \u00e0 d\u00e9bloquer, suivant des jalons comme votre premi\u00e8re victoire, speedruns, \u00e9conomie, le\u00e7ons et s\u00e9ries quotidiennes. V\u00e9rifiez votre progression dans Statistiques.',
         'q11': 'J\u2019ai achet\u00e9 le contenu premium mais il ne s\u2019affiche pas',
         'a11': 'Essayez de red\u00e9marrer l\u2019application. Si le probl\u00e8me persiste, v\u00e9rifiez que votre achat Google Play a bien \u00e9t\u00e9 finalis\u00e9 dans l\u2019historique des achats. Contactez-nous si besoin.',
-        'tip': 'Astuce : Les tutoriels vous apprennent tout ce qu\u2019il faut savoir. Si vous \u00eates bloqu\u00e9, rejouez la le\u00e7on sur la m\u00e9canique qui vous pose probl\u00e8me (riposte de la Faille, r\u00e9actions en cha\u00eene ou gestion de la Lucidit\u00e9).',
+        'tip': '<strong>Astuce :</strong> Les tutoriels vous apprennent tout ce qu\u2019il faut savoir. Si vous \u00eates bloqu\u00e9, rejouez la le\u00e7on sur la m\u00e9canique qui vous pose probl\u00e8me (riposte de la Faille, r\u00e9actions en cha\u00eene ou gestion de la Lucidit\u00e9).',
         'contact_title': 'Besoin d\u2019aide ?', 'contact_desc': 'Nous sommes l\u00e0 pour vous aider. Envoyez-nous un email et nous vous r\u00e9pondrons d\u00e8s que possible.',
         'footer.privacy': 'Politique de confidentialit\u00e9', 'footer.copy': '\u00a9 2025-2026 Californy Lana. Tous droits r\u00e9serv\u00e9s.'
     },
@@ -329,7 +329,7 @@ var texts = {
         'a10': 'Hay 100 insignias para desbloquear, siguiendo hitos como tu primera victoria, speedruns, econom\u00eda, lecciones y rachas diarias. Consulta tu progreso en Estad\u00edsticas.',
         'q11': 'Compr\u00e9 el contenido premium pero no aparece',
         'a11': 'Prueba reiniciando la app. Si el problema persiste, verifica que tu compra en Google Play se complet\u00f3 correctamente en el historial de compras. Cont\u00e1ctanos si necesitas m\u00e1s ayuda.',
-        'tip': 'Consejo: Los tutoriales te ense\u00f1an todo lo que necesitas saber. Si est\u00e1s atascado, repite la lecci\u00f3n sobre la mec\u00e1nica que te da problemas (represalia de la Fisura, reacciones en cadena o gesti\u00f3n de la Lucidez).',
+        'tip': '<strong>Consejo:</strong> Los tutoriales te ense\u00f1an todo lo que necesitas saber. Si est\u00e1s atascado, repite la lecci\u00f3n sobre la mec\u00e1nica que te da problemas (represalia de la Fisura, reacciones en cadena o gesti\u00f3n de la Lucidez).',
         'contact_title': '\u00bfA\u00fan necesitas ayuda?', 'contact_desc': 'Estaremos encantados de ayudarte. Env\u00edanos un email y te responderemos lo antes posible.',
         'footer.privacy': 'Pol\u00edtica de Privacidad', 'footer.copy': '\u00a9 2025-2026 Californy Lana. Todos los derechos reservados.'
     }
@@ -357,7 +357,10 @@ function applyLang(lang) {
     if (!t) return;
     document.querySelectorAll('[data-i18n]').forEach(function(el) {
         var key = el.getAttribute('data-i18n');
-        if (t[key]) el.textContent = t[key];
+        if (t[key]) {
+            if (key === 'tip') el.innerHTML = t[key];
+            else el.textContent = t[key];
+        }
     });
 }
 
