@@ -380,6 +380,7 @@
         .mode-card.songe .level-name { color: var(--violet); }
         .mode-card.lucide .level-name { color: var(--magenta); }
         .mode-card.chain .level-name { color: var(--red); }
+        .mode-card.daily .level-name { color: var(--gold); }
 
         .mode-card .difficulty-bar {
             height: 3px;
@@ -391,6 +392,7 @@
         .mode-card.songe .difficulty-bar { background: linear-gradient(90deg, var(--violet) 55%, transparent); }
         .mode-card.lucide .difficulty-bar { background: linear-gradient(90deg, var(--magenta) 80%, transparent); }
         .mode-card.chain .difficulty-bar { background: linear-gradient(90deg, var(--red) 100%); }
+        .mode-card.daily .difficulty-bar { background: linear-gradient(90deg, var(--gold) 60%, transparent); }
 
         /* === SCREENSHOTS === */
         .screenshots-scroll {
@@ -607,6 +609,31 @@
             <h3 data-i18n="features.seed.title">Seed Replay</h3>
             <p data-i18n="features.seed.desc">Every board has a unique seed. Share it with friends to challenge them on the exact same puzzle.</p>
         </div>
+        <div class="feature-card">
+            <span class="feature-icon">&#128197;</span>
+            <h3 data-i18n="features.daily.title">Daily Challenge</h3>
+            <p data-i18n="features.daily.desc">Three fresh puzzles every day &mdash; one per difficulty. Track your streak, share your results, and compare with friends.</p>
+        </div>
+        <div class="feature-card">
+            <span class="feature-icon">&#127942;</span>
+            <h3 data-i18n="features.badges.title">Achievements</h3>
+            <p data-i18n="features.badges.desc">100 badges to unlock across all modes: speedruns, economy plays, daily streaks, chain records, and mastery milestones.</p>
+        </div>
+        <div class="feature-card">
+            <span class="feature-icon">&#128228;</span>
+            <h3 data-i18n="features.share.title">Native Sharing</h3>
+            <p data-i18n="features.share.desc">Share your results with one tap. The native share sheet lets you send your score to any app &mdash; WhatsApp, Twitter, and more.</p>
+        </div>
+        <div class="feature-card">
+            <span class="feature-icon">&#128065;</span>
+            <h3 data-i18n="features.colorblind.title">Colorblind Mode</h3>
+            <p data-i18n="features.colorblind.desc">Deuteranopia and tritanopia support built in. Swap color palettes with one tap in the pause menu &mdash; no one left behind.</p>
+        </div>
+        <div class="feature-card">
+            <span class="feature-icon">&#127891;</span>
+            <h3 data-i18n="features.tutorials.title">4 Guided Lessons</h3>
+            <p data-i18n="features.tutorials.desc">Step-by-step tutorials covering basics, Rift retaliation, chain reactions, and Lucidity management. Learn at your own pace.</p>
+        </div>
     </div>
 </section>
 
@@ -665,6 +692,11 @@
             <div class="difficulty-bar"></div>
             <p class="level-desc" data-i18n="modes.chain.desc">Infinite escalating arenas. One defeat ends it all. How far can you go?</p>
         </div>
+        <div class="mode-card daily">
+            <div class="level-name" data-i18n="modes.daily.name">DAILY CHALLENGE</div>
+            <div class="difficulty-bar"></div>
+            <p class="level-desc" data-i18n="modes.daily.desc">Three unique puzzles every day. Same seed for all players. Build your streak and share your scores.</p>
+        </div>
     </div>
 </section>
 
@@ -698,7 +730,7 @@
         <a href="support.html">Support</a>
         <a href="mailto:californylana@gmail.com">Contact</a>
     </div>
-    <p data-i18n="footer.copy">&copy; 2025 Californy Lana. All rights reserved.</p>
+    <p data-i18n="footer.copy">&copy; 2025-2026 Californy Lana. All rights reserved.</p>
 </footer>
 
 <script>
@@ -727,6 +759,16 @@ const i18n = {
         'features.offline.desc': 'Pas de compte. Pas de pub. Pas de collecte de donn\u00e9es. Pas d\u2019internet requis. Votre jeu, votre appareil, votre vie priv\u00e9e.',
         'features.seed.title': 'Rejouer par Seed',
         'features.seed.desc': 'Chaque plateau a un seed unique. Partagez-le avec vos amis pour les d\u00e9fier sur exactement le m\u00eame puzzle.',
+        'features.daily.title': 'D\u00e9fi Quotidien',
+        'features.daily.desc': 'Trois puzzles in\u00e9dits chaque jour \u2014 un par difficult\u00e9. Suivez votre s\u00e9rie, partagez vos r\u00e9sultats, et d\u00e9fiez vos amis.',
+        'features.badges.title': 'Succ\u00e8s',
+        'features.badges.desc': '100 badges \u00e0 d\u00e9bloquer dans tous les modes : speedruns, \u00e9conomie, s\u00e9ries quotidiennes, records de cha\u00eene et ma\u00eetrise.',
+        'features.share.title': 'Partage Natif',
+        'features.share.desc': 'Partagez vos r\u00e9sultats en un tap. Le partage natif vous permet d\u2019envoyer votre score vers n\u2019importe quelle app \u2014 WhatsApp, Twitter, etc.',
+        'features.colorblind.title': 'Mode Daltonien',
+        'features.colorblind.desc': 'Support deutan\u00f3pie et tritan\u00f3pie int\u00e9gr\u00e9. Changez la palette de couleurs d\u2019un tap dans le menu pause \u2014 personne n\u2019est oubli\u00e9.',
+        'features.tutorials.title': '4 Le\u00e7ons Guid\u00e9es',
+        'features.tutorials.desc': 'Tutoriels pas \u00e0 pas couvrant les bases, la riposte de la Faille, les r\u00e9actions en cha\u00eene et la gestion de la Lucidit\u00e9.',
         'gameplay.title': 'Comment \u00e7a marche',
         'gameplay.subtitle': 'Quatre m\u00e9caniques fondamentales. Une profondeur strat\u00e9gique infinie.',
         'gameplay.node.title': 'N\u0153uds',
@@ -747,12 +789,14 @@ const i18n = {
         'modes.lucide.desc': 'Difficult\u00e9 extr\u00eame. Lucidit\u00e9 minimale, chaos maximal. Pour les acharn\u00e9s.',
         'modes.chain.name': 'MODE CHA\u00ceNE',
         'modes.chain.desc': 'Ar\u00e8nes infinies et croissantes. Une d\u00e9faite et tout s\u2019arr\u00eate. Jusqu\u2019o\u00f9 irez-vous ?',
+        'modes.daily.name': 'D\u00c9FI DU JOUR',
+        'modes.daily.desc': 'Trois puzzles uniques chaque jour. M\u00eame seed pour tous les joueurs. Construisez votre s\u00e9rie et partagez vos scores.',
         'screenshots.title': 'Captures d\u2019\u00e9cran',
         'screenshots.subtitle': 'Un aper\u00e7u du paysage onirique.',
         'download.title': 'Pr\u00eat \u00e0 entrer dans le r\u00eave ?',
         'download.desc': 'Gratuit \u2014 d\u00e9bloquez le Mode Cha\u00eene, les Seeds et les Stats avec un seul achat.',
         'footer.privacy': 'Politique de confidentialit\u00e9',
-        'footer.copy': '\u00a9 2025 Californy Lana. Tous droits r\u00e9serv\u00e9s.'
+        'footer.copy': '\u00a9 2025-2026 Californy Lana. Tous droits r\u00e9serv\u00e9s.'
     },
     en: {
         'nav.features': 'Features',
@@ -778,6 +822,16 @@ const i18n = {
         'features.offline.desc': 'No accounts. No ads. No data collection. No internet required. Your game, your device, your privacy.',
         'features.seed.title': 'Seed Replay',
         'features.seed.desc': 'Every board has a unique seed. Share it with friends to challenge them on the exact same puzzle.',
+        'features.daily.title': 'Daily Challenge',
+        'features.daily.desc': 'Three fresh puzzles every day \u2014 one per difficulty. Track your streak, share your results, and compare with friends.',
+        'features.badges.title': 'Achievements',
+        'features.badges.desc': '100 badges to unlock across all modes: speedruns, economy plays, daily streaks, chain records, and mastery milestones.',
+        'features.share.title': 'Native Sharing',
+        'features.share.desc': 'Share your results with one tap. The native share sheet lets you send your score to any app \u2014 WhatsApp, Twitter, and more.',
+        'features.colorblind.title': 'Colorblind Mode',
+        'features.colorblind.desc': 'Deuteranopia and tritanopia support built in. Swap color palettes with one tap in the pause menu \u2014 no one left behind.',
+        'features.tutorials.title': '4 Guided Lessons',
+        'features.tutorials.desc': 'Step-by-step tutorials covering basics, Rift retaliation, chain reactions, and Lucidity management. Learn at your own pace.',
         'gameplay.title': 'How It Works',
         'gameplay.subtitle': 'Four core mechanics. Infinite strategic depth.',
         'gameplay.node.title': 'Nodes',
@@ -798,12 +852,14 @@ const i18n = {
         'modes.lucide.desc': 'Extreme difficulty. Minimal lucidity, maximum chaos. For the dedicated.',
         'modes.chain.name': 'CHAIN MODE',
         'modes.chain.desc': 'Infinite escalating arenas. One defeat ends it all. How far can you go?',
+        'modes.daily.name': 'DAILY CHALLENGE',
+        'modes.daily.desc': 'Three unique puzzles every day. Same seed for all players. Build your streak and share your scores.',
         'screenshots.title': 'Screenshots',
         'screenshots.subtitle': 'A glimpse into the dreamscape.',
         'download.title': 'Ready to Enter the Dream?',
         'download.desc': 'Free to play \u2014 unlock Chain Mode, Seeds & Stats with a single purchase.',
         'footer.privacy': 'Privacy Policy',
-        'footer.copy': '\u00a9 2025 Californy Lana. All rights reserved.'
+        'footer.copy': '\u00a9 2025-2026 Californy Lana. All rights reserved.'
     }
 };
 

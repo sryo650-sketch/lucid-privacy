@@ -45,48 +45,66 @@
         .container {
             max-width: 640px;
             margin: 0 auto;
-            padding: 40px 24px;
+            padding: 80px 24px 40px;
             position: relative;
             z-index: 1;
         }
 
-        .nav {
+        /* === NAV (fixed header) === */
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 16px 32px;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            gap: 20px;
-            padding: 20px 0 40px;
-        }
-        .nav a.logo {
-            color: var(--cyan);
-            text-decoration: none;
-            font-family: 'Orbitron', monospace;
-            font-weight: 900;
-            font-size: 2rem;
-            letter-spacing: 0.15em;
-            text-shadow: 0 0 30px rgba(0,255,200,0.3);
-        }
-        .nav a.logo:hover {
-            text-shadow: 0 0 50px rgba(0,255,200,0.5);
-        }
-
-        .lang-toggle {
-            font-family: 'Orbitron', monospace;
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            color: var(--text-dim);
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 20px;
-            padding: 6px 14px;
-            cursor: pointer;
+            background: rgba(5,5,16,0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0,255,200,0.06);
             transition: all 0.3s;
         }
-        .lang-toggle:hover {
+
+        .nav-logo {
+            font-family: 'Orbitron', monospace;
+            font-weight: 900;
+            font-size: 1.2rem;
             color: var(--cyan);
+            text-decoration: none;
+            letter-spacing: 0.1em;
+        }
+
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            margin-left: 32px;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--cyan); }
+        .nav-links a.active { color: var(--magenta); }
+
+        .lang-toggle {
+            background: transparent;
+            border: 1px solid rgba(0,255,200,0.3);
+            color: var(--cyan);
+            font-family: 'Orbitron', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 24px;
+            flex-shrink: 0;
+        }
+        .lang-toggle:hover {
+            background: rgba(0,255,200,0.1);
             border-color: var(--cyan);
-            box-shadow: 0 0 15px rgba(0,255,200,0.15);
         }
 
         .hero-badge {
@@ -335,16 +353,32 @@
         }
 
         .footer a:hover { color: var(--cyan); }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 768px) {
+            .top-nav { padding: 12px 16px; flex-wrap: wrap; }
+            .nav-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 0; }
+            .nav-links a { margin-left: 16px; font-size: 0.8rem; }
+            .lang-toggle { margin-left: 16px; }
+            .container { padding-top: 90px; }
+        }
     </style>
 </head>
 <body>
     <div class="bg-grid"></div>
 
-    <div class="container">
-        <nav class="nav">
-            <a href="index.html" class="logo">LUCID</a>
+    <nav class="top-nav">
+        <a href="index.html" class="nav-logo">LUCID</a>
+        <div class="nav-links">
+            <a href="index.html" data-i18n="nav_home">Home</a>
+            <a href="index.html#features" data-i18n="nav_features">Features</a>
+            <a href="index.html#download" data-i18n="nav_download">Download</a>
+            <a href="support.html" data-i18n="nav_support">Support</a>
             <button class="lang-toggle" id="langBtn" onclick="toggleLang()">FR</button>
-        </nav>
+        </div>
+    </nav>
+
+    <div class="container">
 
         <div style="text-align:center">
             <span class="hero-badge" data-i18n="badge">Closed Beta</span>
@@ -477,6 +511,8 @@
             q4: "Is my data collected?",
             a4: "No. LUCID collects no personal data, works 100% offline and has no trackers.",
             nav_home: "Home",
+            nav_features: "Features",
+            nav_download: "Download",
             nav_support: "Support",
             nav_privacy: "Privacy",
             mail_subject: "LUCID Beta - New tester",
@@ -517,6 +553,8 @@
             q4: "Mes donn\u00e9es sont-elles collect\u00e9es ?",
             a4: "Non. LUCID ne collecte aucune donn\u00e9e personnelle, fonctionne 100% hors-ligne et n'a aucun tracker.",
             nav_home: "Accueil",
+            nav_features: "Fonctionnalit\u00e9s",
+            nav_download: "T\u00e9l\u00e9charger",
             nav_support: "Support",
             nav_privacy: "Confidentialit\u00e9",
             mail_subject: "LUCID Beta - Nouveau testeur",
