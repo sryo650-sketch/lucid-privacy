@@ -205,7 +205,7 @@
 
     <div class="faq-item">
         <h3 data-i18n="q7">How do I change the language?</h3>
-        <p data-i18n="a7">During a game, tap the pause button (II), then tap the language toggle to switch between French, English and Spanish.</p>
+        <p data-i18n="a7">During a game, tap the pause button (II), then tap the language toggle to cycle through available languages.</p>
     </div>
 
     <div class="faq-item">
@@ -267,7 +267,7 @@ var texts = {
         'q6': 'Does the game require an internet connection?',
         'a6': 'No. LUCID works 100% offline. No accounts, no ads, no data is ever sent anywhere. All your progress is stored locally on your device.',
         'q7': 'How do I change the language?',
-        'a7': 'During a game, tap the pause button (II), then tap the language toggle to switch between French, English and Spanish.',
+        'a7': 'During a game, tap the pause button (II), then tap the language toggle to cycle through available languages.',
         'q8': 'How does the Daily Challenge work?',
         'a8': "Every day, three fresh puzzles are generated \u2014 one per difficulty level. All players worldwide get the same boards. You can play each level once per day. Your daily streak tracks how many consecutive days you've completed at least one challenge.",
         'q9': 'Can I share my Daily Challenge results?',
@@ -296,7 +296,7 @@ var texts = {
         'q6': 'Le jeu n\u00e9cessite-t-il une connexion internet ?',
         'a6': 'Non. LUCID fonctionne 100% hors-ligne. Aucun compte, aucune pub, aucune donn\u00e9e n\u2019est envoy\u00e9e. Votre progression est stock\u00e9e localement.',
         'q7': 'Comment changer la langue ?',
-        'a7': 'En partie, appuyez sur pause (II), puis sur le bouton de langue pour basculer entre fran\u00e7ais, anglais et espagnol.',
+        'a7': 'En partie, appuyez sur pause (II), puis sur le bouton de langue pour basculer entre les langues disponibles.',
         'q8': 'Comment fonctionne le D\u00e9fi Quotidien ?',
         'a8': 'Chaque jour, trois puzzles sont g\u00e9n\u00e9r\u00e9s \u2014 un par niveau de difficult\u00e9. Tous les joueurs ont les m\u00eames plateaux. Vous pouvez jouer chaque niveau une fois par jour. Votre s\u00e9rie suit les jours cons\u00e9cutifs.',
         'q9': 'Puis-je partager mes r\u00e9sultats du D\u00e9fi Quotidien ?',
@@ -325,7 +325,7 @@ var texts = {
         'q6': '\u00bfEl juego necesita conexi\u00f3n a internet?',
         'a6': 'No. LUCID funciona 100% sin conexi\u00f3n. Sin cuentas, sin anuncios, ning\u00fan dato se env\u00eda a ning\u00fan sitio. Tu progreso se almacena localmente.',
         'q7': '\u00bfC\u00f3mo cambio el idioma?',
-        'a7': 'Durante una partida, pulsa pausa (II) y luego el bot\u00f3n de idioma para alternar entre franc\u00e9s, ingl\u00e9s y espa\u00f1ol.',
+        'a7': 'Durante una partida, pulsa pausa (II) y luego el bot\u00f3n de idioma para alternar entre los idiomas disponibles.',
         'q8': '\u00bfC\u00f3mo funciona el Desaf\u00edo Diario?',
         'a8': 'Cada d\u00eda se generan tres puzzles \u2014 uno por nivel de dificultad. Todos los jugadores del mundo tienen los mismos tableros. Puedes jugar cada nivel una vez al d\u00eda. Tu racha cuenta los d\u00edas consecutivos.',
         'q9': '\u00bfPuedo compartir mis resultados del Desaf\u00edo Diario?',
@@ -337,10 +337,97 @@ var texts = {
         'tip': '<strong>Consejo:</strong> Los tutoriales te ense\u00f1an todo lo que necesitas saber. Si est\u00e1s atascado, repite la lecci\u00f3n sobre la mec\u00e1nica que te da problemas (represalia de la Fisura, reacciones en cadena o gesti\u00f3n de la Lucidez).',
         'contact_title': '\u00bfA\u00fan necesitas ayuda?', 'contact_desc': 'Estaremos encantados de ayudarte. Env\u00edanos un email y te responderemos lo antes posible.',
         'footer.privacy': 'Pol\u00edtica de Privacidad', 'footer.copy': '\u00a9 2025-2026 Californy Lana. Todos los derechos reservados.'
+    },
+    de: {
+        'nav.home': 'Startseite', 'nav.privacy': 'Datenschutz',
+        'title': 'Support', 'subtitle': 'Finde Antworten auf h\u00e4ufige Fragen oder kontaktiere uns.', 'faq': 'FAQ',
+        'q1': 'Wie setze ich meinen Fortschritt zur\u00fcck?',
+        'a1': 'Gehe im Hauptmen\u00fc zu Statistiken und tippe auf \u00ab Meine Daten l\u00f6schen \u00bb. Das setzt alle Statistiken, freigeschaltete Level und den Ketten-Fortschritt zur\u00fcck.',
+        'q2': 'Das Spiel l\u00e4uft langsam auf meinem Ger\u00e4t',
+        'a2': 'LUCID ist f\u00fcr die meisten Android-Ger\u00e4te optimiert. Bei Leistungsproblemen schlie\u00dfe andere Apps im Hintergrund. Das Spiel erfordert Android 7.1 (API 25) oder h\u00f6her.',
+        'q3': 'Wie schalte ich neue Schwierigkeitsgrade frei?',
+        'a3': 'Gewinne den vorherigen Level, um den n\u00e4chsten freizuschalten. Besiege TRAUM, um VISION freizuschalten, besiege VISION, um LUZID freizuschalten. Der Kettenmodus wird nach dem ersten Sieg freigeschaltet.',
+        'q4': 'Was ist die Seed-Nummer?',
+        'a4': 'Jedes Brett wird aus einem einzigartigen Seed generiert (angezeigt als Hex-Code wie #A3F2). Teile ihn mit Freunden, damit sie genau dasselbe Puzzle spielen k\u00f6nnen.',
+        'q5': 'Wie funktioniert der Kettenmodus?',
+        'a5': 'Der Kettenmodus ist eine endlose Abfolge steigender Arenen. Du spielst TRAUM, dann VISION, dann LUZID, dann immer schwierigere Varianten. Eine Niederlage beendet deinen Lauf. Die Punkte summieren sich.',
+        'q6': 'Ben\u00f6tigt das Spiel eine Internetverbindung?',
+        'a6': 'Nein. LUCID funktioniert 100% offline. Keine Konten, keine Werbung, keine Daten werden jemals irgendwohin gesendet. Dein Fortschritt wird lokal gespeichert.',
+        'q7': 'Wie \u00e4ndere ich die Sprache?',
+        'a7': 'Tippe w\u00e4hrend eines Spiels auf Pause (II) und dann auf die Sprachumschaltung, um zwischen den verf\u00fcgbaren Sprachen zu wechseln.',
+        'q8': 'Wie funktioniert die t\u00e4gliche Herausforderung?',
+        'a8': 'Jeden Tag werden drei Puzzles generiert \u2014 eines pro Schwierigkeitsgrad. Alle Spieler weltweit erhalten dieselben Bretter. Du kannst jeden Level einmal pro Tag spielen. Deine Serie z\u00e4hlt die aufeinanderfolgenden Tage.',
+        'q9': 'Kann ich meine Ergebnisse der t\u00e4glichen Herausforderung teilen?',
+        'a9': 'Ja! Nach Abschluss einer Partie tippe auf Teilen auf dem Endbildschirm. Dein Ergebnis wird als kurzer Text in die Zwischenablage kopiert, den du \u00fcberall einf\u00fcgen kannst.',
+        'q10': 'Was sind Abzeichen (Erfolge)?',
+        'a10': 'Es gibt 100 Abzeichen freizuschalten, die Meilensteine wie deinen ersten Sieg, Speedruns, Sparsamkeit, Lektionen und t\u00e4gliche Serien verfolgen. \u00dcberpr\u00fcfe deinen Fortschritt in den Statistiken.',
+        'q11': 'Ich habe die Premium-Inhalte gekauft, aber sie werden nicht angezeigt',
+        'a11': 'Versuche die App neu zu starten. Wenn das Problem weiterhin besteht, \u00fcberpr\u00fcfe ob dein Google Play-Kauf erfolgreich war im Kaufverlauf. Kontaktiere uns, wenn du weitere Hilfe ben\u00f6tigst.',
+        'tip': '<strong>Tipp:</strong> Die Tutorials bringen dir alles bei, was du wissen musst. Wenn du feststeckst, spiele die Lektion \u00fcber die Mechanik erneut, die dir Probleme bereitet (Vergeltung des Risses, Kettenreaktionen oder Klarheits-Management).',
+        'contact_title': 'Noch Hilfe n\u00f6tig?', 'contact_desc': 'Wir helfen dir gerne. Sende uns eine E-Mail und wir antworten so schnell wie m\u00f6glich.',
+        'footer.privacy': 'Datenschutzerkl\u00e4rung', 'footer.copy': '\u00a9 2025-2026 Californy Lana. Alle Rechte vorbehalten.'
+    },
+    pt: {
+        'nav.home': 'In\u00edcio', 'nav.privacy': 'Privacidade',
+        'title': 'Suporte', 'subtitle': 'Encontre respostas para perguntas frequentes ou entre em contato.', 'faq': 'FAQ',
+        'q1': 'Como redefinir meu progresso?',
+        'a1': 'V\u00e1 para Estat\u00edsticas no menu principal e toque em \u00ab Excluir meus dados \u00bb. Isso redefinir\u00e1 todas as estat\u00edsticas, n\u00edveis desbloqueados e o progresso de corrente.',
+        'q2': 'O jogo est\u00e1 lento no meu dispositivo',
+        'a2': 'O LUCID \u00e9 projetado para rodar bem na maioria dos dispositivos Android. Se tiver problemas de desempenho, feche outros apps em segundo plano. O jogo requer Android 7.1 (API 25) ou superior.',
+        'q3': 'Como desbloqueio novos n\u00edveis de dificuldade?',
+        'a3': 'Vença o n\u00edvel anterior para desbloquear o pr\u00f3ximo. Supere SONHO para desbloquear DEVANEIO, supere DEVANEIO para desbloquear L\u00daCIDO. O Modo Corrente \u00e9 desbloqueado ap\u00f3s sua primeira vit\u00f3ria.',
+        'q4': 'O que \u00e9 o n\u00famero Seed?',
+        'a4': 'Cada tabuleiro \u00e9 gerado a partir de um seed \u00fanico (exibido como c\u00f3digo hex #A3F2). Compartilhe com amigos para jogar exatamente o mesmo puzzle.',
+        'q5': 'Como funciona o Modo Corrente?',
+        'a5': 'O Modo Corrente \u00e9 um desafio infinito de arenas crescentes. Voc\u00ea joga SONHO, depois DEVANEIO, depois L\u00daCIDO, e variantes cada vez mais dif\u00edceis. Uma derrota encerra seu run. A pontua\u00e7\u00e3o se acumula.',
+        'q6': 'O jogo precisa de conex\u00e3o com a internet?',
+        'a6': 'N\u00e3o. O LUCID funciona 100% offline. Sem contas, sem an\u00fancios, nenhum dado \u00e9 enviado a lugar nenhum. Seu progresso \u00e9 armazenado localmente.',
+        'q7': 'Como mudo o idioma?',
+        'a7': 'Durante uma partida, toque em pausa (II) e depois no bot\u00e3o de idioma para alternar entre os idiomas dispon\u00edveis.',
+        'q8': 'Como funciona o Desafio Di\u00e1rio?',
+        'a8': 'Todo dia, tr\u00eas puzzles s\u00e3o gerados \u2014 um por n\u00edvel de dificuldade. Todos os jogadores do mundo recebem os mesmos tabuleiros. Voc\u00ea pode jogar cada n\u00edvel uma vez por dia. Sua sequ\u00eancia conta os dias consecutivos.',
+        'q9': 'Posso compartilhar meus resultados do Desafio Di\u00e1rio?',
+        'a9': 'Sim! Ap\u00f3s completar uma partida, toque em Compartilhar na tela final. Seu resultado \u00e9 copiado para a \u00e1rea de transfer\u00eancia como um texto curto que voc\u00ea pode colar em qualquer lugar.',
+        'q10': 'O que s\u00e3o emblemas (conquistas)?',
+        'a10': 'S\u00e3o 100 emblemas para desbloquear, acompanhando marcos como sua primeira vit\u00f3ria, speedruns, economia, li\u00e7\u00f5es e sequ\u00eancias di\u00e1rias. Verifique seu progresso em Estat\u00edsticas.',
+        'q11': 'Comprei o conte\u00fado premium mas n\u00e3o aparece',
+        'a11': 'Tente reiniciar o app. Se o problema persistir, verifique se sua compra no Google Play foi conclu\u00edda com sucesso no hist\u00f3rico de compras. Entre em contato se precisar de mais ajuda.',
+        'tip': '<strong>Dica:</strong> Os tutoriais ensinam tudo que voc\u00ea precisa saber. Se estiver travado, repita a li\u00e7\u00e3o sobre a mec\u00e2nica que est\u00e1 te dando problema (retalia\u00e7\u00e3o da Fenda, rea\u00e7\u00f5es em cadeia ou gest\u00e3o da Lucidez).',
+        'contact_title': 'Ainda precisa de ajuda?', 'contact_desc': 'Teremos prazer em ajudar. Envie-nos um e-mail e responderemos o mais r\u00e1pido poss\u00edvel.',
+        'footer.privacy': 'Pol\u00edtica de Privacidade', 'footer.copy': '\u00a9 2025-2026 Californy Lana. Todos os direitos reservados.'
+    },
+    it: {
+        'nav.home': 'Home', 'nav.privacy': 'Privacy',
+        'title': 'Supporto', 'subtitle': 'Trova risposte alle domande frequenti o contattaci.', 'faq': 'FAQ',
+        'q1': 'Come resetto i miei progressi?',
+        'a1': 'Vai in Statistiche dal menu principale e tocca \u00ab Cancella i miei dati \u00bb. Questo resetter\u00e0 tutte le statistiche, i livelli sbloccati e i progressi della catena.',
+        'q2': 'Il gioco \u00e8 lento sul mio dispositivo',
+        'a2': 'LUCID \u00e8 progettato per funzionare bene sulla maggior parte dei dispositivi Android. In caso di problemi di prestazioni, chiudi le altre app in background. Il gioco richiede Android 7.1 (API 25) o superiore.',
+        'q3': 'Come sblocco nuovi livelli di difficolt\u00e0?',
+        'a3': 'Vinci il livello precedente per sbloccare il successivo. Supera SOGNO per sbloccare VISIONE, supera VISIONE per sbloccare LUCIDO. La Modalit\u00e0 Catena si sblocca dopo la prima vittoria.',
+        'q4': 'Cos\u2019\u00e8 il numero Seed?',
+        'a4': 'Ogni tavola \u00e8 generata da un seed unico (mostrato come codice hex #A3F2). Condividilo con gli amici per giocare esattamente lo stesso puzzle.',
+        'q5': 'Come funziona la Modalit\u00e0 Catena?',
+        'a5': 'La Modalit\u00e0 Catena \u00e8 una sfida infinita di arene crescenti. Giochi SOGNO, poi VISIONE, poi LUCIDO, poi varianti sempre pi\u00f9 difficili. Una sconfitta termina il tuo run. Il punteggio si accumula.',
+        'q6': 'Il gioco richiede una connessione internet?',
+        'a6': 'No. LUCID funziona 100% offline. Nessun account, nessuna pubblicit\u00e0, nessun dato viene mai inviato da nessuna parte. I tuoi progressi sono memorizzati localmente.',
+        'q7': 'Come cambio la lingua?',
+        'a7': 'Durante una partita, tocca pausa (II) e poi il pulsante della lingua per alternare tra le lingue disponibili.',
+        'q8': 'Come funziona la Sfida Giornaliera?',
+        'a8': 'Ogni giorno vengono generati tre puzzle \u2014 uno per livello di difficolt\u00e0. Tutti i giocatori del mondo ricevono le stesse tavole. Puoi giocare ogni livello una volta al giorno. La tua serie conta i giorni consecutivi.',
+        'q9': 'Posso condividere i risultati della Sfida Giornaliera?',
+        'a9': 'S\u00ec! Dopo aver completato una partita, tocca Condividi nella schermata finale. Il tuo risultato viene copiato negli appunti come un breve testo che puoi incollare ovunque.',
+        'q10': 'Cosa sono i distintivi (obiettivi)?',
+        'a10': 'Ci sono 100 distintivi da sbloccare, che tracciano traguardi come la tua prima vittoria, speedrun, economia, lezioni e serie giornaliere. Controlla i tuoi progressi nelle Statistiche.',
+        'q11': 'Ho acquistato i contenuti premium ma non compaiono',
+        'a11': 'Prova a riavviare l\u2019app. Se il problema persiste, verifica che il tuo acquisto su Google Play sia stato completato correttamente nella cronologia degli acquisti. Contattaci se hai bisogno di ulteriore aiuto.',
+        'tip': '<strong>Consiglio:</strong> I tutorial ti insegnano tutto ci\u00f2 che devi sapere. Se sei bloccato, rigioca la lezione sulla meccanica che ti d\u00e0 problemi (ritorsione della Faglia, reazioni a catena o gestione della Lucidit\u00e0).',
+        'contact_title': 'Hai ancora bisogno di aiuto?', 'contact_desc': 'Saremo felici di assisterti. Inviaci un\u2019email e ti risponderemo il prima possibile.',
+        'footer.privacy': 'Informativa sulla Privacy', 'footer.copy': '\u00a9 2025-2026 Californy Lana. Tutti i diritti riservati.'
     }
 };
 
-var langCycle = ['fr', 'en', 'es'];
+var langCycle = ['fr', 'en', 'es', 'de', 'pt', 'it'];
 
 function detectLang() {
     var saved = localStorage.getItem('lucid-lang');
@@ -348,6 +435,9 @@ function detectLang() {
     var nav = navigator.language.toLowerCase();
     if (nav.startsWith('fr')) return 'fr';
     if (nav.startsWith('es')) return 'es';
+    if (nav.startsWith('de')) return 'de';
+    if (nav.startsWith('pt')) return 'pt';
+    if (nav.startsWith('it')) return 'it';
     return 'en';
 }
 

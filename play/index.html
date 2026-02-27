@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUCID &mdash; Open Puzzle</title>
+    <meta property="og:title" content="LUCID &mdash; Can you solve this puzzle?">
+    <meta property="og:description" content="Someone shared a hex puzzle with you. Open it in LUCID!">
+    <meta property="og:image" content="https://sryo650-sketch.github.io/lucid-privacy/screenshots/Presentation.png">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;text y='.9em' font-size='90'&gt;&#11042;&lt;/text&gt;&lt;/svg&gt;">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #050510;
+            color: #c8c8d8;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+        .container { max-width: 420px; padding: 2rem; }
+        h1 {
+            font-family: 'Orbitron', monospace;
+            color: #00ffc8;
+            font-size: 3rem;
+            font-weight: 900;
+            letter-spacing: 0.15em;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(0, 255, 200, 0.3);
+        }
+        .subtitle {
+            color: #707088;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+        .message {
+            font-size: 1.1rem;
+            color: #b0b0c8;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        .loading {
+            color: #00ffc8;
+            font-size: 1.2rem;
+            font-family: 'Orbitron', monospace;
+        }
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, #00ffc8, #00c8ff);
+            color: #050510;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 0 20px rgba(0, 255, 200, 0.2);
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(0, 255, 200, 0.4);
+        }
+        .hex {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 15px rgba(0, 255, 200, 0.3));
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="loading">
+        <div class="hex">&#11042;</div>
+        <h1>LUCID</h1>
+        <p class="loading">Opening puzzle...</p>
+    </div>
+    <div class="container" id="fallback" style="display:none;">
+        <div class="hex">&#11042;</div>
+        <h1>LUCID</h1>
+        <p class="subtitle">Strategic Hex Puzzle Game</p>
+        <p class="message">Someone shared a puzzle with you!<br>Open it in LUCID to play.</p>
+        <a class="btn" href="https://play.google.com/store/apps/details?id=com.californylana.lucid">
+            Download on Google Play
+        </a>
+    </div>
+    <script>
+        // Si Android App Links fonctionne, cette page n'est jamais affichee.
+        // Sinon, tente l'intent URL puis affiche le fallback.
+        var params = new URLSearchParams(window.location.search);
+        var intentUrl = 'intent://sryo650-sketch.github.io/lucid-privacy/play?'
+            + params.toString()
+            + '#Intent;scheme=https;package=com.californylana.lucid;end';
+
+        setTimeout(function() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('fallback').style.display = 'block';
+        }, 2500);
+
+        window.location.href = intentUrl;
+    </script>
+</body>
+</html>
