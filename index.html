@@ -531,8 +531,10 @@
         .mode-card.songe::before { background: var(--violet); }
         .mode-card.lucide .level-name { color: var(--magenta); }
         .mode-card.lucide::before { background: var(--magenta); }
-        .mode-card.chain .level-name { color: var(--red); }
-        .mode-card.chain::before { background: var(--red); }
+        .mode-card.eveil .level-name { color: var(--red); }
+        .mode-card.eveil::before { background: var(--red); }
+        .mode-card.chain .level-name { color: #00ff88; }
+        .mode-card.chain::before { background: #00ff88; }
         .mode-card.daily .level-name { color: var(--gold); }
         .mode-card.daily::before { background: var(--gold); }
 
@@ -750,14 +752,14 @@
                 <p data-i18n="features.share.desc">Share your results with one tap. The native share sheet lets you send your score to any app &mdash; WhatsApp, Twitter, and more.</p>
             </div>
             <div class="feature-card reveal">
-                <img class="feature-icon" src="sprites/loupe.png" alt="Colorblind">
+                <img class="feature-icon" src="sprites/activer.png" alt="Colorblind">
                 <h3 data-i18n="features.colorblind.title">Colorblind Mode</h3>
                 <p data-i18n="features.colorblind.desc">Deuteranopia and tritanopia support built in. Swap color palettes with one tap in the pause menu &mdash; no one left behind.</p>
             </div>
             <div class="feature-card reveal">
-                <img class="feature-icon" src="sprites/activer.png" alt="Hints">
+                <img class="feature-icon" src="sprites/loupe.png" alt="Hints">
                 <h3 data-i18n="features.hints.title">Smart Hints</h3>
-                <p data-i18n="features.hints.desc">Stuck? Tap the hint button for a nudge in the right direction. Earn hints through gameplay and use them whenever you need &mdash; they never run out.</p>
+                <p data-i18n="features.hints.desc">Stuck? Tap the hint button for a nudge in the right direction. Hints are limited &mdash; use them wisely.</p>
             </div>
             <div class="feature-card reveal">
                 <img class="feature-icon" src="sprites/tuto.png" alt="Tutorial">
@@ -825,6 +827,10 @@
             <div class="mode-card lucide reveal">
                 <div class="level-name" data-i18n="modes.lucide.name">LUCID</div>
                 <p class="level-desc" data-i18n="modes.lucide.desc">Extreme difficulty. Minimal lucidity, maximum chaos. For the dedicated.</p>
+            </div>
+            <div class="mode-card eveil reveal">
+                <div class="level-name" data-i18n="modes.eveil.name">AWAKENING</div>
+                <p class="level-desc" data-i18n="modes.eveil.desc">Two Rifts. Extreme pressure. The ultimate challenge for masters.</p>
             </div>
             <div class="mode-card chain reveal">
                 <div class="level-name" data-i18n="modes.chain.name">CHAIN MODE</div>
@@ -923,7 +929,7 @@ const i18n = {
         'features.colorblind.title': 'Mode Daltonien',
         'features.colorblind.desc': 'Support deutan\u00f3pie et tritan\u00f3pie int\u00e9gr\u00e9. Changez la palette de couleurs d\u2019un tap dans le menu pause \u2014 personne n\u2019est oubli\u00e9.',
         'features.hints.title': 'Indices Intelligents',
-        'features.hints.desc': 'Bloqu\u00e9 ? Appuyez sur le bouton indice pour un coup de pouce. Gagnez des indices en jouant et utilisez-les quand vous voulez \u2014 ils ne s\u2019\u00e9puisent jamais.',
+        'features.hints.desc': 'Bloqu\u00e9 ? Appuyez sur le bouton indice pour un coup de pouce. Les indices sont limit\u00e9s \u2014 utilisez-les avec sagesse.',
         'features.tutorials.title': '4 Le\u00e7ons Guid\u00e9es',
         'features.tutorials.desc': 'Tutoriels pas \u00e0 pas couvrant les bases, la riposte de la Faille, les r\u00e9actions en cha\u00eene et la gestion de la Lucidit\u00e9.',
         'gameplay.title': 'Comment \u00e7a marche',
@@ -944,7 +950,9 @@ const i18n = {
         'modes.songe.desc': 'Ressources limit\u00e9es, plus d\u2019instabilit\u00e9. Chaque coup compte.',
         'modes.lucide.name': 'LUCIDE',
         'modes.lucide.desc': 'Difficult\u00e9 extr\u00eame. Lucidit\u00e9 minimale, chaos maximal. Pour les acharn\u00e9s.',
-        'modes.chain.name': 'MODE CHA\u00ceNE',
+        'modes.eveil.name': '\u00c9VEIL',
+        'modes.eveil.desc': 'Deux Failles. Pression extr\u00eame. Le d\u00e9fi ultime pour les ma\u00eetres.',
+        'modes.chain.name': 'ENCHA\u00ceNEMENT',
         'modes.chain.desc': 'Ar\u00e8nes infinies et croissantes. Une d\u00e9faite et tout s\u2019arr\u00eate. Jusqu\u2019o\u00f9 irez-vous ?',
         'modes.daily.name': 'D\u00c9FI DU JOUR',
         'modes.daily.desc': 'Trois puzzles uniques chaque jour. M\u00eame seed pour tous les joueurs. Construisez votre s\u00e9rie et partagez vos scores.',
@@ -988,7 +996,7 @@ const i18n = {
         'features.colorblind.title': 'Colorblind Mode',
         'features.colorblind.desc': 'Deuteranopia and tritanopia support built in. Swap color palettes with one tap in the pause menu \u2014 no one left behind.',
         'features.hints.title': 'Smart Hints',
-        'features.hints.desc': 'Stuck? Tap the hint button for a nudge in the right direction. Earn hints through gameplay and use them whenever you need \u2014 they never run out.',
+        'features.hints.desc': 'Stuck? Tap the hint button for a nudge in the right direction. Hints are limited \u2014 use them wisely.',
         'features.tutorials.title': '4 Guided Lessons',
         'features.tutorials.desc': 'Step-by-step tutorials covering basics, Rift retaliation, chain reactions, and Lucidity management. Learn at your own pace.',
         'gameplay.title': 'How It Works',
@@ -1009,7 +1017,9 @@ const i18n = {
         'modes.songe.desc': 'Tighter resources, more instability. Every move counts.',
         'modes.lucide.name': 'LUCID',
         'modes.lucide.desc': 'Extreme difficulty. Minimal lucidity, maximum chaos. For the dedicated.',
-        'modes.chain.name': 'CHAIN MODE',
+        'modes.eveil.name': 'AWAKENING',
+        'modes.eveil.desc': 'Two Rifts. Extreme pressure. The ultimate challenge for masters.',
+        'modes.chain.name': 'CHAIN RUN',
         'modes.chain.desc': 'Infinite escalating arenas. One defeat ends it all. How far can you go?',
         'modes.daily.name': 'DAILY CHALLENGE',
         'modes.daily.desc': 'Three unique puzzles every day. Same seed for all players. Build your streak and share your scores.',
@@ -1037,7 +1047,7 @@ const i18n = {
         'features.badges.title': 'Logros', 'features.badges.desc': '100 insignias para desbloquear en todos los modos: speedruns, econom\u00eda, rachas diarias, r\u00e9cords de cadena y maestr\u00eda.',
         'features.share.title': 'Compartir Nativo', 'features.share.desc': 'Comparte tus resultados con un toque. El men\u00fa de compartir nativo te permite enviar tu puntuaci\u00f3n a cualquier app \u2014 WhatsApp, Twitter, etc.',
         'features.colorblind.title': 'Modo Dalt\u00f3nico', 'features.colorblind.desc': 'Soporte para deuteranop\u00eda y tritanop\u00eda integrado. Cambia la paleta de colores con un toque en el men\u00fa de pausa \u2014 nadie queda fuera.',
-        'features.hints.title': 'Pistas Inteligentes', 'features.hints.desc': '\u00bfAtascado? Toca el bot\u00f3n de pista para recibir ayuda. Gana pistas jugando y \u00fasalas cuando quieras \u2014 nunca se agotan.',
+        'features.hints.title': 'Pistas Inteligentes', 'features.hints.desc': '\u00bfAtascado? Toca el bot\u00f3n de pista para recibir ayuda. Las pistas son limitadas \u2014 \u00fasalas con sabidur\u00eda.',
         'features.tutorials.title': '4 Lecciones Guiadas', 'features.tutorials.desc': 'Tutoriales paso a paso cubriendo lo b\u00e1sico, la represalia de la Fisura, las reacciones en cadena y la gesti\u00f3n de la Lucidez.',
         'gameplay.title': 'C\u00f3mo Funciona', 'gameplay.subtitle': 'Cuatro mec\u00e1nicas fundamentales. Profundidad estrat\u00e9gica infinita.',
         'gameplay.node.title': 'Nodos', 'gameplay.node.desc': 'Activa para estabilizar vecinos. Mueve para reposicionar. Sacrifica para bloquear amenazas \u2014 a un precio.',
@@ -1048,7 +1058,8 @@ const i18n = {
         'modes.reve.name': 'SUE\u00d1O', 'modes.reve.desc': 'Introducci\u00f3n suave. Lucidez generosa, pocas amenazas. Aprende los fundamentos.',
         'modes.songe.name': 'ENSUE\u00d1O', 'modes.songe.desc': 'Recursos limitados, m\u00e1s inestabilidad. Cada movimiento cuenta.',
         'modes.lucide.name': 'L\u00daCIDO', 'modes.lucide.desc': 'Dificultad extrema. Lucidez m\u00ednima, caos m\u00e1ximo. Para los dedicados.',
-        'modes.chain.name': 'MODO CADENA', 'modes.chain.desc': 'Arenas infinitas y crecientes. Una derrota lo termina todo. \u00bfHasta d\u00f3nde llegar\u00e1s?',
+        'modes.eveil.name': 'DESPERTAR', 'modes.eveil.desc': 'Dos Fisuras. Presi\u00f3n extrema. El desaf\u00edo definitivo para los maestros.',
+        'modes.chain.name': 'ENCADENAMIENTO', 'modes.chain.desc': 'Arenas infinitas y crecientes. Una derrota lo termina todo. \u00bfHasta d\u00f3nde llegar\u00e1s?',
         'modes.daily.name': 'DESAF\u00cdO DIARIO', 'modes.daily.desc': 'Tres puzzles \u00fanicos cada d\u00eda. Mismo seed para todos. Construye tu racha y comparte tus puntuaciones.',
         'screenshots.title': 'Capturas de Pantalla', 'screenshots.subtitle': 'Un vistazo al paisaje on\u00edrico.',
         'download.title': '\u00bfListo para Entrar al Sue\u00f1o?', 'download.desc': 'Gratis \u2014 desbloquea el Modo Cadena, Seeds y Estad\u00edsticas con una sola compra.',
@@ -1070,7 +1081,7 @@ const i18n = {
         'features.badges.title': 'Abzeichen', 'features.badges.desc': '100 Abzeichen in allen Modi freischalten: Speedruns, Sparsamkeit, t\u00e4gliche Serien, Kettenrekorde und Meisterschaftsmeilensteine.',
         'features.share.title': 'Natives Teilen', 'features.share.desc': 'Teile deine Ergebnisse mit einem Tippen. Die native Teilen-Funktion sendet deinen Score an jede App \u2014 WhatsApp, Twitter und mehr.',
         'features.colorblind.title': 'Farbenblind-Modus', 'features.colorblind.desc': 'Deuteranopie- und Tritanopie-Unterst\u00fctzung integriert. Wechsle die Farbpalette mit einem Tippen im Pause-Men\u00fc \u2014 niemand wird vergessen.',
-        'features.hints.title': 'Intelligente Hinweise', 'features.hints.desc': 'Stuck? Tippe auf den Hinweis-Button f\u00fcr einen Schubs. Verdiene Hinweise durchs Spielen und nutze sie wann du willst \u2014 sie gehen nie aus.',
+        'features.hints.title': 'Intelligente Hinweise', 'features.hints.desc': 'Stuck? Tippe auf den Hinweis-Button f\u00fcr einen Schubs. Hinweise sind begrenzt \u2014 nutze sie weise.',
         'features.tutorials.title': '4 gef\u00fchrte Lektionen', 'features.tutorials.desc': 'Schritt-f\u00fcr-Schritt-Tutorials zu den Grundlagen, der Vergeltung des Risses, Kettenreaktionen und Klarheit-Management.',
         'gameplay.title': 'Wie es funktioniert', 'gameplay.subtitle': 'Vier Kernmechaniken. Unendliche strategische Tiefe.',
         'gameplay.node.title': 'Knoten', 'gameplay.node.desc': 'Aktiviere, um Nachbarn zu stabilisieren. Bewege, um umzupositionieren. Opfere, um Bedrohungen zu verriegeln \u2014 zu einem Preis.',
@@ -1081,7 +1092,8 @@ const i18n = {
         'modes.reve.name': 'TRAUM', 'modes.reve.desc': 'Sanfte Einf\u00fchrung. Gro\u00dfz\u00fcgige Klarheit, wenige Bedrohungen. Lerne die Grundlagen.',
         'modes.songe.name': 'VISION', 'modes.songe.desc': 'Knappe Ressourcen, mehr Instabilit\u00e4t. Jeder Zug z\u00e4hlt.',
         'modes.lucide.name': 'LUZID', 'modes.lucide.desc': 'Extreme Schwierigkeit. Minimale Klarheit, maximales Chaos. F\u00fcr die Entschlossenen.',
-        'modes.chain.name': 'KETTENMODUS', 'modes.chain.desc': 'Unendlich eskalierende Arenen. Eine Niederlage beendet alles. Wie weit kommst du?',
+        'modes.eveil.name': 'ERWACHEN', 'modes.eveil.desc': 'Zwei Risse. Extremer Druck. Die ultimative Herausforderung f\u00fcr Meister.',
+        'modes.chain.name': 'VERKETTUNG', 'modes.chain.desc': 'Unendlich eskalierende Arenen. Eine Niederlage beendet alles. Wie weit kommst du?',
         'modes.daily.name': 'TAGESHERAUSFORDERUNG', 'modes.daily.desc': 'Drei einzigartige Puzzles jeden Tag. Gleicher Seed f\u00fcr alle Spieler. Baue deine Serie auf und teile deine Punkte.',
         'screenshots.title': 'Screenshots', 'screenshots.subtitle': 'Ein Blick in die Traumlandschaft.',
         'download.title': 'Bereit, den Traum zu betreten?', 'download.desc': 'Kostenlos spielbar \u2014 schalte den Kettenmodus, Seeds und Statistiken mit einem einzigen Kauf frei.',
@@ -1103,7 +1115,7 @@ const i18n = {
         'features.badges.title': 'Conquistas', 'features.badges.desc': '100 medalhas para desbloquear em todos os modos: speedruns, economia, sequ\u00eancias di\u00e1rias, recordes de cadeia e marcos de mestria.',
         'features.share.title': 'Compartilhamento Nativo', 'features.share.desc': 'Compartilhe seus resultados com um toque. O compartilhamento nativo envia seu score para qualquer app \u2014 WhatsApp, Twitter e mais.',
         'features.colorblind.title': 'Modo Dalt\u00f4nico', 'features.colorblind.desc': 'Suporte a deuteranopia e tritanopia integrado. Troque a paleta de cores com um toque no menu de pausa \u2014 ningu\u00e9m fica de fora.',
-        'features.hints.title': 'Dicas Inteligentes', 'features.hints.desc': 'Travado? Toque no bot\u00e3o de dica para uma ajuda. Ganhe dicas jogando e use quando quiser \u2014 elas nunca acabam.',
+        'features.hints.title': 'Dicas Inteligentes', 'features.hints.desc': 'Preso? Toque no bot\u00e3o de dica para uma ajuda. As dicas s\u00e3o limitadas \u2014 use-as com sabedoria.',
         'features.tutorials.title': '4 Li\u00e7\u00f5es Guiadas', 'features.tutorials.desc': 'Tutoriais passo a passo cobrindo o b\u00e1sico, a retalia\u00e7\u00e3o da Fenda, rea\u00e7\u00f5es em cadeia e gest\u00e3o de Lucidez.',
         'gameplay.title': 'Como Funciona', 'gameplay.subtitle': 'Quatro mec\u00e2nicas fundamentais. Profundidade estrat\u00e9gica infinita.',
         'gameplay.node.title': 'N\u00f3s', 'gameplay.node.desc': 'Ative para estabilizar vizinhos. Mova para reposicionar. Sacrifique para travar amea\u00e7as \u2014 a um custo.',
@@ -1114,7 +1126,8 @@ const i18n = {
         'modes.reve.name': 'SONHO', 'modes.reve.desc': 'Introdu\u00e7\u00e3o suave. Lucidez generosa, poucas amea\u00e7as. Aprenda os fundamentos.',
         'modes.songe.name': 'DEVANEIO', 'modes.songe.desc': 'Recursos limitados, mais instabilidade. Cada movimento conta.',
         'modes.lucide.name': 'L\u00daCIDO', 'modes.lucide.desc': 'Dificuldade extrema. Lucidez m\u00ednima, caos m\u00e1ximo. Para os dedicados.',
-        'modes.chain.name': 'MODO CADEIA', 'modes.chain.desc': 'Arenas infinitas e escalantes. Uma derrota encerra tudo. At\u00e9 onde voc\u00ea chega?',
+        'modes.eveil.name': 'DESPERTAR', 'modes.eveil.desc': 'Duas Fissuras. Press\u00e3o extrema. O desafio definitivo para mestres.',
+        'modes.chain.name': 'ENCADEAMENTO', 'modes.chain.desc': 'Arenas infinitas e escalantes. Uma derrota encerra tudo. At\u00e9 onde voc\u00ea chega?',
         'modes.daily.name': 'DESAFIO DI\u00c1RIO', 'modes.daily.desc': 'Tr\u00eas puzzles \u00fanicos todos os dias. Mesmo seed para todos. Construa sua sequ\u00eancia e compartilhe suas pontua\u00e7\u00f5es.',
         'screenshots.title': 'Capturas de Tela', 'screenshots.subtitle': 'Um vislumbre da paisagem on\u00edrica.',
         'download.title': 'Pronto para Entrar no Sonho?', 'download.desc': 'Gr\u00e1tis \u2014 desbloqueie o Modo Cadeia, Seeds e Estat\u00edsticas com uma \u00fanica compra.',
@@ -1136,7 +1149,7 @@ const i18n = {
         'features.badges.title': 'Traguardi', 'features.badges.desc': '100 medaglie da sbloccare in tutte le modalit\u00e0: speedrun, risparmio, serie giornaliere, record di catena e tappe di maestria.',
         'features.share.title': 'Condivisione Nativa', 'features.share.desc': 'Condividi i tuoi risultati con un tocco. La condivisione nativa invia il tuo punteggio a qualsiasi app \u2014 WhatsApp, Twitter e altro.',
         'features.colorblind.title': 'Modalit\u00e0 Daltonismo', 'features.colorblind.desc': 'Supporto per deuteranopia e tritanopia integrato. Cambia la palette colori con un tocco nel menu pausa \u2014 nessuno viene dimenticato.',
-        'features.hints.title': 'Suggerimenti Intelligenti', 'features.hints.desc': 'Bloccato? Tocca il pulsante suggerimento per un aiuto. Guadagna suggerimenti giocando e usali quando vuoi \u2014 non finiscono mai.',
+        'features.hints.title': 'Suggerimenti Intelligenti', 'features.hints.desc': 'Bloccato? Tocca il pulsante suggerimento per un aiuto. I suggerimenti sono limitati \u2014 usali con saggezza.',
         'features.tutorials.title': '4 Lezioni Guidate', 'features.tutorials.desc': 'Tutorial passo passo che coprono le basi, la ritorsione della Faglia, le reazioni a catena e la gestione della Lucidit\u00e0.',
         'gameplay.title': 'Come Funziona', 'gameplay.subtitle': 'Quattro meccaniche fondamentali. Profondit\u00e0 strategica infinita.',
         'gameplay.node.title': 'Nodi', 'gameplay.node.desc': 'Attiva per stabilizzare i vicini. Sposta per riposizionare. Sacrifica per bloccare le minacce \u2014 a un costo.',
@@ -1147,7 +1160,8 @@ const i18n = {
         'modes.reve.name': 'SOGNO', 'modes.reve.desc': 'Introduzione dolce. Lucidit\u00e0 generosa, poche minacce. Impara i fondamenti.',
         'modes.songe.name': 'VISIONE', 'modes.songe.desc': 'Risorse limitate, pi\u00f9 instabilit\u00e0. Ogni mossa conta.',
         'modes.lucide.name': 'LUCIDO', 'modes.lucide.desc': 'Difficolt\u00e0 estrema. Lucidit\u00e0 minima, caos massimo. Per i pi\u00f9 determinati.',
-        'modes.chain.name': 'MODALIT\u00c0 CATENA', 'modes.chain.desc': 'Arene infinite in escalation. Una sconfitta e finisce tutto. Quanto lontano arrivi?',
+        'modes.eveil.name': 'RISVEGLIO', 'modes.eveil.desc': 'Due Fessure. Pressione estrema. La sfida definitiva per i maestri.',
+        'modes.chain.name': 'CONCATENAMENTO', 'modes.chain.desc': 'Arene infinite in escalation. Una sconfitta e finisce tutto. Quanto lontano arrivi?',
         'modes.daily.name': 'SFIDA GIORNALIERA', 'modes.daily.desc': 'Tre puzzle unici ogni giorno. Stesso seed per tutti i giocatori. Costruisci la tua serie e condividi i punteggi.',
         'screenshots.title': 'Screenshot', 'screenshots.subtitle': 'Uno sguardo al paesaggio onirico.',
         'download.title': 'Pronto a Entrare nel Sogno?', 'download.desc': 'Gratis \u2014 sblocca la Modalit\u00e0 Catena, Seeds e Statistiche con un singolo acquisto.',
