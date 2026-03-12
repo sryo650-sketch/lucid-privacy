@@ -385,9 +385,11 @@
         .feature-card:hover::before { opacity: 1; }
 
         .feature-icon {
-            font-size: 2.8rem;
+            width: 56px; height: 56px;
             margin-bottom: 20px;
             display: block;
+            object-fit: contain;
+            filter: drop-shadow(0 0 8px rgba(0,255,200,0.4));
         }
 
         .feature-card h3 {
@@ -436,9 +438,13 @@
             width: 100px; height: 100px;
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            font-size: 2.4rem;
             flex-shrink: 0;
             position: relative;
+        }
+        .mechanic-icon img {
+            width: 60px; height: 60px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 6px rgba(255,255,255,0.3));
         }
         .mechanic-icon::after {
             content: '';
@@ -699,62 +705,62 @@
 
         <div class="features-grid">
             <div class="feature-card reveal">
-                <span class="feature-icon">&#11042;</span>
+                <img class="feature-icon" src="sprites/node.png" alt="Node">
                 <h3 data-i18n="features.hex.title">Hex Grid Tactics</h3>
                 <p data-i18n="features.hex.desc">Every cell on the hexagonal grid matters. Activate, move, or sacrifice Nodes to stabilize your surroundings and push back the entropy.</p>
             </div>
             <div class="feature-card reveal">
-                <span class="feature-icon">&#9889;</span>
+                <img class="feature-icon" src="sprites/Rift.png" alt="Rift">
                 <h3 data-i18n="features.rift.title">The Rift Fights Back</h3>
                 <p data-i18n="features.rift.desc">The Rift retaliates against every move near it. Each stabilization triggers a counter-attack. Outsmart it or be overwhelmed.</p>
             </div>
             <div class="feature-card reveal">
-                <span class="feature-icon">&#128279;</span>
+                <img class="feature-icon" src="sprites/catalyst.png" alt="Catalyst">
                 <h3 data-i18n="features.chain.title">Chain Reactions</h3>
                 <p data-i18n="features.chain.desc">Catalysts invert their neighbors, stressed Nodes cascade instability. Master the chain reactions to turn chaos into order.</p>
             </div>
             <div class="feature-card reveal">
-                <span class="feature-icon">&#127911;</span>
+                <img class="feature-icon" src="sprites/enchainement.png" alt="Audio">
                 <h3 data-i18n="features.audio.title">Synthwave Soundtrack</h3>
                 <p data-i18n="features.audio.desc">Handcrafted procedural audio and synthwave music immerse you in a neon cyberpunk dreamscape.</p>
             </div>
             <div class="feature-card reveal">
-                <span class="feature-icon">&#128274;</span>
+                <img class="feature-icon" src="sprites/instable-2.png" alt="Offline">
                 <h3 data-i18n="features.offline.title">100% Offline</h3>
                 <p data-i18n="features.offline.desc">No accounts. No ads. No data collection. No internet required. Your game, your device, your privacy.</p>
             </div>
             <div class="feature-card reveal">
-                <span class="feature-icon">&#127922;</span>
+                <img class="feature-icon" src="sprites/seed.png" alt="Seed">
                 <h3 data-i18n="features.seed.title">Seed Replay</h3>
                 <p data-i18n="features.seed.desc">Every board has a unique seed. Share it with friends to challenge them on the exact same puzzle.</p>
             </div>
             <div class="feature-card reveal">
-                <span class="feature-icon">&#128197;</span>
+                <img class="feature-icon" src="sprites/défi.png" alt="Daily">
                 <h3 data-i18n="features.daily.title">Daily Challenge</h3>
                 <p data-i18n="features.daily.desc">Three fresh puzzles every day &mdash; one per difficulty. Track your streak, share your results, and compare with friends.</p>
             </div>
             <div class="feature-card reveal">
-                <span class="feature-icon">&#127942;</span>
+                <img class="feature-icon" src="sprites/trophy.png" alt="Badges">
                 <h3 data-i18n="features.badges.title">Achievements</h3>
                 <p data-i18n="features.badges.desc">100 badges to unlock across all modes: speedruns, economy plays, daily streaks, chain records, and mastery milestones.</p>
             </div>
             <div class="feature-card reveal">
-                <span class="feature-icon">&#128228;</span>
+                <img class="feature-icon" src="sprites/projection.png" alt="Share">
                 <h3 data-i18n="features.share.title">Native Sharing</h3>
                 <p data-i18n="features.share.desc">Share your results with one tap. The native share sheet lets you send your score to any app &mdash; WhatsApp, Twitter, and more.</p>
             </div>
             <div class="feature-card reveal">
-                <span class="feature-icon">&#128065;</span>
+                <img class="feature-icon" src="sprites/loupe.png" alt="Colorblind">
                 <h3 data-i18n="features.colorblind.title">Colorblind Mode</h3>
                 <p data-i18n="features.colorblind.desc">Deuteranopia and tritanopia support built in. Swap color palettes with one tap in the pause menu &mdash; no one left behind.</p>
             </div>
             <div class="feature-card reveal">
-                <span class="feature-icon">&#128161;</span>
+                <img class="feature-icon" src="sprites/activer.png" alt="Hints">
                 <h3 data-i18n="features.hints.title">Smart Hints</h3>
                 <p data-i18n="features.hints.desc">Stuck? Tap the hint button for a nudge in the right direction. Earn hints through gameplay and use them whenever you need &mdash; they never run out.</p>
             </div>
             <div class="feature-card reveal">
-                <span class="feature-icon">&#127891;</span>
+                <img class="feature-icon" src="sprites/tuto.png" alt="Tutorial">
                 <h3 data-i18n="features.tutorials.title">4 Guided Lessons</h3>
                 <p data-i18n="features.tutorials.desc">Step-by-step tutorials covering basics, Rift retaliation, chain reactions, and Lucidity management. Learn at your own pace.</p>
             </div>
@@ -770,28 +776,28 @@
 
         <div class="mechanics-list">
             <div class="mechanic mechanic-node reveal">
-                <div class="mechanic-icon">&#9678;</div>
+                <div class="mechanic-icon"><img src="sprites/node.png" alt="Node"></div>
                 <div class="mechanic-content">
                     <h3 data-i18n="gameplay.node.title">Nodes</h3>
                     <p data-i18n="gameplay.node.desc">Activate to stabilize neighbors. Move to reposition. Sacrifice to lock down threats &mdash; at a cost.</p>
                 </div>
             </div>
             <div class="mechanic mechanic-catalyst reveal">
-                <div class="mechanic-icon">&#10022;</div>
+                <div class="mechanic-icon"><img src="sprites/catalyst.png" alt="Catalyst"></div>
                 <div class="mechanic-content">
                     <h3 data-i18n="gameplay.catalyst.title">Catalysts</h3>
                     <p data-i18n="gameplay.catalyst.desc">Single-use powerhouses. Invert the state of all adjacent cells. High risk, high reward.</p>
                 </div>
             </div>
             <div class="mechanic mechanic-rift reveal">
-                <div class="mechanic-icon">&#9670;</div>
+                <div class="mechanic-icon"><img src="sprites/Rift.png" alt="Rift"></div>
                 <div class="mechanic-content">
                     <h3 data-i18n="gameplay.rift.title">The Rift</h3>
                     <p data-i18n="gameplay.rift.desc">The source of chaos. Indestructible. Retaliates when you stabilize nearby. Contain it to win.</p>
                 </div>
             </div>
             <div class="mechanic mechanic-lucidity reveal">
-                <div class="mechanic-icon">&#9673;</div>
+                <div class="mechanic-icon"><img src="sprites/gauge.png" alt="Lucidity"></div>
                 <div class="mechanic-content">
                     <h3 data-i18n="gameplay.lucidity.title">Lucidity</h3>
                     <p data-i18n="gameplay.lucidity.desc">Every action costs Lucidity. Run out and your mind collapses. Efficient play earns bonuses.</p>
