@@ -17,74 +17,97 @@
             --magenta: #e000ff;
             --violet: #8040ff;
             --bg-deep: #050510;
-            --bg-card: #0a0a1a;
+            --bg-card: rgba(8,8,24,0.7);
+            --bg-card-hover: rgba(16,16,40,0.85);
             --text: #c8c8d8;
             --text-dim: #707088;
         }
+
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg-deep);
             color: var(--text);
             line-height: 1.6;
-            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        .bg-grid {
+        /* === GLOBAL BACKGROUND === */
+        body::before {
+            content: '';
             position: fixed;
             inset: 0;
-            opacity: 0.03;
-            background-image:
-                linear-gradient(rgba(0,255,200,0.3) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0,255,200,0.3) 1px, transparent 1px);
-            background-size: 60px 60px;
-            pointer-events: none;
-            z-index: 0;
+            background: url('fond_credits.png') center/cover no-repeat;
+            z-index: -2;
         }
-
-        .container {
-            max-width: 640px;
-            margin: 0 auto;
-            padding: 80px 24px 40px;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* === NAV (fixed header) === */
-        .top-nav {
+        body::after {
+            content: '';
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            inset: 0;
+            background: linear-gradient(
+                180deg,
+                rgba(5,5,16,0.6) 0%,
+                rgba(5,5,16,0.75) 30%,
+                rgba(5,5,16,0.85) 60%,
+                rgba(5,5,16,0.7) 100%
+            );
+            z-index: -1;
+        }
+
+        /* === NAV === */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
             z-index: 100;
-            padding: 16px 32px;
+            padding: 16px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(5,5,16,0.85);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(0,255,200,0.06);
-            transition: all 0.3s;
+            background: rgba(5,5,16,0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,255,200,0.04);
+            transition: all 0.4s ease;
+        }
+        nav.scrolled {
+            background: rgba(5,5,16,0.92);
+            border-bottom-color: rgba(0,255,200,0.1);
+            padding: 10px 40px;
         }
 
         .nav-logo {
             font-family: 'Orbitron', monospace;
             font-weight: 900;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: var(--cyan);
             text-decoration: none;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.15em;
+            text-shadow: 0 0 20px rgba(0,255,200,0.3);
         }
 
+        .nav-links { display: flex; align-items: center; gap: 0; }
         .nav-links a {
             color: var(--text-dim);
             text-decoration: none;
             font-size: 0.85rem;
-            letter-spacing: 0.05em;
+            font-weight: 500;
+            letter-spacing: 0.06em;
             margin-left: 32px;
-            transition: color 0.2s;
+            transition: color 0.3s;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 0; right: 0;
+            height: 1px;
+            background: var(--cyan);
+            transform: scaleX(0);
+            transition: transform 0.3s;
         }
         .nav-links a:hover { color: var(--cyan); }
+        .nav-links a:hover::after { transform: scaleX(1); }
         .nav-links a.active { color: var(--magenta); }
 
         .lang-toggle {
@@ -95,16 +118,41 @@
             font-size: 0.75rem;
             font-weight: 700;
             letter-spacing: 0.08em;
-            padding: 6px 12px;
-            border-radius: 20px;
+            padding: 6px 14px;
+            border-radius: 4px;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-left: 24px;
-            flex-shrink: 0;
+            margin-left: 28px;
         }
         .lang-toggle:hover {
-            background: rgba(0,255,200,0.1);
+            background: rgba(0,255,200,0.12);
             border-color: var(--cyan);
+            box-shadow: 0 0 15px rgba(0,255,200,0.2);
+        }
+
+        /* Hamburger mobile */
+        .nav-hamburger {
+            display: none;
+            background: none; border: none;
+            cursor: pointer; padding: 4px;
+        }
+        .nav-hamburger span {
+            display: block; width: 24px; height: 2px;
+            background: var(--cyan); margin: 5px 0;
+            transition: all 0.3s;
+        }
+
+        /* === HERO === */
+        .hero {
+            position: relative;
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 140px 24px 80px;
+            overflow: hidden;
         }
 
         .hero-badge {
@@ -115,159 +163,272 @@
             letter-spacing: 0.2em;
             color: var(--bg-deep);
             background: var(--magenta);
-            padding: 6px 18px;
-            border-radius: 20px;
-            margin-bottom: 24px;
+            padding: 8px 24px;
+            border-radius: 4px;
+            margin-bottom: 28px;
             text-transform: uppercase;
+            box-shadow: 0 0 30px rgba(224,0,255,0.3);
         }
 
-        h1 {
+        .hero h1 {
             font-family: 'Orbitron', monospace;
-            font-size: clamp(1.8rem, 6vw, 2.5rem);
+            font-size: clamp(2rem, 7vw, 3.5rem);
             font-weight: 700;
             color: var(--cyan);
-            text-shadow: 0 0 30px rgba(0,255,200,0.2);
-            margin-bottom: 16px;
-            text-align: center;
-        }
-
-        .subtitle {
-            font-size: 1.1rem;
-            color: var(--text);
-            text-align: center;
-            margin-bottom: 48px;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .what-section {
-            background: var(--bg-card);
-            border: 1px solid rgba(0,255,200,0.1);
-            border-radius: 16px;
-            padding: 32px;
-            margin-bottom: 32px;
-        }
-
-        .what-section h2 {
-            font-family: 'Orbitron', monospace;
-            font-size: 1rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            color: var(--cyan);
+            text-shadow:
+                0 0 40px rgba(0,255,200,0.4),
+                0 0 80px rgba(0,255,200,0.2);
             margin-bottom: 20px;
-            text-transform: uppercase;
+            animation: titlePulse 4s ease-in-out infinite alternate;
+        }
+        @keyframes titlePulse {
+            from { text-shadow: 0 0 40px rgba(0,255,200,0.4), 0 0 80px rgba(0,255,200,0.2); filter: brightness(1); }
+            to { text-shadow: 0 0 60px rgba(0,255,200,0.6), 0 0 120px rgba(0,255,200,0.35); filter: brightness(1.1); }
         }
 
-        .feature-list { list-style: none; padding: 0; }
-
-        .feature-list li {
-            padding: 10px 0;
-            padding-left: 28px;
-            position: relative;
+        .hero .subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
             color: var(--text);
-            font-size: 0.95rem;
+            max-width: 560px;
+            font-weight: 300;
+            line-height: 1.8;
         }
 
-        .feature-list li::before {
-            content: '\25C6';
+        /* === SECTIONS === */
+        .section-full {
+            position: relative;
+            padding: 100px 24px;
+            overflow: hidden;
+        }
+        .section-inner {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        /* Section separator - lens flare */
+        .section-full::before {
+            content: '';
             position: absolute;
-            left: 0;
-            color: var(--magenta);
-            font-size: 0.8rem;
+            top: 0; left: 10%; right: 10%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0,255,200,0.4), rgba(255,255,255,0.6), rgba(0,255,200,0.4), transparent);
+            box-shadow: 0 0 20px rgba(0,255,200,0.3), 0 0 60px rgba(0,255,200,0.1);
         }
 
-        .steps-section { margin-bottom: 40px; }
-
-        .steps-section h2 {
+        .section-title {
             font-family: 'Orbitron', monospace;
-            font-size: 1rem;
+            font-size: clamp(1.6rem, 4vw, 2.4rem);
             font-weight: 700;
-            letter-spacing: 0.1em;
-            color: var(--cyan);
-            margin-bottom: 24px;
-            text-transform: uppercase;
             text-align: center;
+            margin-bottom: 56px;
+            color: #fff;
+            text-shadow: 0 0 30px rgba(255,255,255,0.1);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
         }
 
-        .step {
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* === WHAT YOU GET - CARDS === */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(0,255,200,0.06);
+            border-radius: 8px;
+            padding: 32px 28px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        .feature-card:hover {
+            background: var(--bg-card-hover);
+            border-color: rgba(0,255,200,0.2);
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px rgba(0,255,200,0.05);
+        }
+        .feature-card:hover::before { opacity: 1; }
+
+        .feature-icon {
+            font-size: 2.2rem;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .feature-card h3 {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--cyan);
+            margin-bottom: 8px;
+            letter-spacing: 0.05em;
+        }
+
+        .feature-card p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        /* === TIMELINE (How it works) === */
+        .timeline-section {
+            background: linear-gradient(180deg, rgba(128,64,255,0.02), transparent);
+        }
+
+        .timeline {
             display: flex;
             align-items: flex-start;
-            gap: 16px;
-            margin-bottom: 20px;
+            justify-content: center;
+            position: relative;
+            padding: 20px 0;
+        }
+
+        /* Horizontal connector line */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 28px;
+            left: 12%;
+            right: 12%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(0,255,200,0.3), rgba(128,64,255,0.3), rgba(224,0,255,0.3), transparent);
+        }
+
+        .timeline-step {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            padding: 0 12px;
+            max-width: 220px;
         }
 
         .step-number {
-            flex-shrink: 0;
-            width: 36px;
-            height: 36px;
+            width: 56px;
+            height: 56px;
             border-radius: 50%;
-            background: rgba(0,255,200,0.1);
-            border: 1px solid rgba(0,255,200,0.3);
+            background: var(--bg-card);
+            border: 2px solid var(--cyan);
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Orbitron', monospace;
-            font-weight: 700;
-            font-size: 0.85rem;
+            font-weight: 900;
+            font-size: 1.2rem;
             color: var(--cyan);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 0 20px rgba(0,255,200,0.15);
+            transition: all 0.3s ease;
+        }
+        .timeline-step:hover .step-number {
+            background: rgba(0,255,200,0.1);
+            box-shadow: 0 0 35px rgba(0,255,200,0.3);
+            transform: scale(1.1);
         }
 
-        .step-text { padding-top: 6px; font-size: 0.95rem; }
+        .step-text {
+            font-size: 0.95rem;
+            color: var(--text);
+            line-height: 1.6;
+        }
 
+        /* === FORM === */
         .form-section {
-            background: var(--bg-card);
-            border: 1px solid rgba(224,0,255,0.15);
-            border-radius: 16px;
-            padding: 32px;
-            margin-bottom: 32px;
-            text-align: center;
+            background: linear-gradient(180deg, transparent, rgba(224,0,255,0.02), transparent);
         }
 
-        .form-section h2 {
+        .form-card {
+            max-width: 560px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(224,0,255,0.12);
+            border-radius: 8px;
+            padding: 48px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .form-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--magenta), var(--violet), transparent);
+        }
+
+        .form-card h2 {
             font-family: 'Orbitron', monospace;
-            font-size: 1.1rem;
+            font-size: 1.3rem;
             font-weight: 700;
             color: var(--magenta);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-shadow: 0 0 20px rgba(224,0,255,0.3);
+        }
+
+        .form-note {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-bottom: 28px;
+        }
+
+        .form-group { margin-bottom: 20px; text-align: left; }
+
+        .form-group label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-dim);
             margin-bottom: 8px;
             text-transform: uppercase;
             letter-spacing: 0.08em;
         }
 
-        .form-section .form-note {
-            font-size: 0.85rem;
-            color: var(--text-dim);
-            margin-bottom: 24px;
-        }
-
-        .form-group { margin-bottom: 16px; text-align: left; }
-
-        .form-group label {
-            display: block;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--text-dim);
-            margin-bottom: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
         .form-group input {
             width: 100%;
-            padding: 14px 16px;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 10px;
+            padding: 16px 18px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 6px;
             color: var(--text);
             font-family: 'Inter', sans-serif;
             font-size: 1rem;
-            transition: border-color 0.3s;
+            transition: all 0.3s ease;
         }
 
         .form-group input:focus {
             outline: none;
             border-color: var(--cyan);
-            box-shadow: 0 0 20px rgba(0,255,200,0.1);
+            box-shadow: 0 0 25px rgba(0,255,200,0.12), inset 0 0 15px rgba(0,255,200,0.03);
         }
 
         .form-group input::placeholder { color: var(--text-dim); }
@@ -275,155 +436,280 @@
         .submit-btn {
             display: inline-block;
             width: 100%;
-            padding: 16px 32px;
+            padding: 18px 32px;
             margin-top: 8px;
             font-family: 'Orbitron', monospace;
             font-weight: 700;
             font-size: 0.95rem;
             letter-spacing: 0.1em;
             color: var(--bg-deep);
-            background: var(--cyan);
+            background: linear-gradient(135deg, var(--cyan), #00d4a8);
             border: none;
-            border-radius: 10px;
+            border-radius: 6px;
             cursor: pointer;
             text-transform: uppercase;
-            transition: all 0.3s;
-            box-shadow: 0 0 30px rgba(0,255,200,0.2);
+            transition: all 0.3s ease;
+            box-shadow: 0 0 30px rgba(0,255,200,0.25), 0 4px 20px rgba(0,0,0,0.3);
         }
 
         .submit-btn:hover {
-            background: #00ffdf;
-            box-shadow: 0 0 50px rgba(0,255,200,0.4);
-            transform: translateY(-2px);
+            box-shadow: 0 0 50px rgba(0,255,200,0.45), 0 4px 30px rgba(0,0,0,0.4);
+            transform: translateY(-3px);
         }
 
         .success-msg {
             display: none;
-            padding: 20px;
-            background: rgba(0,255,200,0.08);
-            border: 1px solid rgba(0,255,200,0.3);
-            border-radius: 10px;
+            padding: 24px;
+            background: rgba(0,255,200,0.06);
+            border: 1px solid rgba(0,255,200,0.25);
+            border-radius: 6px;
             color: var(--cyan);
             font-weight: 500;
-            margin-top: 16px;
+            margin-top: 20px;
         }
 
         .privacy-note {
             font-size: 0.8rem;
             color: var(--text-dim);
             text-align: center;
-            margin-top: 16px;
+            margin-top: 20px;
         }
-
         .privacy-note a {
             color: var(--cyan-dim);
             text-decoration: none;
+            transition: color 0.3s;
+        }
+        .privacy-note a:hover { color: var(--cyan); }
+
+        /* === FAQ ACCORDION === */
+        .faq-list {
+            max-width: 700px;
+            margin: 0 auto;
         }
 
-        .privacy-note a:hover { text-decoration: underline; }
+        .faq-item {
+            background: var(--bg-card);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.04);
+            border-radius: 8px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .faq-item:hover {
+            border-color: rgba(0,255,200,0.12);
+        }
 
-        .faq-section { margin-bottom: 40px; }
-
-        .faq-section h2 {
-            font-family: 'Orbitron', monospace;
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
             font-size: 1rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
+            font-weight: 600;
+            padding: 20px 24px;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: color 0.3s;
+        }
+        .faq-question:hover { color: var(--cyan); }
+
+        .faq-question::after {
+            content: '+';
+            font-family: 'Orbitron', monospace;
+            font-size: 1.2rem;
             color: var(--cyan);
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            text-align: center;
+            transition: transform 0.3s;
+            flex-shrink: 0;
+            margin-left: 16px;
+        }
+        .faq-item.open .faq-question::after {
+            transform: rotate(45deg);
         }
 
-        .faq-item { margin-bottom: 16px; }
-        .faq-item dt { font-weight: 600; color: var(--text); margin-bottom: 4px; }
-        .faq-item dd { color: var(--text-dim); font-size: 0.9rem; padding-left: 16px; }
-
-        .footer {
-            text-align: center;
-            padding: 40px 0 20px;
-            border-top: 1px solid rgba(255,255,255,0.05);
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+        .faq-item.open .faq-answer {
+            max-height: 200px;
         }
 
-        .footer a {
+        .faq-answer p {
             color: var(--text-dim);
-            text-decoration: none;
-            font-size: 0.85rem;
-            margin: 0 12px;
+            font-size: 0.92rem;
+            line-height: 1.7;
+            padding: 0 24px 20px;
         }
 
-        .footer a:hover { color: var(--cyan); }
+        /* === FOOTER === */
+        footer {
+            position: relative;
+            padding: 48px 24px;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 15%; right: 15%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0,255,200,0.2), transparent);
+        }
+        footer a {
+            color: var(--cyan-dim);
+            text-decoration: none;
+            margin: 0 20px;
+            transition: color 0.3s;
+        }
+        footer a:hover { color: var(--cyan); }
+        .footer-links { margin-bottom: 20px; }
 
         /* === RESPONSIVE === */
         @media (max-width: 768px) {
-            .top-nav { padding: 10px 12px; flex-wrap: wrap; gap: 6px 0; }
-            .nav-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 2px 0; }
-            .nav-links a { margin-left: 12px; font-size: 0.72rem; }
-            .lang-toggle { margin-left: 12px; font-size: 0.68rem; padding: 4px 10px; }
-            .container { padding-top: 110px; }
+            nav { padding: 12px 16px; }
+            nav.scrolled { padding: 8px 16px; }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%; left: 0; right: 0;
+                background: rgba(5,5,16,0.95);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 16px;
+                border-bottom: 1px solid rgba(0,255,200,0.1);
+            }
+            .nav-links.open { display: flex; }
+            .nav-links a { margin: 8px 0; margin-left: 0; font-size: 1rem; }
+            .lang-toggle { margin: 12px 0 0; margin-left: 0; }
+            .nav-hamburger { display: block; }
+
+            .hero { padding: 110px 16px 60px; min-height: auto; }
+            .section-full { padding: 72px 16px; }
+            .features-grid { grid-template-columns: 1fr; }
+
+            /* Timeline vertical on mobile */
+            .timeline {
+                flex-direction: column;
+                align-items: center;
+                gap: 32px;
+                padding: 0;
+            }
+            .timeline::before {
+                top: 28px;
+                bottom: 28px;
+                left: 50%;
+                right: auto;
+                width: 2px;
+                height: auto;
+                background: linear-gradient(180deg, rgba(0,255,200,0.3), rgba(128,64,255,0.3), rgba(224,0,255,0.3));
+            }
+            .timeline-step {
+                max-width: 280px;
+            }
+
+            .form-card { padding: 32px 20px; }
         }
+
         @media (max-width: 400px) {
-            .nav-links a { margin-left: 8px; font-size: 0.68rem; }
-            .lang-toggle { margin-left: 8px; }
-            .container { padding-top: 120px; }
+            .hero { padding-top: 100px; }
+            .hero h1 { letter-spacing: 0.05em; }
         }
     </style>
 </head>
 <body>
-    <div class="bg-grid"></div>
 
-    <nav class="top-nav">
-        <a href="index.html" class="nav-logo">LUCID</a>
-        <div class="nav-links">
-            <a href="index.html" data-i18n="nav_home">Home</a>
-            <a href="index.html#features" data-i18n="nav_features">Features</a>
-            <a href="index.html#download" data-i18n="nav_download">Download</a>
-            <a href="support.html" data-i18n="nav_support">Support</a>
-            <button class="lang-toggle" id="langBtn" onclick="toggleLang()">FR</button>
+<!-- NAV -->
+<nav>
+    <a href="index.html" class="nav-logo">LUCID</a>
+    <button class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+        <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links">
+        <a href="index.html" data-i18n="nav_home">Home</a>
+        <a href="index.html#features" data-i18n="nav_features">Features</a>
+        <a href="index.html#download" data-i18n="nav_download">Download</a>
+        <a href="support.html" data-i18n="nav_support">Support</a>
+        <button class="lang-toggle" id="langBtn" onclick="toggleLang()">FR</button>
+    </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+    <span class="hero-badge reveal" data-i18n="badge">Closed Beta</span>
+    <h1 class="reveal" data-i18n="title">Become a Beta Tester</h1>
+    <p class="subtitle reveal" data-i18n="subtitle">Get early access to LUCID on Google Play. Help us polish the game before public launch.</p>
+</div>
+
+<!-- WHAT YOU GET -->
+<div class="section-full" id="what">
+    <div class="section-inner">
+        <h2 class="section-title reveal" data-i18n="what_title">What you get</h2>
+        <div class="features-grid">
+            <div class="feature-card reveal">
+                <span class="feature-icon">&#127918;</span>
+                <h3>Google Play</h3>
+                <p data-i18n="f1">Early access to the full game on Google Play</p>
+            </div>
+            <div class="feature-card reveal">
+                <span class="feature-icon">&#127891;</span>
+                <h3>Levels + Tutorials</h3>
+                <p data-i18n="f2">3 difficulty levels + 4 tutorial lessons</p>
+            </div>
+            <div class="feature-card reveal">
+                <span class="feature-icon">&#128279;</span>
+                <h3>Chain &amp; Seeds</h3>
+                <p data-i18n="f3">Infinite Chain Mode, Seeds, Statistics</p>
+            </div>
+            <div class="feature-card reveal">
+                <span class="feature-icon">&#127911;</span>
+                <h3>Synthwave</h3>
+                <p data-i18n="f4">Original synthwave music + neon visual effects</p>
+            </div>
+            <div class="feature-card reveal">
+                <span class="feature-icon">&#128274;</span>
+                <h3>Privacy</h3>
+                <p data-i18n="f5">Zero ads, zero tracking, 100% offline</p>
+            </div>
         </div>
-    </nav>
+    </div>
+</div>
 
-    <div class="container">
-
-        <div style="text-align:center">
-            <span class="hero-badge" data-i18n="badge">Closed Beta</span>
-        </div>
-
-        <h1 data-i18n="title">Become a Beta Tester</h1>
-        <p class="subtitle" data-i18n="subtitle">Get early access to LUCID on Google Play. Help us polish the game before public launch.</p>
-
-        <div class="what-section">
-            <h2 data-i18n="what_title">What you get</h2>
-            <ul class="feature-list">
-                <li data-i18n="f1">Early access to the full game on Google Play</li>
-                <li data-i18n="f2">3 difficulty levels + 4 tutorial lessons</li>
-                <li data-i18n="f3">Infinite Chain Mode, Seeds, Statistics</li>
-                <li data-i18n="f4">Original synthwave music + neon visual effects</li>
-                <li data-i18n="f5">Zero ads, zero tracking, 100% offline</li>
-            </ul>
-        </div>
-
-        <div class="steps-section">
-            <h2 data-i18n="how_title">How it works</h2>
-            <div class="step">
+<!-- HOW IT WORKS -->
+<div class="section-full timeline-section" id="how">
+    <div class="section-inner">
+        <h2 class="section-title reveal" data-i18n="how_title">How it works</h2>
+        <div class="timeline reveal">
+            <div class="timeline-step">
                 <div class="step-number">1</div>
                 <div class="step-text" data-i18n="s1">Enter your Google email below</div>
             </div>
-            <div class="step">
+            <div class="timeline-step">
                 <div class="step-number">2</div>
                 <div class="step-text" data-i18n="s2">You'll receive a Google Play invite by email</div>
             </div>
-            <div class="step">
+            <div class="timeline-step">
                 <div class="step-number">3</div>
                 <div class="step-text" data-i18n="s3">Accept the invite and download LUCID</div>
             </div>
-            <div class="step">
+            <div class="timeline-step">
                 <div class="step-number">4</div>
                 <div class="step-text" data-i18n="s4">Play and share your feedback!</div>
             </div>
         </div>
+    </div>
+</div>
 
-        <div class="form-section">
+<!-- SIGN UP FORM -->
+<div class="section-full form-section" id="signup">
+    <div class="section-inner">
+        <div class="form-card reveal">
             <h2 data-i18n="form_title">Sign up</h2>
             <p class="form-note" data-i18n="form_note">Use the Gmail / Google address linked to your Android device.</p>
 
@@ -448,349 +734,388 @@
                 <a href="privacy.html" data-i18n="privacy_link">Privacy Policy</a>
             </p>
         </div>
-
-        <div class="faq-section">
-            <h2 data-i18n="faq_title">FAQ</h2>
-            <dl>
-                <div class="faq-item">
-                    <dt data-i18n="q1">Do I need an Android device?</dt>
-                    <dd data-i18n="a1">Yes, LUCID is only available on Android for now.</dd>
-                </div>
-                <div class="faq-item">
-                    <dt data-i18n="q2">Is it free?</dt>
-                    <dd data-i18n="a2">Yes, the beta is completely free. The final game will be freemium with an optional one-time purchase.</dd>
-                </div>
-                <div class="faq-item">
-                    <dt data-i18n="q3">How long does the test last?</dt>
-                    <dd data-i18n="a3">At least 14 days. You keep access to the game even after.</dd>
-                </div>
-                <div class="faq-item">
-                    <dt data-i18n="q4">Is my data collected?</dt>
-                    <dd data-i18n="a4">No. LUCID collects no personal data, works 100% offline and has no trackers.</dd>
-                </div>
-            </dl>
-        </div>
-
-        <footer class="footer">
-            <a href="index.html" data-i18n="nav_home">Home</a>
-            <a href="support.html" data-i18n="nav_support">Support</a>
-            <a href="privacy.html" data-i18n="nav_privacy">Privacy</a>
-            <a href="mailto:californylana@gmail.com">Contact</a>
-        </footer>
     </div>
+</div>
 
-    <script>
-    var texts = {
-        en: {
-            badge: "Closed Beta",
-            title: "Become a Beta Tester",
-            subtitle: "Get early access to LUCID on Google Play. Help us polish the game before public launch.",
-            what_title: "What you get",
-            f1: "Early access to the full game on Google Play",
-            f2: "3 difficulty levels + 4 tutorial lessons",
-            f3: "Infinite Chain Mode, Seeds, Statistics",
-            f4: "Original synthwave music + neon visual effects",
-            f5: "Zero ads, zero tracking, 100% offline",
-            how_title: "How it works",
-            s1: "Enter your Google email below",
-            s2: "You'll receive a Google Play invite by email",
-            s3: "Accept the invite and download LUCID",
-            s4: "Play and share your feedback!",
-            form_title: "Sign up",
-            form_note: "Use the Gmail / Google address linked to your Android device.",
-            label_email: "Google email address",
-            ph_email: "your.name@gmail.com",
-            label_pseudo: "Nickname (optional)",
-            ph_pseudo: "What should we call you?",
-            submit: "Join the beta",
-            success: "Your email client has been opened. Send the email to complete your registration!",
-            privacy_note: "Your email will only be used for the Google Play invite. ",
-            privacy_link: "Privacy Policy",
-            faq_title: "FAQ",
-            q1: "Do I need an Android device?",
-            a1: "Yes, LUCID is only available on Android for now.",
-            q2: "Is it free?",
-            a2: "Yes, the beta is completely free. The final game will be freemium with an optional one-time purchase.",
-            q3: "How long does the test last?",
-            a3: "At least 14 days. You keep access to the game even after.",
-            q4: "Is my data collected?",
-            a4: "No. LUCID collects no personal data, works 100% offline and has no trackers.",
-            nav_home: "Home",
-            nav_features: "Features",
-            nav_download: "Download",
-            nav_support: "Support",
-            nav_privacy: "Privacy",
-            mail_subject: "LUCID Beta - New tester",
-            mail_none: "(not provided)"
-        },
-        fr: {
-            badge: "Test Ferm\u00e9",
-            title: "Devenez B\u00eata-Testeur",
-            subtitle: "Acc\u00e9dez \u00e0 LUCID en avant-premi\u00e8re sur Google Play. Aidez-nous \u00e0 peaufiner le jeu avant son lancement public.",
-            what_title: "Ce que vous obtenez",
-            f1: "Acc\u00e8s anticip\u00e9 au jeu complet sur Google Play",
-            f2: "3 niveaux de difficult\u00e9 + 4 le\u00e7ons tutorielles",
-            f3: "Mode Encha\u00eenement infini, Seeds, Statistiques",
-            f4: "Musique synth\u00e9tique originale + effets visuels n\u00e9on",
-            f5: "Z\u00e9ro pub, z\u00e9ro tracking, 100% hors-ligne",
-            how_title: "Comment \u00e7a marche",
-            s1: "Inscrivez votre email Google ci-dessous",
-            s2: "Vous recevrez un lien d'invitation Google Play par email",
-            s3: "Acceptez l'invitation et t\u00e9l\u00e9chargez LUCID",
-            s4: "Jouez et partagez vos retours !",
-            form_title: "S'inscrire",
-            form_note: "Utilisez l'adresse Gmail / Google associ\u00e9e \u00e0 votre appareil Android.",
-            label_email: "Adresse email Google",
-            ph_email: "votre.nom@gmail.com",
-            label_pseudo: "Pseudo / pr\u00e9nom (optionnel)",
-            ph_pseudo: "Comment vous appeler ?",
-            submit: "Rejoindre le test",
-            success: "Votre client email a \u00e9t\u00e9 ouvert. Envoyez l'email pour finaliser votre inscription !",
-            privacy_note: "Votre email sera uniquement utilis\u00e9 pour l'invitation Google Play. ",
-            privacy_link: "Politique de confidentialit\u00e9",
-            faq_title: "Questions fr\u00e9quentes",
-            q1: "Faut-il un appareil Android ?",
-            a1: "Oui, LUCID est disponible uniquement sur Android pour le moment.",
-            q2: "C'est gratuit ?",
-            a2: "Oui, le test est enti\u00e8rement gratuit. Le jeu final sera freemium avec un achat unique optionnel.",
-            q3: "Combien de temps dure le test ?",
-            a3: "Au minimum 14 jours. Vous gardez l'acc\u00e8s au jeu m\u00eame apr\u00e8s.",
-            q4: "Mes donn\u00e9es sont-elles collect\u00e9es ?",
-            a4: "Non. LUCID ne collecte aucune donn\u00e9e personnelle, fonctionne 100% hors-ligne et n'a aucun tracker.",
-            nav_home: "Accueil",
-            nav_features: "Fonctionnalit\u00e9s",
-            nav_download: "T\u00e9l\u00e9charger",
-            nav_support: "Support",
-            nav_privacy: "Confidentialit\u00e9",
-            mail_subject: "LUCID Beta - Nouveau testeur",
-            mail_none: "(non renseign\u00e9)"
-        },
-        es: {
-            badge: "Beta Cerrada",
-            title: "Convi\u00e9rtete en Beta Tester",
-            subtitle: "Accede a LUCID en primicia en Google Play. Ay\u00fadanos a pulir el juego antes del lanzamiento.",
-            what_title: "Lo que obtienes",
-            f1: "Acceso anticipado al juego completo en Google Play",
-            f2: "3 niveles de dificultad + 4 lecciones tutoriales",
-            f3: "Modo Cadena infinito, Seeds, Estad\u00edsticas",
-            f4: "M\u00fasica synthwave original + efectos visuales ne\u00f3n",
-            f5: "Sin anuncios, sin rastreo, 100% sin conexi\u00f3n",
-            how_title: "C\u00f3mo funciona",
-            s1: "Introduce tu email de Google abajo",
-            s2: "Recibir\u00e1s una invitaci\u00f3n de Google Play por email",
-            s3: "Acepta la invitaci\u00f3n y descarga LUCID",
-            s4: "\u00a1Juega y comparte tu opini\u00f3n!",
-            form_title: "Registrarse",
-            form_note: "Usa la direcci\u00f3n Gmail / Google vinculada a tu dispositivo Android.",
-            label_email: "Direcci\u00f3n de email Google",
-            ph_email: "tu.nombre@gmail.com",
-            label_pseudo: "Apodo (opcional)",
-            ph_pseudo: "\u00bfC\u00f3mo te llamamos?",
-            submit: "Unirse a la beta",
-            success: "Tu cliente de correo se ha abierto. \u00a1Env\u00eda el email para completar tu registro!",
-            privacy_note: "Tu email solo se usar\u00e1 para la invitaci\u00f3n de Google Play. ",
-            privacy_link: "Pol\u00edtica de Privacidad",
-            faq_title: "Preguntas Frecuentes",
-            q1: "\u00bfNecesito un dispositivo Android?",
-            a1: "S\u00ed, LUCID solo est\u00e1 disponible en Android por ahora.",
-            q2: "\u00bfEs gratis?",
-            a2: "S\u00ed, la beta es completamente gratuita. El juego final ser\u00e1 freemium con una compra \u00fanica opcional.",
-            q3: "\u00bfCu\u00e1nto dura la prueba?",
-            a3: "M\u00ednimo 14 d\u00edas. Mantienes acceso al juego incluso despu\u00e9s.",
-            q4: "\u00bfSe recopilan mis datos?",
-            a4: "No. LUCID no recopila datos personales, funciona 100% sin conexi\u00f3n y no tiene rastreadores.",
-            nav_home: "Inicio",
-            nav_features: "Caracter\u00edsticas",
-            nav_download: "Descargar",
-            nav_support: "Soporte",
-            nav_privacy: "Privacidad",
-            mail_subject: "LUCID Beta - Nuevo tester",
-            mail_none: "(no indicado)"
-        },
-        de: {
-            badge: "Geschlossene Beta",
-            title: "Werde Beta-Tester",
-            subtitle: "Erhalte fr\u00fchen Zugang zu LUCID auf Google Play. Hilf uns, das Spiel vor dem \u00f6ffentlichen Start zu perfektionieren.",
-            what_title: "Was du bekommst",
-            f1: "Fr\u00fcher Zugang zum vollst\u00e4ndigen Spiel auf Google Play",
-            f2: "3 Schwierigkeitsgrade + 4 Tutorial-Lektionen",
-            f3: "Endloser Kettenmodus, Seeds, Statistiken",
-            f4: "Originale Synthwave-Musik + Neon-Effekte",
-            f5: "Keine Werbung, kein Tracking, 100% offline",
-            how_title: "So funktioniert's",
-            s1: "Gib unten deine Google-E-Mail ein",
-            s2: "Du erh\u00e4ltst eine Google Play-Einladung per E-Mail",
-            s3: "Nimm die Einladung an und lade LUCID herunter",
-            s4: "Spiele und teile dein Feedback!",
-            form_title: "Anmelden",
-            form_note: "Verwende die Gmail-/Google-Adresse, die mit deinem Android-Ger\u00e4t verkn\u00fcpft ist.",
-            label_email: "Google-E-Mail-Adresse",
-            ph_email: "dein.name@gmail.com",
-            label_pseudo: "Spitzname (optional)",
-            ph_pseudo: "Wie sollen wir dich nennen?",
-            submit: "Der Beta beitreten",
-            success: "Dein E-Mail-Client wurde ge\u00f6ffnet. Sende die E-Mail, um deine Registrierung abzuschlie\u00dfen!",
-            privacy_note: "Deine E-Mail wird nur f\u00fcr die Google Play-Einladung verwendet. ",
-            privacy_link: "Datenschutzerkl\u00e4rung",
-            faq_title: "H\u00e4ufige Fragen",
-            q1: "Brauche ich ein Android-Ger\u00e4t?",
-            a1: "Ja, LUCID ist derzeit nur auf Android verf\u00fcgbar.",
-            q2: "Ist es kostenlos?",
-            a2: "Ja, die Beta ist komplett kostenlos. Das fertige Spiel wird Freemium mit einem optionalen Einmalkauf.",
-            q3: "Wie lange dauert der Test?",
-            a3: "Mindestens 14 Tage. Du beh\u00e4ltst den Zugang zum Spiel auch danach.",
-            q4: "Werden meine Daten erhoben?",
-            a4: "Nein. LUCID erhebt keine pers\u00f6nlichen Daten, funktioniert 100% offline und hat keine Tracker.",
-            nav_home: "Startseite",
-            nav_features: "Funktionen",
-            nav_download: "Herunterladen",
-            nav_support: "Support",
-            nav_privacy: "Datenschutz",
-            mail_subject: "LUCID Beta - Neuer Tester",
-            mail_none: "(nicht angegeben)"
-        },
-        pt: {
-            badge: "Beta Fechado",
-            title: "Torne-se um Beta Tester",
-            subtitle: "Tenha acesso antecipado ao LUCID no Google Play. Ajude-nos a aperfei\u00e7oar o jogo antes do lan\u00e7amento.",
-            what_title: "O que voc\u00ea recebe",
-            f1: "Acesso antecipado ao jogo completo no Google Play",
-            f2: "3 n\u00edveis de dificuldade + 4 li\u00e7\u00f5es tutoriais",
-            f3: "Modo Corrente infinito, Seeds, Estat\u00edsticas",
-            f4: "M\u00fasica synthwave original + efeitos visuais neon",
-            f5: "Sem an\u00fancios, sem rastreamento, 100% offline",
-            how_title: "Como funciona",
-            s1: "Insira seu e-mail do Google abaixo",
-            s2: "Voc\u00ea receber\u00e1 um convite do Google Play por e-mail",
-            s3: "Aceite o convite e baixe o LUCID",
-            s4: "Jogue e compartilhe seu feedback!",
-            form_title: "Inscrever-se",
-            form_note: "Use o endere\u00e7o Gmail/Google vinculado ao seu dispositivo Android.",
-            label_email: "Endere\u00e7o de e-mail Google",
-            ph_email: "seu.nome@gmail.com",
-            label_pseudo: "Apelido (opcional)",
-            ph_pseudo: "Como devemos te chamar?",
-            submit: "Participar do beta",
-            success: "Seu cliente de e-mail foi aberto. Envie o e-mail para concluir sua inscri\u00e7\u00e3o!",
-            privacy_note: "Seu e-mail ser\u00e1 usado apenas para o convite do Google Play. ",
-            privacy_link: "Pol\u00edtica de Privacidade",
-            faq_title: "Perguntas Frequentes",
-            q1: "Preciso de um dispositivo Android?",
-            a1: "Sim, o LUCID est\u00e1 dispon\u00edvel apenas no Android por enquanto.",
-            q2: "\u00c9 gratuito?",
-            a2: "Sim, o beta \u00e9 completamente gratuito. O jogo final ser\u00e1 freemium com uma compra \u00fanica opcional.",
-            q3: "Quanto tempo dura o teste?",
-            a3: "No m\u00ednimo 14 dias. Voc\u00ea mant\u00e9m o acesso ao jogo mesmo depois.",
-            q4: "Meus dados s\u00e3o coletados?",
-            a4: "N\u00e3o. O LUCID n\u00e3o coleta dados pessoais, funciona 100% offline e n\u00e3o tem rastreadores.",
-            nav_home: "In\u00edcio",
-            nav_features: "Recursos",
-            nav_download: "Baixar",
-            nav_support: "Suporte",
-            nav_privacy: "Privacidade",
-            mail_subject: "LUCID Beta - Novo tester",
-            mail_none: "(n\u00e3o informado)"
-        },
-        it: {
-            badge: "Beta Chiusa",
-            title: "Diventa un Beta Tester",
-            subtitle: "Ottieni l'accesso anticipato a LUCID su Google Play. Aiutaci a perfezionare il gioco prima del lancio.",
-            what_title: "Cosa ottieni",
-            f1: "Accesso anticipato al gioco completo su Google Play",
-            f2: "3 livelli di difficolt\u00e0 + 4 lezioni tutorial",
-            f3: "Modalit\u00e0 Catena infinita, Seeds, Statistiche",
-            f4: "Musica synthwave originale + effetti visivi neon",
-            f5: "Zero pubblicit\u00e0, zero tracciamento, 100% offline",
-            how_title: "Come funziona",
-            s1: "Inserisci la tua email Google qui sotto",
-            s2: "Riceverai un invito Google Play via email",
-            s3: "Accetta l'invito e scarica LUCID",
-            s4: "Gioca e condividi il tuo feedback!",
-            form_title: "Iscriviti",
-            form_note: "Usa l'indirizzo Gmail/Google collegato al tuo dispositivo Android.",
-            label_email: "Indirizzo email Google",
-            ph_email: "tuo.nome@gmail.com",
-            label_pseudo: "Nickname (opzionale)",
-            ph_pseudo: "Come ti chiamiamo?",
-            submit: "Partecipa alla beta",
-            success: "Il tuo client email \u00e8 stato aperto. Invia l'email per completare la registrazione!",
-            privacy_note: "La tua email verr\u00e0 usata solo per l'invito Google Play. ",
-            privacy_link: "Informativa sulla Privacy",
-            faq_title: "Domande Frequenti",
-            q1: "Mi serve un dispositivo Android?",
-            a1: "S\u00ec, LUCID \u00e8 disponibile solo su Android per ora.",
-            q2: "\u00c8 gratuito?",
-            a2: "S\u00ec, la beta \u00e8 completamente gratuita. Il gioco finale sar\u00e0 freemium con un acquisto unico opzionale.",
-            q3: "Quanto dura il test?",
-            a3: "Almeno 14 giorni. Mantieni l'accesso al gioco anche dopo.",
-            q4: "I miei dati vengono raccolti?",
-            a4: "No. LUCID non raccoglie dati personali, funziona 100% offline e non ha tracker.",
-            nav_home: "Home",
-            nav_features: "Funzionalit\u00e0",
-            nav_download: "Scarica",
-            nav_support: "Supporto",
-            nav_privacy: "Privacy",
-            mail_subject: "LUCID Beta - Nuovo tester",
-            mail_none: "(non fornito)"
-        }
-    };
+<!-- FAQ -->
+<div class="section-full" id="faq">
+    <div class="section-inner">
+        <h2 class="section-title reveal" data-i18n="faq_title">FAQ</h2>
+        <div class="faq-list">
+            <div class="faq-item reveal">
+                <button class="faq-question" data-i18n="q1">Do I need an Android device?</button>
+                <div class="faq-answer">
+                    <p data-i18n="a1">Yes, LUCID is only available on Android for now.</p>
+                </div>
+            </div>
+            <div class="faq-item reveal">
+                <button class="faq-question" data-i18n="q2">Is it free?</button>
+                <div class="faq-answer">
+                    <p data-i18n="a2">Yes, the beta is completely free. The final game will be freemium with an optional one-time purchase.</p>
+                </div>
+            </div>
+            <div class="faq-item reveal">
+                <button class="faq-question" data-i18n="q3">How long does the test last?</button>
+                <div class="faq-answer">
+                    <p data-i18n="a3">At least 14 days. You keep access to the game even after.</p>
+                </div>
+            </div>
+            <div class="faq-item reveal">
+                <button class="faq-question" data-i18n="q4">Is my data collected?</button>
+                <div class="faq-answer">
+                    <p data-i18n="a4">No. LUCID collects no personal data, works 100% offline and has no trackers.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-    var langCycle = ['fr', 'en', 'es', 'de', 'pt', 'it'];
+<!-- FOOTER -->
+<footer>
+    <div class="footer-links">
+        <a href="index.html" data-i18n="nav_home">Home</a>
+        <a href="support.html" data-i18n="nav_support">Support</a>
+        <a href="privacy.html" data-i18n="nav_privacy">Privacy</a>
+        <a href="mailto:californylana@gmail.com">Contact</a>
+    </div>
+    <p>&copy; 2025-2026 Californy Lana.</p>
+</footer>
 
-    function detectLang() {
-        var saved = localStorage.getItem('lucid-lang');
-        if (saved && langCycle.indexOf(saved) !== -1) return saved;
-        var nav = navigator.language.toLowerCase();
-        if (nav.startsWith('fr')) return 'fr';
-        if (nav.startsWith('es')) return 'es';
-        if (nav.startsWith('de')) return 'de';
-        if (nav.startsWith('pt')) return 'pt';
-        if (nav.startsWith('it')) return 'it';
-        return 'en';
+<script>
+var texts = {
+    en: {
+        badge: "Closed Beta",
+        title: "Become a Beta Tester",
+        subtitle: "Get early access to LUCID on Google Play. Help us polish the game before public launch.",
+        what_title: "What you get",
+        f1: "Early access to the full game on Google Play",
+        f2: "3 difficulty levels + 4 tutorial lessons",
+        f3: "Infinite Chain Mode, Seeds, Statistics",
+        f4: "Original synthwave music + neon visual effects",
+        f5: "Zero ads, zero tracking, 100% offline",
+        how_title: "How it works",
+        s1: "Enter your Google email below",
+        s2: "You'll receive a Google Play invite by email",
+        s3: "Accept the invite and download LUCID",
+        s4: "Play and share your feedback!",
+        form_title: "Sign up",
+        form_note: "Use the Gmail / Google address linked to your Android device.",
+        label_email: "Google email address",
+        ph_email: "your.name@gmail.com",
+        label_pseudo: "Nickname (optional)",
+        ph_pseudo: "What should we call you?",
+        submit: "Join the beta",
+        success: "Your email client has been opened. Send the email to complete your registration!",
+        privacy_note: "Your email will only be used for the Google Play invite. ",
+        privacy_link: "Privacy Policy",
+        faq_title: "FAQ",
+        q1: "Do I need an Android device?",
+        a1: "Yes, LUCID is only available on Android for now.",
+        q2: "Is it free?",
+        a2: "Yes, the beta is completely free. The final game will be freemium with an optional one-time purchase.",
+        q3: "How long does the test last?",
+        a3: "At least 14 days. You keep access to the game even after.",
+        q4: "Is my data collected?",
+        a4: "No. LUCID collects no personal data, works 100% offline and has no trackers.",
+        nav_home: "Home",
+        nav_features: "Features",
+        nav_download: "Download",
+        nav_support: "Support",
+        nav_privacy: "Privacy",
+        mail_subject: "LUCID Beta - New tester",
+        mail_none: "(not provided)"
+    },
+    fr: {
+        badge: "Test Ferm\u00e9",
+        title: "Devenez B\u00eata-Testeur",
+        subtitle: "Acc\u00e9dez \u00e0 LUCID en avant-premi\u00e8re sur Google Play. Aidez-nous \u00e0 peaufiner le jeu avant son lancement public.",
+        what_title: "Ce que vous obtenez",
+        f1: "Acc\u00e8s anticip\u00e9 au jeu complet sur Google Play",
+        f2: "3 niveaux de difficult\u00e9 + 4 le\u00e7ons tutorielles",
+        f3: "Mode Encha\u00eenement infini, Seeds, Statistiques",
+        f4: "Musique synth\u00e9tique originale + effets visuels n\u00e9on",
+        f5: "Z\u00e9ro pub, z\u00e9ro tracking, 100% hors-ligne",
+        how_title: "Comment \u00e7a marche",
+        s1: "Inscrivez votre email Google ci-dessous",
+        s2: "Vous recevrez un lien d'invitation Google Play par email",
+        s3: "Acceptez l'invitation et t\u00e9l\u00e9chargez LUCID",
+        s4: "Jouez et partagez vos retours !",
+        form_title: "S'inscrire",
+        form_note: "Utilisez l'adresse Gmail / Google associ\u00e9e \u00e0 votre appareil Android.",
+        label_email: "Adresse email Google",
+        ph_email: "votre.nom@gmail.com",
+        label_pseudo: "Pseudo / pr\u00e9nom (optionnel)",
+        ph_pseudo: "Comment vous appeler ?",
+        submit: "Rejoindre le test",
+        success: "Votre client email a \u00e9t\u00e9 ouvert. Envoyez l'email pour finaliser votre inscription !",
+        privacy_note: "Votre email sera uniquement utilis\u00e9 pour l'invitation Google Play. ",
+        privacy_link: "Politique de confidentialit\u00e9",
+        faq_title: "Questions fr\u00e9quentes",
+        q1: "Faut-il un appareil Android ?",
+        a1: "Oui, LUCID est disponible uniquement sur Android pour le moment.",
+        q2: "C'est gratuit ?",
+        a2: "Oui, le test est enti\u00e8rement gratuit. Le jeu final sera freemium avec un achat unique optionnel.",
+        q3: "Combien de temps dure le test ?",
+        a3: "Au minimum 14 jours. Vous gardez l'acc\u00e8s au jeu m\u00eame apr\u00e8s.",
+        q4: "Mes donn\u00e9es sont-elles collect\u00e9es ?",
+        a4: "Non. LUCID ne collecte aucune donn\u00e9e personnelle, fonctionne 100% hors-ligne et n'a aucun tracker.",
+        nav_home: "Accueil",
+        nav_features: "Fonctionnalit\u00e9s",
+        nav_download: "T\u00e9l\u00e9charger",
+        nav_support: "Support",
+        nav_privacy: "Confidentialit\u00e9",
+        mail_subject: "LUCID Beta - Nouveau testeur",
+        mail_none: "(non renseign\u00e9)"
+    },
+    es: {
+        badge: "Beta Cerrada",
+        title: "Convi\u00e9rtete en Beta Tester",
+        subtitle: "Accede a LUCID en primicia en Google Play. Ay\u00fadanos a pulir el juego antes del lanzamiento.",
+        what_title: "Lo que obtienes",
+        f1: "Acceso anticipado al juego completo en Google Play",
+        f2: "3 niveles de dificultad + 4 lecciones tutoriales",
+        f3: "Modo Cadena infinito, Seeds, Estad\u00edsticas",
+        f4: "M\u00fasica synthwave original + efectos visuales ne\u00f3n",
+        f5: "Sin anuncios, sin rastreo, 100% sin conexi\u00f3n",
+        how_title: "C\u00f3mo funciona",
+        s1: "Introduce tu email de Google abajo",
+        s2: "Recibir\u00e1s una invitaci\u00f3n de Google Play por email",
+        s3: "Acepta la invitaci\u00f3n y descarga LUCID",
+        s4: "\u00a1Juega y comparte tu opini\u00f3n!",
+        form_title: "Registrarse",
+        form_note: "Usa la direcci\u00f3n Gmail / Google vinculada a tu dispositivo Android.",
+        label_email: "Direcci\u00f3n de email Google",
+        ph_email: "tu.nombre@gmail.com",
+        label_pseudo: "Apodo (opcional)",
+        ph_pseudo: "\u00bfC\u00f3mo te llamamos?",
+        submit: "Unirse a la beta",
+        success: "Tu cliente de correo se ha abierto. \u00a1Env\u00eda el email para completar tu registro!",
+        privacy_note: "Tu email solo se usar\u00e1 para la invitaci\u00f3n de Google Play. ",
+        privacy_link: "Pol\u00edtica de Privacidad",
+        faq_title: "Preguntas Frecuentes",
+        q1: "\u00bfNecesito un dispositivo Android?",
+        a1: "S\u00ed, LUCID solo est\u00e1 disponible en Android por ahora.",
+        q2: "\u00bfEs gratis?",
+        a2: "S\u00ed, la beta es completamente gratuita. El juego final ser\u00e1 freemium con una compra \u00fanica opcional.",
+        q3: "\u00bfCu\u00e1nto dura la prueba?",
+        a3: "M\u00ednimo 14 d\u00edas. Mantienes acceso al juego incluso despu\u00e9s.",
+        q4: "\u00bfSe recopilan mis datos?",
+        a4: "No. LUCID no recopila datos personales, funciona 100% sin conexi\u00f3n y no tiene rastreadores.",
+        nav_home: "Inicio",
+        nav_features: "Caracter\u00edsticas",
+        nav_download: "Descargar",
+        nav_support: "Soporte",
+        nav_privacy: "Privacidad",
+        mail_subject: "LUCID Beta - Nuevo tester",
+        mail_none: "(no indicado)"
+    },
+    de: {
+        badge: "Geschlossene Beta",
+        title: "Werde Beta-Tester",
+        subtitle: "Erhalte fr\u00fchen Zugang zu LUCID auf Google Play. Hilf uns, das Spiel vor dem \u00f6ffentlichen Start zu perfektionieren.",
+        what_title: "Was du bekommst",
+        f1: "Fr\u00fcher Zugang zum vollst\u00e4ndigen Spiel auf Google Play",
+        f2: "3 Schwierigkeitsgrade + 4 Tutorial-Lektionen",
+        f3: "Endloser Kettenmodus, Seeds, Statistiken",
+        f4: "Originale Synthwave-Musik + Neon-Effekte",
+        f5: "Keine Werbung, kein Tracking, 100% offline",
+        how_title: "So funktioniert's",
+        s1: "Gib unten deine Google-E-Mail ein",
+        s2: "Du erh\u00e4ltst eine Google Play-Einladung per E-Mail",
+        s3: "Nimm die Einladung an und lade LUCID herunter",
+        s4: "Spiele und teile dein Feedback!",
+        form_title: "Anmelden",
+        form_note: "Verwende die Gmail-/Google-Adresse, die mit deinem Android-Ger\u00e4t verkn\u00fcpft ist.",
+        label_email: "Google-E-Mail-Adresse",
+        ph_email: "dein.name@gmail.com",
+        label_pseudo: "Spitzname (optional)",
+        ph_pseudo: "Wie sollen wir dich nennen?",
+        submit: "Der Beta beitreten",
+        success: "Dein E-Mail-Client wurde ge\u00f6ffnet. Sende die E-Mail, um deine Registrierung abzuschlie\u00dfen!",
+        privacy_note: "Deine E-Mail wird nur f\u00fcr die Google Play-Einladung verwendet. ",
+        privacy_link: "Datenschutzerkl\u00e4rung",
+        faq_title: "H\u00e4ufige Fragen",
+        q1: "Brauche ich ein Android-Ger\u00e4t?",
+        a1: "Ja, LUCID ist derzeit nur auf Android verf\u00fcgbar.",
+        q2: "Ist es kostenlos?",
+        a2: "Ja, die Beta ist komplett kostenlos. Das fertige Spiel wird Freemium mit einem optionalen Einmalkauf.",
+        q3: "Wie lange dauert der Test?",
+        a3: "Mindestens 14 Tage. Du beh\u00e4ltst den Zugang zum Spiel auch danach.",
+        q4: "Werden meine Daten erhoben?",
+        a4: "Nein. LUCID erhebt keine pers\u00f6nlichen Daten, funktioniert 100% offline und hat keine Tracker.",
+        nav_home: "Startseite",
+        nav_features: "Funktionen",
+        nav_download: "Herunterladen",
+        nav_support: "Support",
+        nav_privacy: "Datenschutz",
+        mail_subject: "LUCID Beta - Neuer Tester",
+        mail_none: "(nicht angegeben)"
+    },
+    pt: {
+        badge: "Beta Fechado",
+        title: "Torne-se um Beta Tester",
+        subtitle: "Tenha acesso antecipado ao LUCID no Google Play. Ajude-nos a aperfei\u00e7oar o jogo antes do lan\u00e7amento.",
+        what_title: "O que voc\u00ea recebe",
+        f1: "Acesso antecipado ao jogo completo no Google Play",
+        f2: "3 n\u00edveis de dificuldade + 4 li\u00e7\u00f5es tutoriais",
+        f3: "Modo Corrente infinito, Seeds, Estat\u00edsticas",
+        f4: "M\u00fasica synthwave original + efeitos visuais neon",
+        f5: "Sem an\u00fancios, sem rastreamento, 100% offline",
+        how_title: "Como funciona",
+        s1: "Insira seu e-mail do Google abaixo",
+        s2: "Voc\u00ea receber\u00e1 um convite do Google Play por e-mail",
+        s3: "Aceite o convite e baixe o LUCID",
+        s4: "Jogue e compartilhe seu feedback!",
+        form_title: "Inscrever-se",
+        form_note: "Use o endere\u00e7o Gmail/Google vinculado ao seu dispositivo Android.",
+        label_email: "Endere\u00e7o de e-mail Google",
+        ph_email: "seu.nome@gmail.com",
+        label_pseudo: "Apelido (opcional)",
+        ph_pseudo: "Como devemos te chamar?",
+        submit: "Participar do beta",
+        success: "Seu cliente de e-mail foi aberto. Envie o e-mail para concluir sua inscri\u00e7\u00e3o!",
+        privacy_note: "Seu e-mail ser\u00e1 usado apenas para o convite do Google Play. ",
+        privacy_link: "Pol\u00edtica de Privacidade",
+        faq_title: "Perguntas Frequentes",
+        q1: "Preciso de um dispositivo Android?",
+        a1: "Sim, o LUCID est\u00e1 dispon\u00edvel apenas no Android por enquanto.",
+        q2: "\u00c9 gratuito?",
+        a2: "Sim, o beta \u00e9 completamente gratuito. O jogo final ser\u00e1 freemium com uma compra \u00fanica opcional.",
+        q3: "Quanto tempo dura o teste?",
+        a3: "No m\u00ednimo 14 dias. Voc\u00ea mant\u00e9m o acesso ao jogo mesmo depois.",
+        q4: "Meus dados s\u00e3o coletados?",
+        a4: "N\u00e3o. O LUCID n\u00e3o coleta dados pessoais, funciona 100% offline e n\u00e3o tem rastreadores.",
+        nav_home: "In\u00edcio",
+        nav_features: "Recursos",
+        nav_download: "Baixar",
+        nav_support: "Suporte",
+        nav_privacy: "Privacidade",
+        mail_subject: "LUCID Beta - Novo tester",
+        mail_none: "(n\u00e3o informado)"
+    },
+    it: {
+        badge: "Beta Chiusa",
+        title: "Diventa un Beta Tester",
+        subtitle: "Ottieni l'accesso anticipato a LUCID su Google Play. Aiutaci a perfezionare il gioco prima del lancio.",
+        what_title: "Cosa ottieni",
+        f1: "Accesso anticipato al gioco completo su Google Play",
+        f2: "3 livelli di difficolt\u00e0 + 4 lezioni tutorial",
+        f3: "Modalit\u00e0 Catena infinita, Seeds, Statistiche",
+        f4: "Musica synthwave originale + effetti visivi neon",
+        f5: "Zero pubblicit\u00e0, zero tracciamento, 100% offline",
+        how_title: "Come funziona",
+        s1: "Inserisci la tua email Google qui sotto",
+        s2: "Riceverai un invito Google Play via email",
+        s3: "Accetta l'invito e scarica LUCID",
+        s4: "Gioca e condividi il tuo feedback!",
+        form_title: "Iscriviti",
+        form_note: "Usa l'indirizzo Gmail/Google collegato al tuo dispositivo Android.",
+        label_email: "Indirizzo email Google",
+        ph_email: "tuo.nome@gmail.com",
+        label_pseudo: "Nickname (opzionale)",
+        ph_pseudo: "Come ti chiamiamo?",
+        submit: "Partecipa alla beta",
+        success: "Il tuo client email \u00e8 stato aperto. Invia l'email per completare la registrazione!",
+        privacy_note: "La tua email verr\u00e0 usata solo per l'invito Google Play. ",
+        privacy_link: "Informativa sulla Privacy",
+        faq_title: "Domande Frequenti",
+        q1: "Mi serve un dispositivo Android?",
+        a1: "S\u00ec, LUCID \u00e8 disponibile solo su Android per ora.",
+        q2: "\u00c8 gratuito?",
+        a2: "S\u00ec, la beta \u00e8 completamente gratuita. Il gioco finale sar\u00e0 freemium con un acquisto unico opzionale.",
+        q3: "Quanto dura il test?",
+        a3: "Almeno 14 giorni. Mantieni l'accesso al gioco anche dopo.",
+        q4: "I miei dati vengono raccolti?",
+        a4: "No. LUCID non raccoglie dati personali, funziona 100% offline e non ha tracker.",
+        nav_home: "Home",
+        nav_features: "Funzionalit\u00e0",
+        nav_download: "Scarica",
+        nav_support: "Supporto",
+        nav_privacy: "Privacy",
+        mail_subject: "LUCID Beta - Nuovo tester",
+        mail_none: "(non fornito)"
     }
+};
 
-    var currentLang = detectLang();
+var langCycle = ['fr', 'en', 'es', 'de', 'pt', 'it'];
 
-    function setLang(lang) {
-        currentLang = lang;
-        localStorage.setItem('lucid-lang', lang);
-        var t = texts[lang];
-        if (!t) return;
-        document.querySelectorAll('[data-i18n]').forEach(function(el) {
-            var key = el.getAttribute('data-i18n');
-            if (t[key]) el.textContent = t[key];
-        });
-        document.querySelectorAll('[data-ph]').forEach(function(el) {
-            var key = el.getAttribute('data-ph');
-            if (t[key]) el.placeholder = t[key];
-        });
-        document.getElementById('langBtn').textContent = lang.toUpperCase();
-        document.documentElement.lang = lang;
-    }
+function detectLang() {
+    var saved = localStorage.getItem('lucid-lang');
+    if (saved && langCycle.indexOf(saved) !== -1) return saved;
+    var nav = navigator.language.toLowerCase();
+    if (nav.startsWith('fr')) return 'fr';
+    if (nav.startsWith('es')) return 'es';
+    if (nav.startsWith('de')) return 'de';
+    if (nav.startsWith('pt')) return 'pt';
+    if (nav.startsWith('it')) return 'it';
+    return 'en';
+}
 
-    function toggleLang() {
-        var idx = langCycle.indexOf(currentLang);
-        setLang(langCycle[(idx + 1) % langCycle.length]);
-    }
+var currentLang = detectLang();
 
-    function submitForm(e) {
-        e.preventDefault();
-        var email = document.getElementById('email').value.trim();
-        var pseudo = document.getElementById('pseudo').value.trim();
-        if (!email) return false;
+function setLang(lang) {
+    currentLang = lang;
+    localStorage.setItem('lucid-lang', lang);
+    var t = texts[lang];
+    if (!t) return;
+    document.querySelectorAll('[data-i18n]').forEach(function(el) {
+        var key = el.getAttribute('data-i18n');
+        if (t[key]) el.textContent = t[key];
+    });
+    document.querySelectorAll('[data-ph]').forEach(function(el) {
+        var key = el.getAttribute('data-ph');
+        if (t[key]) el.placeholder = t[key];
+    });
+    document.getElementById('langBtn').textContent = lang.toUpperCase();
+    document.documentElement.lang = lang;
+}
 
-        var t = texts[currentLang];
-        var subject = encodeURIComponent(t.mail_subject);
-        var body = encodeURIComponent('Email: ' + email + '\nPseudo: ' + (pseudo || t.mail_none));
-        window.location.href = 'mailto:californylana@gmail.com?subject=' + subject + '&body=' + body;
+function toggleLang() {
+    var idx = langCycle.indexOf(currentLang);
+    setLang(langCycle[(idx + 1) % langCycle.length]);
+}
 
-        document.getElementById('betaForm').style.display = 'none';
-        document.getElementById('successMsg').style.display = 'block';
-        return false;
-    }
+function submitForm(e) {
+    e.preventDefault();
+    var email = document.getElementById('email').value.trim();
+    var pseudo = document.getElementById('pseudo').value.trim();
+    if (!email) return false;
 
-    // Init
-    setLang(currentLang);
-    </script>
+    var t = texts[currentLang];
+    var subject = encodeURIComponent(t.mail_subject);
+    var body = encodeURIComponent('Email: ' + email + '\nPseudo: ' + (pseudo || t.mail_none));
+    window.location.href = 'mailto:californylana@gmail.com?subject=' + subject + '&body=' + body;
+
+    document.getElementById('betaForm').style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+    return false;
+}
+
+// === Nav scroll effect ===
+window.addEventListener('scroll', function() {
+    document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+// === Scroll reveal ===
+var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('revealed'); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+// === FAQ accordion ===
+document.querySelectorAll('.faq-question').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+        var item = btn.parentElement;
+        var wasOpen = item.classList.contains('open');
+        // Close all
+        document.querySelectorAll('.faq-item').forEach(function(fi) { fi.classList.remove('open'); });
+        // Toggle current
+        if (!wasOpen) item.classList.add('open');
+    });
+});
+
+// Init
+setLang(currentLang);
+</script>
 </body>
 </html>

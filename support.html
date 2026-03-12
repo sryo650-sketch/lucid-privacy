@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LUCID &mdash; Support</title>
+    <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;text y='.9em' font-size='90'&gt;&#11042;&lt;/text&gt;&lt;/svg&gt;">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap');
 
@@ -12,152 +13,460 @@
         :root {
             --cyan: #00ffc8;
             --cyan-dim: #00d4a8;
+            --magenta: #e000ff;
+            --violet: #8040ff;
             --bg-deep: #050510;
-            --bg-card: #0a0a1a;
+            --bg-card: rgba(8,8,24,0.7);
+            --bg-card-hover: rgba(16,16,40,0.85);
             --text: #c8c8d8;
             --text-dim: #707088;
         }
+
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg-deep);
             color: var(--text);
             line-height: 1.7;
+            overflow-x: hidden;
         }
 
+        /* === GLOBAL BACKGROUND === */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: url('fond_credits.png') center/cover no-repeat;
+            z-index: -2;
+        }
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(
+                180deg,
+                rgba(5,5,16,0.6) 0%,
+                rgba(5,5,16,0.75) 30%,
+                rgba(5,5,16,0.85) 60%,
+                rgba(5,5,16,0.7) 100%
+            );
+            z-index: -1;
+        }
+
+        /* === NAV === */
         nav {
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            background: rgba(5,5,16,0.92);
-            backdrop-filter: blur(12px);
-            padding: 16px 32px;
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 16px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(0,255,200,0.06);
+            background: rgba(5,5,16,0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,255,200,0.04);
+            transition: all 0.4s ease;
         }
+        nav.scrolled {
+            background: rgba(5,5,16,0.92);
+            border-bottom-color: rgba(0,255,200,0.1);
+            padding: 10px 40px;
+        }
+
         .nav-logo {
             font-family: 'Orbitron', monospace;
             font-weight: 900;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: var(--cyan);
             text-decoration: none;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.15em;
+            text-shadow: 0 0 20px rgba(0,255,200,0.3);
         }
+
+        .nav-links { display: flex; align-items: center; gap: 0; }
         .nav-links a {
             color: var(--text-dim);
             text-decoration: none;
             font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
             margin-left: 32px;
-            transition: color 0.2s;
+            transition: color 0.3s;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 0; right: 0;
+            height: 1px;
+            background: var(--cyan);
+            transform: scaleX(0);
+            transition: transform 0.3s;
         }
         .nav-links a:hover { color: var(--cyan); }
-        .lang-toggle { background: transparent; border: 1px solid rgba(0,255,200,0.3); color: var(--cyan); font-family: 'Orbitron', monospace; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; padding: 6px 12px; border-radius: 20px; cursor: pointer; transition: all 0.3s ease; margin-left: 24px; }
-        .lang-toggle:hover { background: rgba(0,255,200,0.1); border-color: var(--cyan); }
+        .nav-links a:hover::after { transform: scaleX(1); }
 
-        .container {
-            max-width: 760px;
-            margin: 0 auto;
-            padding: 60px 24px 80px;
+        .lang-toggle {
+            background: transparent;
+            border: 1px solid rgba(0,255,200,0.3);
+            color: var(--cyan);
+            font-family: 'Orbitron', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            padding: 6px 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 28px;
+        }
+        .lang-toggle:hover {
+            background: rgba(0,255,200,0.12);
+            border-color: var(--cyan);
+            box-shadow: 0 0 15px rgba(0,255,200,0.2);
         }
 
-        h1 {
+        /* Hamburger mobile */
+        .nav-hamburger {
+            display: none;
+            background: none; border: none;
+            cursor: pointer; padding: 4px;
+        }
+        .nav-hamburger span {
+            display: block; width: 24px; height: 2px;
+            background: var(--cyan); margin: 5px 0;
+            transition: all 0.3s;
+        }
+
+        /* === HERO HEADER === */
+        .page-header {
+            position: relative;
+            padding: 160px 24px 80px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .page-header h1 {
             font-family: 'Orbitron', monospace;
-            font-size: 2.2rem;
+            font-size: clamp(2.4rem, 7vw, 3.8rem);
             font-weight: 700;
             color: #fff;
-            margin-bottom: 8px;
+            text-shadow: 0 0 30px rgba(255,255,255,0.1);
+            margin-bottom: 16px;
         }
 
-        .subtitle {
+        .page-header .subtitle {
+            color: var(--text-dim);
+            font-size: clamp(1rem, 2.5vw, 1.15rem);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* === SECTIONS === */
+        .section-full {
+            position: relative;
+            padding: 100px 24px;
+            overflow: hidden;
+        }
+        .section-inner {
+            max-width: 820px;
+            margin: 0 auto;
+        }
+
+        /* Section separator - lens flare */
+        .section-full::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 10%; right: 10%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0,255,200,0.4), rgba(255,255,255,0.6), rgba(0,255,200,0.4), transparent);
+            box-shadow: 0 0 20px rgba(0,255,200,0.3), 0 0 60px rgba(0,255,200,0.1);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.6rem, 4vw, 2.2rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 16px;
+            color: #fff;
+            text-shadow: 0 0 30px rgba(255,255,255,0.1);
+        }
+
+        .section-subtitle {
+            text-align: center;
             color: var(--text-dim);
             font-size: 1.05rem;
-            margin-bottom: 48px;
+            margin-bottom: 56px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        h2 {
-            font-family: 'Orbitron', monospace;
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--cyan);
-            margin-top: 40px;
-            margin-bottom: 12px;
-            letter-spacing: 0.03em;
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        p, li { margin-bottom: 12px; font-size: 0.95rem; }
-        ul { padding-left: 24px; }
+        /* === FAQ ACCORDION === */
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
 
         .faq-item {
             background: var(--bg-card);
+            backdrop-filter: blur(8px);
             border: 1px solid rgba(0,255,200,0.06);
-            border-radius: 12px;
-            padding: 24px;
-            margin-bottom: 16px;
-        }
-
-        .faq-item h3 {
-            color: #fff;
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        .faq-item p {
-            color: var(--text-dim);
-            margin-bottom: 0;
-        }
-
-        .highlight {
-            background: rgba(0,255,200,0.04);
-            border-left: 3px solid var(--cyan);
-            padding: 20px 24px;
             border-radius: 8px;
-            margin: 24px 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+        .faq-item:hover {
+            border-color: rgba(0,255,200,0.15);
+        }
+        .faq-item.open {
+            border-color: rgba(0,255,200,0.25);
+            box-shadow: 0 0 30px rgba(0,255,200,0.04);
         }
 
+        .faq-question {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 22px 28px;
+            cursor: pointer;
+            user-select: none;
+            gap: 16px;
+        }
+
+        .faq-question h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #fff;
+            transition: color 0.3s;
+            flex: 1;
+        }
+        .faq-item.open .faq-question h3 {
+            color: var(--cyan);
+        }
+
+        .faq-chevron {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            position: relative;
+        }
+        .faq-chevron::before,
+        .faq-chevron::after {
+            content: '';
+            position: absolute;
+            background: var(--text-dim);
+            transition: all 0.3s ease;
+        }
+        .faq-chevron::before {
+            top: 50%; left: 50%;
+            width: 12px; height: 1.5px;
+            transform: translate(-50%, -50%);
+        }
+        .faq-chevron::after {
+            top: 50%; left: 50%;
+            width: 1.5px; height: 12px;
+            transform: translate(-50%, -50%);
+        }
+        .faq-item.open .faq-chevron::after {
+            transform: translate(-50%, -50%) rotate(90deg);
+            opacity: 0;
+        }
+        .faq-item.open .faq-chevron::before,
+        .faq-item.open .faq-chevron::after {
+            background: var(--cyan);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+        .faq-answer-inner {
+            padding: 0 28px 24px;
+            color: var(--text-dim);
+            font-size: 0.93rem;
+            line-height: 1.8;
+            border-top: 1px solid rgba(0,255,200,0.06);
+            padding-top: 18px;
+        }
+        .faq-item.open .faq-answer {
+            max-height: 400px;
+        }
+
+        /* === TIP HIGHLIGHT === */
+        .highlight {
+            background: var(--bg-card);
+            backdrop-filter: blur(8px);
+            border-left: 3px solid var(--cyan);
+            border-radius: 0 8px 8px 0;
+            padding: 28px 32px;
+            margin-top: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        .highlight::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; bottom: 0;
+            width: 3px;
+            box-shadow: 0 0 15px rgba(0,255,200,0.4);
+        }
+        .highlight span {
+            font-size: 0.95rem;
+            color: var(--text-dim);
+            line-height: 1.8;
+        }
+        .highlight strong {
+            color: var(--cyan);
+            font-weight: 600;
+        }
+
+        /* === CONTACT BOX === */
         .contact-box {
             background: var(--bg-card);
-            border: 1px solid rgba(0,255,200,0.1);
-            border-radius: 16px;
-            padding: 36px;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(0,255,200,0.12);
+            border-radius: 8px;
+            padding: 48px 40px;
             text-align: center;
-            margin-top: 48px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(0,255,200,0.04);
+            transition: all 0.4s ease;
+        }
+        .contact-box:hover {
+            border-color: rgba(0,255,200,0.25);
+            box-shadow: 0 0 60px rgba(0,255,200,0.08), 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .contact-box::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--cyan), transparent);
         }
 
         .contact-box h2 {
-            margin-top: 0;
+            font-family: 'Orbitron', monospace;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--cyan);
             margin-bottom: 16px;
+            letter-spacing: 0.05em;
         }
 
-        .contact-box a {
+        .contact-box p {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+        }
+
+        .contact-box a.email-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             color: var(--cyan);
             text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: 600;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            padding: 14px 36px;
+            border: 1.5px solid rgba(0,255,200,0.3);
+            border-radius: 4px;
+            transition: all 0.3s ease;
         }
-        .contact-box a:hover { text-decoration: underline; }
+        .contact-box a.email-link:hover {
+            background: rgba(0,255,200,0.1);
+            border-color: var(--cyan);
+            box-shadow: 0 0 25px rgba(0,255,200,0.15);
+            transform: translateY(-2px);
+        }
 
+        /* === FOOTER === */
         footer {
-            border-top: 1px solid rgba(0,255,200,0.08);
-            padding: 40px 24px;
+            position: relative;
+            padding: 48px 24px;
             text-align: center;
             color: var(--text-dim);
             font-size: 0.85rem;
         }
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 15%; right: 15%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0,255,200,0.2), transparent);
+        }
+
         footer a {
             color: var(--cyan-dim);
             text-decoration: none;
-            margin: 0 16px;
+            margin: 0 20px;
+            transition: color 0.3s;
         }
         footer a:hover { color: var(--cyan); }
+        .footer-links { margin-bottom: 20px; }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 768px) {
+            nav { padding: 12px 16px; }
+            nav.scrolled { padding: 8px 16px; }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%; left: 0; right: 0;
+                background: rgba(5,5,16,0.95);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 16px;
+                border-bottom: 1px solid rgba(0,255,200,0.1);
+            }
+            .nav-links.open { display: flex; }
+            .nav-links a { margin: 8px 0; margin-left: 0; font-size: 1rem; }
+            .lang-toggle { margin: 12px 0 0; margin-left: 0; }
+            .nav-hamburger { display: block; }
+
+            .page-header { padding: 120px 16px 60px; }
+            .section-full { padding: 70px 16px; }
+
+            .faq-question { padding: 18px 20px; }
+            .faq-answer-inner { padding: 0 20px 20px; padding-top: 16px; }
+
+            .contact-box { padding: 36px 24px; }
+            .highlight { padding: 22px 20px; }
+        }
+
+        @media (max-width: 400px) {
+            .page-header { padding-top: 100px; }
+        }
     </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
     <a href="index.html" class="nav-logo">LUCID</a>
+    <button class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+        <span></span><span></span><span></span>
+    </button>
     <div class="nav-links">
         <a href="index.html" data-i18n="nav.home">Home</a>
         <a href="privacy.html" data-i18n="nav.privacy">Privacy</a>
@@ -166,86 +475,176 @@
     </div>
 </nav>
 
-<div class="container">
+<!-- HEADER -->
+<div class="page-header">
+    <h1 class="reveal" data-i18n="title">Support</h1>
+    <p class="subtitle reveal" data-i18n="subtitle">Find answers to common questions or reach out to us.</p>
+</div>
 
-    <h1 data-i18n="title">Support</h1>
-    <p class="subtitle" data-i18n="subtitle">Find answers to common questions or reach out to us.</p>
+<!-- FAQ SECTION -->
+<div class="section-full" id="faq">
+    <div class="section-inner">
+        <h2 class="section-title reveal" data-i18n="faq">FAQ</h2>
 
-    <h2 data-i18n="faq">FAQ</h2>
+        <div class="faq-list">
 
-    <div class="faq-item">
-        <h3 data-i18n="q1">How do I reset my progress?</h3>
-        <p data-i18n="a1">Go to Statistics from the main menu, then tap "Delete my data". This will reset all stats, unlocked levels, and saved chain progress.</p>
+            <div class="faq-item reveal">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3 data-i18n="q1">How do I reset my progress?</h3>
+                    <div class="faq-chevron"></div>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p data-i18n="a1">Go to Statistics from the main menu, then tap "Delete my data". This will reset all stats, unlocked levels, and saved chain progress.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item reveal">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3 data-i18n="q2">The game runs slowly on my device</h3>
+                    <div class="faq-chevron"></div>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p data-i18n="a2">LUCID is designed to run smoothly on most Android devices. If you experience performance issues, try closing other apps running in the background. The game requires Android 7.1 (API 25) or higher.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item reveal">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3 data-i18n="q3">How do I unlock new difficulty levels?</h3>
+                    <div class="faq-chevron"></div>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p data-i18n="a3">Win the previous level to unlock the next one. Beat DREAM to unlock REVERIE, beat REVERIE to unlock LUCID. Chain Mode unlocks after your first victory on any level.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item reveal">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3 data-i18n="q4">What is the Seed number?</h3>
+                    <div class="faq-chevron"></div>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p data-i18n="a4">Every board is generated from a unique seed (shown as a hex code like #A3F2). Share it with friends so they can play the exact same puzzle and compare strategies.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item reveal">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3 data-i18n="q5">How does Chain Mode work?</h3>
+                    <div class="faq-chevron"></div>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p data-i18n="a5">Chain Mode is an infinite gauntlet of escalating arenas. You play DREAM, then REVERIE, then LUCID, then increasingly harder variants. One defeat ends your run. Your score accumulates across all arenas.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item reveal">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3 data-i18n="q6">Does the game require an internet connection?</h3>
+                    <div class="faq-chevron"></div>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p data-i18n="a6">No. LUCID works 100% offline. No accounts, no ads, no data is ever sent anywhere. All your progress is stored locally on your device.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item reveal">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3 data-i18n="q7">How do I change the language?</h3>
+                    <div class="faq-chevron"></div>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p data-i18n="a7">During a game, tap the pause button (II), then tap the language toggle to cycle through available languages.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item reveal">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3 data-i18n="q8">How does the Daily Challenge work?</h3>
+                    <div class="faq-chevron"></div>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p data-i18n="a8">Every day, three fresh puzzles are generated &mdash; one per difficulty level. All players worldwide get the same boards. You can play each level once per day. Your daily streak tracks how many consecutive days you've completed at least one challenge.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item reveal">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3 data-i18n="q9">Can I share my Daily Challenge results?</h3>
+                    <div class="faq-chevron"></div>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p data-i18n="a9">Yes! After completing any game, tap the Share button on the end screen. Your result is copied to the clipboard as a short text summary that you can paste anywhere.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item reveal">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3 data-i18n="q10">What are badges (achievements)?</h3>
+                    <div class="faq-chevron"></div>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p data-i18n="a10">There are 100 badges to unlock, tracking milestones like your first win, speedruns, economy plays, lesson completion, and daily challenge streaks. Check your progress in the Statistics screen.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item reveal">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3 data-i18n="q11">I purchased the premium features but they're not showing</h3>
+                    <div class="faq-chevron"></div>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p data-i18n="a11">Try restarting the app. If the issue persists, make sure your Google Play purchase was completed successfully by checking your purchase history in the Google Play app. Contact us if you need further help.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="highlight reveal">
+            <span data-i18n="tip"><strong>Tip:</strong> The tutorials teach you everything you need to know. If you're stuck, try replaying the lesson about the specific mechanic that's giving you trouble (Rift retaliation, chain reactions, or lucidity management).</span>
+        </div>
     </div>
+</div>
 
-    <div class="faq-item">
-        <h3 data-i18n="q2">The game runs slowly on my device</h3>
-        <p data-i18n="a2">LUCID is designed to run smoothly on most Android devices. If you experience performance issues, try closing other apps running in the background. The game requires Android 7.1 (API 25) or higher.</p>
+<!-- CONTACT SECTION -->
+<div class="section-full" id="contact">
+    <div class="section-inner">
+        <div class="contact-box reveal">
+            <h2 data-i18n="contact_title">Still need help?</h2>
+            <p data-i18n="contact_desc">We're happy to assist. Send us an email and we'll get back to you as soon as possible.</p>
+            <a href="mailto:californylana@gmail.com" class="email-link">californylana@gmail.com</a>
+        </div>
     </div>
-
-    <div class="faq-item">
-        <h3 data-i18n="q3">How do I unlock new difficulty levels?</h3>
-        <p data-i18n="a3">Win the previous level to unlock the next one. Beat DREAM to unlock REVERIE, beat REVERIE to unlock LUCID. Chain Mode unlocks after your first victory on any level.</p>
-    </div>
-
-    <div class="faq-item">
-        <h3 data-i18n="q4">What is the Seed number?</h3>
-        <p data-i18n="a4">Every board is generated from a unique seed (shown as a hex code like #A3F2). Share it with friends so they can play the exact same puzzle and compare strategies.</p>
-    </div>
-
-    <div class="faq-item">
-        <h3 data-i18n="q5">How does Chain Mode work?</h3>
-        <p data-i18n="a5">Chain Mode is an infinite gauntlet of escalating arenas. You play DREAM, then REVERIE, then LUCID, then increasingly harder variants. One defeat ends your run. Your score accumulates across all arenas.</p>
-    </div>
-
-    <div class="faq-item">
-        <h3 data-i18n="q6">Does the game require an internet connection?</h3>
-        <p data-i18n="a6">No. LUCID works 100% offline. No accounts, no ads, no data is ever sent anywhere. All your progress is stored locally on your device.</p>
-    </div>
-
-    <div class="faq-item">
-        <h3 data-i18n="q7">How do I change the language?</h3>
-        <p data-i18n="a7">During a game, tap the pause button (II), then tap the language toggle to cycle through available languages.</p>
-    </div>
-
-    <div class="faq-item">
-        <h3 data-i18n="q8">How does the Daily Challenge work?</h3>
-        <p data-i18n="a8">Every day, three fresh puzzles are generated &mdash; one per difficulty level. All players worldwide get the same boards. You can play each level once per day. Your daily streak tracks how many consecutive days you've completed at least one challenge.</p>
-    </div>
-
-    <div class="faq-item">
-        <h3 data-i18n="q9">Can I share my Daily Challenge results?</h3>
-        <p data-i18n="a9">Yes! After completing any game, tap the Share button on the end screen. Your result is copied to the clipboard as a short text summary that you can paste anywhere.</p>
-    </div>
-
-    <div class="faq-item">
-        <h3 data-i18n="q10">What are badges (achievements)?</h3>
-        <p data-i18n="a10">There are 100 badges to unlock, tracking milestones like your first win, speedruns, economy plays, lesson completion, and daily challenge streaks. Check your progress in the Statistics screen.</p>
-    </div>
-
-    <div class="faq-item">
-        <h3 data-i18n="q11">I purchased the premium features but they're not showing</h3>
-        <p data-i18n="a11">Try restarting the app. If the issue persists, make sure your Google Play purchase was completed successfully by checking your purchase history in the Google Play app. Contact us if you need further help.</p>
-    </div>
-
-    <div class="highlight">
-        <span data-i18n="tip"><strong>Tip:</strong> The tutorials teach you everything you need to know. If you're stuck, try replaying the lesson about the specific mechanic that's giving you trouble (Rift retaliation, chain reactions, or lucidity management).</span>
-    </div>
-
-    <div class="contact-box">
-        <h2 data-i18n="contact_title">Still need help?</h2>
-        <p data-i18n="contact_desc">We're happy to assist. Send us an email and we'll get back to you as soon as possible.</p>
-        <br>
-        <a href="mailto:californylana@gmail.com">californylana@gmail.com</a>
-    </div>
-
 </div>
 
 <footer>
-    <a href="index.html" data-i18n="nav.home">Home</a>
-    <a href="privacy.html" data-i18n="footer.privacy">Privacy Policy</a>
-    <a href="mailto:californylana@gmail.com">Contact</a>
-    <br><br>
+    <div class="footer-links">
+        <a href="index.html" data-i18n="nav.home">Home</a>
+        <a href="privacy.html" data-i18n="footer.privacy">Privacy Policy</a>
+        <a href="mailto:californylana@gmail.com">Contact</a>
+    </div>
     <p data-i18n="footer.copy">&copy; 2025-2026 Californy Lana. All rights reserved.</p>
 </footer>
 
@@ -465,6 +864,39 @@ function toggleLang() {
 }
 
 applyLang(currentLang);
+
+/* === FAQ Accordion === */
+function toggleFaq(questionEl) {
+    var item = questionEl.parentElement;
+    var wasOpen = item.classList.contains('open');
+    /* Close all */
+    document.querySelectorAll('.faq-item.open').forEach(function(el) {
+        el.classList.remove('open');
+    });
+    /* Toggle clicked */
+    if (!wasOpen) item.classList.add('open');
+}
+
+/* === Nav scroll effect === */
+window.addEventListener('scroll', function() {
+    var nav = document.querySelector('nav');
+    if (window.scrollY > 60) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+});
+
+/* === Scroll reveal (IntersectionObserver) === */
+var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            revealObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(function(el) {
+    revealObserver.observe(el);
+});
 </script>
 
 </body>

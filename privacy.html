@@ -6,361 +6,758 @@
     <title>LUCID &mdash; Politique de confidentialit&eacute; / Privacy Policy</title>
     <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;text y='.9em' font-size='90'&gt;&#11042;&lt;/text&gt;&lt;/svg&gt;">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap');
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #0a0a14; color: #c8c8d0; line-height: 1.7; }
 
-        /* Nav */
-        .nav { position: sticky; top: 0; background: #0a0a14ee; backdrop-filter: blur(10px); border-bottom: 1px solid #1a1a2e; padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; z-index: 10; }
-        .nav-logo { font-family: 'Orbitron', monospace; font-weight: 700; font-size: 1.3em; color: #00ffc8; text-decoration: none; }
-        .nav-right { display: flex; align-items: center; gap: 16px; }
-        .nav-right a { color: #707088; text-decoration: none; font-size: 0.85em; transition: color 0.2s; }
-        .nav-right a:hover { color: #00ffc8; }
-        .lang-toggle { background: none; border: 1px solid #00ffc8; color: #00ffc8; padding: 4px 14px; border-radius: 4px; font-family: 'Orbitron', monospace; font-size: 0.8em; font-weight: 700; cursor: pointer; transition: background 0.2s; }
-        .lang-toggle:hover { background: #00ffc820; }
+        :root {
+            --cyan: #00ffc8;
+            --cyan-dim: #00d4a8;
+            --magenta: #e000ff;
+            --bg-deep: #050510;
+            --bg-card: rgba(8,8,24,0.7);
+            --bg-card-hover: rgba(16,16,40,0.85);
+            --text: #c8c8d8;
+            --text-dim: #707088;
+        }
 
-        /* Content */
-        .container { max-width: 720px; margin: 0 auto; padding: 40px 24px; }
-        h1 { font-family: 'Orbitron', monospace; color: #00ffc8; font-size: 2em; margin-bottom: 8px; }
-        h2 { color: #00d4a8; font-size: 1.4em; margin-top: 36px; margin-bottom: 12px; border-bottom: 1px solid #1a1a2e; padding-bottom: 6px; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-deep);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* === GLOBAL BACKGROUND === */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: url('fond_credits.png') center/cover no-repeat;
+            z-index: -2;
+        }
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(
+                180deg,
+                rgba(5,5,16,0.6) 0%,
+                rgba(5,5,16,0.75) 30%,
+                rgba(5,5,16,0.85) 60%,
+                rgba(5,5,16,0.7) 100%
+            );
+            z-index: -1;
+        }
+
+        /* === NAV === */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(5,5,16,0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,255,200,0.04);
+            transition: all 0.4s ease;
+        }
+        nav.scrolled {
+            background: rgba(5,5,16,0.92);
+            border-bottom-color: rgba(0,255,200,0.1);
+            padding: 10px 40px;
+        }
+
+        .nav-logo {
+            font-family: 'Orbitron', monospace;
+            font-weight: 900;
+            font-size: 1.3rem;
+            color: var(--cyan);
+            text-decoration: none;
+            letter-spacing: 0.15em;
+            text-shadow: 0 0 20px rgba(0,255,200,0.3);
+        }
+
+        .nav-links { display: flex; align-items: center; gap: 0; }
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            margin-left: 32px;
+            transition: color 0.3s;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 0; right: 0;
+            height: 1px;
+            background: var(--cyan);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+        .nav-links a:hover { color: var(--cyan); }
+        .nav-links a:hover::after { transform: scaleX(1); }
+
+        .lang-toggle {
+            background: transparent;
+            border: 1px solid rgba(0,255,200,0.3);
+            color: var(--cyan);
+            font-family: 'Orbitron', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            padding: 6px 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 28px;
+        }
+        .lang-toggle:hover {
+            background: rgba(0,255,200,0.12);
+            border-color: var(--cyan);
+            box-shadow: 0 0 15px rgba(0,255,200,0.2);
+        }
+
+        /* Hamburger mobile */
+        .nav-hamburger {
+            display: none;
+            background: none; border: none;
+            cursor: pointer; padding: 4px;
+        }
+        .nav-hamburger span {
+            display: block; width: 24px; height: 2px;
+            background: var(--cyan); margin: 5px 0;
+            transition: all 0.3s;
+        }
+
+        /* === HERO HEADER === */
+        .page-header {
+            position: relative;
+            padding: 140px 24px 60px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .page-header h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2rem, 6vw, 3.2rem);
+            font-weight: 900;
+            letter-spacing: 0.1em;
+            color: var(--cyan);
+            text-shadow:
+                0 0 40px rgba(0,255,200,0.4),
+                0 0 80px rgba(0,255,200,0.2);
+            margin-bottom: 12px;
+        }
+
+        .page-header p {
+            color: var(--text-dim);
+            font-size: 1rem;
+            max-width: 540px;
+            margin: 0 auto;
+        }
+
+        /* === LANGUAGE TABS === */
+        .lang-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 32px;
+            flex-wrap: wrap;
+        }
+
+        .lang-tab {
+            background: rgba(0,255,200,0.04);
+            border: 1px solid rgba(0,255,200,0.12);
+            color: var(--text-dim);
+            font-family: 'Orbitron', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            padding: 8px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .lang-tab:hover {
+            background: rgba(0,255,200,0.08);
+            border-color: rgba(0,255,200,0.3);
+            color: var(--cyan);
+        }
+        .lang-tab.active {
+            background: rgba(0,255,200,0.12);
+            border-color: var(--cyan);
+            color: var(--cyan);
+            box-shadow: 0 0 20px rgba(0,255,200,0.15), inset 0 0 12px rgba(0,255,200,0.05);
+        }
+
+        /* === SECTION SEPARATOR (lens flare) === */
+        .lens-flare {
+            position: relative;
+            height: 1px;
+            margin: 48px auto;
+            max-width: 720px;
+            background: linear-gradient(90deg, transparent, rgba(0,255,200,0.4), rgba(255,255,255,0.6), rgba(0,255,200,0.4), transparent);
+            box-shadow: 0 0 20px rgba(0,255,200,0.3), 0 0 60px rgba(0,255,200,0.1);
+        }
+
+        /* === CONTENT === */
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+        }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Language content blocks */
+        .lang-content { display: none; }
+        .lang-content.active { display: block; }
+
+        .lang-content h1 {
+            font-family: 'Orbitron', monospace;
+            color: var(--cyan);
+            font-size: clamp(1.6rem, 4vw, 2.2rem);
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-shadow: 0 0 20px rgba(0,255,200,0.2);
+        }
+
+        .lang-content > p:first-of-type {
+            color: var(--text-dim);
+            margin-bottom: 24px;
+        }
+
+        h2 {
+            font-family: 'Orbitron', monospace;
+            color: var(--cyan-dim);
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            margin-top: 40px;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(0,255,200,0.08);
+            position: relative;
+        }
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -1px; left: 0;
+            width: 60px;
+            height: 1px;
+            background: var(--cyan);
+        }
+
         p, li { margin-bottom: 10px; }
         ul { padding-left: 24px; }
-        .highlight { background: #0f1a2a; border-left: 3px solid #00ffc8; padding: 16px 20px; border-radius: 4px; margin: 16px 0; }
-        .date { color: #606070; font-size: 0.85em; margin-top: 40px; }
-        a { color: #00ffc8; }
+        li { color: var(--text); }
+        li strong { color: var(--cyan-dim); }
 
-        /* Footer */
-        .footer { text-align: center; padding: 32px 24px; border-top: 1px solid #1a1a2e; margin-top: 48px; }
-        .footer a { color: #707088; text-decoration: none; margin: 0 12px; font-size: 0.85em; }
-        .footer a:hover { color: #00ffc8; }
+        /* Highlight card */
+        .highlight {
+            background: var(--bg-card);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(0,255,200,0.1);
+            border-left: 3px solid var(--cyan);
+            padding: 24px 28px;
+            border-radius: 8px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+        .highlight::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, var(--cyan), transparent);
+            opacity: 0.3;
+        }
+        .highlight:hover {
+            border-color: rgba(0,255,200,0.25);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 20px rgba(0,255,200,0.05);
+        }
+        .highlight strong {
+            color: #fff;
+        }
+
+        .date {
+            color: var(--text-dim);
+            font-size: 0.85em;
+            margin-top: 40px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(0,255,200,0.06);
+        }
+
+        a { color: var(--cyan); text-decoration: none; transition: color 0.3s; }
+        a:hover { color: #fff; }
+
+        /* === FOOTER === */
+        footer {
+            position: relative;
+            padding: 48px 24px;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 15%; right: 15%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0,255,200,0.2), transparent);
+        }
+        footer a {
+            color: var(--cyan-dim);
+            text-decoration: none;
+            margin: 0 20px;
+            transition: color 0.3s;
+        }
+        footer a:hover { color: var(--cyan); }
+        .footer-links { margin-bottom: 20px; }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 768px) {
+            nav { padding: 12px 16px; }
+            nav.scrolled { padding: 8px 16px; }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%; left: 0; right: 0;
+                background: rgba(5,5,16,0.95);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 16px;
+                border-bottom: 1px solid rgba(0,255,200,0.1);
+            }
+            .nav-links.open { display: flex; }
+            .nav-links a { margin: 8px 0; margin-left: 0; font-size: 1rem; }
+            .lang-toggle { margin: 12px 0 0; margin-left: 0; }
+            .nav-hamburger { display: block; }
+
+            .page-header { padding: 110px 16px 40px; }
+            .container { padding: 0 16px 60px; }
+
+            .lang-tabs { gap: 6px; }
+            .lang-tab { padding: 6px 14px; font-size: 0.7rem; }
+        }
+
+        @media (max-width: 400px) {
+            .page-header { padding-top: 100px; }
+            .lang-tab { padding: 6px 10px; font-size: 0.65rem; }
+        }
     </style>
 </head>
 <body>
 
-<!-- Nav -->
-<nav class="nav">
+<!-- NAV -->
+<nav>
     <a href="index.html" class="nav-logo">LUCID</a>
-    <div class="nav-right">
+    <button class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+        <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links">
         <a href="index.html">Home</a>
         <a href="support.html">Support</a>
         <button id="langBtn" class="lang-toggle" onclick="toggleLang()">FR</button>
     </div>
 </nav>
 
+<!-- HEADER -->
+<div class="page-header">
+    <h1 id="pageTitle">Privacy Policy</h1>
+    <p id="pageSubtitle">LUCID &mdash; Hexagonal puzzle game</p>
+
+    <div class="lang-tabs" id="langTabs">
+        <button class="lang-tab" data-lang="fr" onclick="setLang('fr')">FR</button>
+        <button class="lang-tab" data-lang="en" onclick="setLang('en')">EN</button>
+        <button class="lang-tab" data-lang="es" onclick="setLang('es')">ES</button>
+        <button class="lang-tab" data-lang="de" onclick="setLang('de')">DE</button>
+        <button class="lang-tab" data-lang="pt" onclick="setLang('pt')">PT</button>
+        <button class="lang-tab" data-lang="it" onclick="setLang('it')">IT</button>
+    </div>
+</div>
+
+<div class="lens-flare"></div>
+
 <div class="container">
 
 <!-- ===================== FRANCAIS ===================== -->
-<div id="fr">
+<div id="fr" class="lang-content">
     <h1>Politique de confidentialit&eacute;</h1>
     <p><strong>LUCID</strong> &mdash; Jeu de puzzle hexagonal<br>
     &Eacute;diteur : Californy Lana</p>
 
-    <h2>R&eacute;sum&eacute;</h2>
-    <div class="highlight">
+    <h2 class="reveal">R&eacute;sum&eacute;</h2>
+    <div class="highlight reveal">
         <strong>LUCID ne collecte aucune donn&eacute;e personnelle.</strong><br>
         Le jeu fonctionne enti&egrave;rement hors ligne. Aucune information n'est transmise &agrave; un serveur, un tiers ou l'&eacute;diteur.
     </div>
 
-    <h2>Donn&eacute;es stock&eacute;es localement</h2>
-    <p>LUCID enregistre uniquement des donn&eacute;es de gameplay sur votre appareil :</p>
-    <ul>
+    <h2 class="reveal">Donn&eacute;es stock&eacute;es localement</h2>
+    <p class="reveal">LUCID enregistre uniquement des donn&eacute;es de gameplay sur votre appareil :</p>
+    <ul class="reveal">
         <li><strong>Pr&eacute;f&eacute;rences</strong> : son (on/off), vibrations (on/off), langue</li>
         <li><strong>Progression</strong> : le&ccedil;ons compl&eacute;t&eacute;es, niveaux d&eacute;bloqu&eacute;s</li>
         <li><strong>Statistiques</strong> : parties jou&eacute;es, victoires, meilleurs scores, tours, temps par niveau</li>
         <li><strong>Mode cha&icirc;ne</strong> : sauvegarde de la partie en cours, meilleur run</li>
     </ul>
-    <p>Ces donn&eacute;es sont stock&eacute;es localement via le syst&egrave;me PlayerPrefs de Unity et ne quittent jamais votre appareil.</p>
+    <p class="reveal">Ces donn&eacute;es sont stock&eacute;es localement via le syst&egrave;me PlayerPrefs de Unity et ne quittent jamais votre appareil.</p>
 
-    <h2>Aucune collecte de donn&eacute;es personnelles</h2>
-    <p>LUCID ne collecte, ne stocke et ne transmet aucune donn&eacute;e personnelle, notamment :</p>
-    <ul>
+    <div class="lens-flare"></div>
+
+    <h2 class="reveal">Aucune collecte de donn&eacute;es personnelles</h2>
+    <p class="reveal">LUCID ne collecte, ne stocke et ne transmet aucune donn&eacute;e personnelle, notamment :</p>
+    <ul class="reveal">
         <li>Aucun nom, email ou identifiant</li>
         <li>Aucune donn&eacute;e de localisation</li>
         <li>Aucun identifiant publicitaire</li>
         <li>Aucune donn&eacute;e d'utilisation transmise &agrave; distance</li>
     </ul>
 
-    <h2>Aucun acc&egrave;s r&eacute;seau</h2>
-    <p>Le jeu ne n&eacute;cessite pas de connexion Internet et ne communique avec aucun serveur. Il n'int&egrave;gre aucun SDK d'analytics, de publicit&eacute; ou de suivi.</p>
+    <h2 class="reveal">Aucun acc&egrave;s r&eacute;seau</h2>
+    <p class="reveal">Le jeu ne n&eacute;cessite pas de connexion Internet et ne communique avec aucun serveur. Il n'int&egrave;gre aucun SDK d'analytics, de publicit&eacute; ou de suivi.</p>
 
-    <h2>Suppression des donn&eacute;es</h2>
-    <p>Vous pouvez supprimer toutes les donn&eacute;es enregistr&eacute;es &agrave; tout moment :</p>
-    <ul>
+    <div class="lens-flare"></div>
+
+    <h2 class="reveal">Suppression des donn&eacute;es</h2>
+    <p class="reveal">Vous pouvez supprimer toutes les donn&eacute;es enregistr&eacute;es &agrave; tout moment :</p>
+    <ul class="reveal">
         <li>Dans le jeu : <strong>Statistiques &rarr; Effacer mes donn&eacute;es</strong></li>
         <li>En d&eacute;sinstallant l'application (supprime automatiquement toutes les donn&eacute;es locales)</li>
     </ul>
 
-    <h2>Enfants</h2>
-    <p>LUCID ne collectant aucune donn&eacute;e personnelle, il est compatible avec une utilisation par des enfants sans pr&eacute;occupation li&eacute;e &agrave; la vie priv&eacute;e.</p>
+    <h2 class="reveal">Enfants</h2>
+    <p class="reveal">LUCID ne collectant aucune donn&eacute;e personnelle, il est compatible avec une utilisation par des enfants sans pr&eacute;occupation li&eacute;e &agrave; la vie priv&eacute;e.</p>
 
-    <h2>Contact</h2>
-    <p>Pour toute question : <strong>californylana@gmail.com</strong></p>
+    <h2 class="reveal">Contact</h2>
+    <p class="reveal">Pour toute question : <strong>californylana@gmail.com</strong></p>
 
-    <p class="date">Derni&egrave;re mise &agrave; jour : 2025-02-16</p>
+    <p class="date reveal">Derni&egrave;re mise &agrave; jour : 2025-02-16</p>
 </div>
 
 <!-- ===================== ENGLISH ===================== -->
-<div id="en">
+<div id="en" class="lang-content">
     <h1>Privacy Policy</h1>
     <p><strong>LUCID</strong> &mdash; Hexagonal puzzle game<br>
     Publisher: Californy Lana</p>
 
-    <h2>Summary</h2>
-    <div class="highlight">
+    <h2 class="reveal">Summary</h2>
+    <div class="highlight reveal">
         <strong>LUCID does not collect any personal data.</strong><br>
         The game works entirely offline. No information is sent to any server, third party, or the publisher.
     </div>
 
-    <h2>Data stored locally</h2>
-    <p>LUCID only saves gameplay data on your device:</p>
-    <ul>
+    <h2 class="reveal">Data stored locally</h2>
+    <p class="reveal">LUCID only saves gameplay data on your device:</p>
+    <ul class="reveal">
         <li><strong>Preferences</strong>: sound (on/off), haptics (on/off), language</li>
         <li><strong>Progression</strong>: completed lessons, unlocked levels</li>
         <li><strong>Statistics</strong>: games played, wins, best scores, turns, times per level</li>
         <li><strong>Chain mode</strong>: current run save, best run</li>
     </ul>
-    <p>This data is stored locally using Unity's PlayerPrefs system and never leaves your device.</p>
+    <p class="reveal">This data is stored locally using Unity's PlayerPrefs system and never leaves your device.</p>
 
-    <h2>No personal data collection</h2>
-    <p>LUCID does not collect, store, or transmit any personal data, including:</p>
-    <ul>
+    <div class="lens-flare"></div>
+
+    <h2 class="reveal">No personal data collection</h2>
+    <p class="reveal">LUCID does not collect, store, or transmit any personal data, including:</p>
+    <ul class="reveal">
         <li>No names, emails, or identifiers</li>
         <li>No location data</li>
         <li>No advertising identifiers</li>
         <li>No remotely transmitted usage data</li>
     </ul>
 
-    <h2>No network access</h2>
-    <p>The game does not require an Internet connection and does not communicate with any server. It does not include any analytics, advertising, or tracking SDK.</p>
+    <h2 class="reveal">No network access</h2>
+    <p class="reveal">The game does not require an Internet connection and does not communicate with any server. It does not include any analytics, advertising, or tracking SDK.</p>
 
-    <h2>Data deletion</h2>
-    <p>You can delete all saved data at any time:</p>
-    <ul>
+    <div class="lens-flare"></div>
+
+    <h2 class="reveal">Data deletion</h2>
+    <p class="reveal">You can delete all saved data at any time:</p>
+    <ul class="reveal">
         <li>In-game: <strong>Statistics &rarr; Delete my data</strong></li>
         <li>By uninstalling the app (automatically removes all local data)</li>
     </ul>
 
-    <h2>Children</h2>
-    <p>Since LUCID does not collect any personal data, it is safe for use by children with no privacy concerns.</p>
+    <h2 class="reveal">Children</h2>
+    <p class="reveal">Since LUCID does not collect any personal data, it is safe for use by children with no privacy concerns.</p>
 
-    <h2>Contact</h2>
-    <p>For any questions: <strong>californylana@gmail.com</strong></p>
+    <h2 class="reveal">Contact</h2>
+    <p class="reveal">For any questions: <strong>californylana@gmail.com</strong></p>
 
-    <p class="date">Last updated: 2025-02-16</p>
+    <p class="date reveal">Last updated: 2025-02-16</p>
 </div>
 
 <!-- ===================== ESPA&Ntilde;OL ===================== -->
-<div id="es">
+<div id="es" class="lang-content">
     <h1>Pol&iacute;tica de Privacidad</h1>
     <p><strong>LUCID</strong> &mdash; Juego de puzzle hexagonal<br>
     Editor: Californy Lana</p>
 
-    <h2>Resumen</h2>
-    <div class="highlight">
+    <h2 class="reveal">Resumen</h2>
+    <div class="highlight reveal">
         <strong>LUCID no recopila ning&uacute;n dato personal.</strong><br>
         El juego funciona completamente sin conexi&oacute;n. Ninguna informaci&oacute;n se env&iacute;a a ning&uacute;n servidor, tercero o al editor.
     </div>
 
-    <h2>Datos almacenados localmente</h2>
-    <p>LUCID solo guarda datos de juego en tu dispositivo:</p>
-    <ul>
+    <h2 class="reveal">Datos almacenados localmente</h2>
+    <p class="reveal">LUCID solo guarda datos de juego en tu dispositivo:</p>
+    <ul class="reveal">
         <li><strong>Preferencias</strong>: sonido (on/off), vibraci&oacute;n (on/off), idioma</li>
         <li><strong>Progreso</strong>: lecciones completadas, niveles desbloqueados</li>
         <li><strong>Estad&iacute;sticas</strong>: partidas jugadas, victorias, mejores puntuaciones, turnos, tiempos por nivel</li>
         <li><strong>Modo cadena</strong>: partida en curso guardada, mejor run</li>
     </ul>
-    <p>Estos datos se almacenan localmente mediante el sistema PlayerPrefs de Unity y nunca salen de tu dispositivo.</p>
+    <p class="reveal">Estos datos se almacenan localmente mediante el sistema PlayerPrefs de Unity y nunca salen de tu dispositivo.</p>
 
-    <h2>Sin recolecci&oacute;n de datos personales</h2>
-    <p>LUCID no recopila, almacena ni transmite ning&uacute;n dato personal, incluyendo:</p>
-    <ul>
+    <div class="lens-flare"></div>
+
+    <h2 class="reveal">Sin recolecci&oacute;n de datos personales</h2>
+    <p class="reveal">LUCID no recopila, almacena ni transmite ning&uacute;n dato personal, incluyendo:</p>
+    <ul class="reveal">
         <li>Ning&uacute;n nombre, email o identificador</li>
         <li>Ning&uacute;n dato de ubicaci&oacute;n</li>
         <li>Ning&uacute;n identificador publicitario</li>
         <li>Ning&uacute;n dato de uso transmitido remotamente</li>
     </ul>
 
-    <h2>Sin acceso a red</h2>
-    <p>El juego no requiere conexi&oacute;n a Internet y no se comunica con ning&uacute;n servidor. No incluye ning&uacute;n SDK de an&aacute;lisis, publicidad o rastreo.</p>
+    <h2 class="reveal">Sin acceso a red</h2>
+    <p class="reveal">El juego no requiere conexi&oacute;n a Internet y no se comunica con ning&uacute;n servidor. No incluye ning&uacute;n SDK de an&aacute;lisis, publicidad o rastreo.</p>
 
-    <h2>Eliminaci&oacute;n de datos</h2>
-    <p>Puedes eliminar todos los datos guardados en cualquier momento:</p>
-    <ul>
+    <div class="lens-flare"></div>
+
+    <h2 class="reveal">Eliminaci&oacute;n de datos</h2>
+    <p class="reveal">Puedes eliminar todos los datos guardados en cualquier momento:</p>
+    <ul class="reveal">
         <li>En el juego: <strong>Estad&iacute;sticas &rarr; Borrar mis datos</strong></li>
         <li>Desinstalando la aplicaci&oacute;n (elimina autom&aacute;ticamente todos los datos locales)</li>
     </ul>
 
-    <h2>Ni&ntilde;os</h2>
-    <p>Como LUCID no recopila ning&uacute;n dato personal, es seguro para el uso por ni&ntilde;os sin preocupaciones de privacidad.</p>
+    <h2 class="reveal">Ni&ntilde;os</h2>
+    <p class="reveal">Como LUCID no recopila ning&uacute;n dato personal, es seguro para el uso por ni&ntilde;os sin preocupaciones de privacidad.</p>
 
-    <h2>Contacto</h2>
-    <p>Para cualquier pregunta: <strong>californylana@gmail.com</strong></p>
+    <h2 class="reveal">Contacto</h2>
+    <p class="reveal">Para cualquier pregunta: <strong>californylana@gmail.com</strong></p>
 
-    <p class="date">&Uacute;ltima actualizaci&oacute;n: 2025-02-16</p>
+    <p class="date reveal">&Uacute;ltima actualizaci&oacute;n: 2025-02-16</p>
 </div>
 
 <!-- ===================== DEUTSCH ===================== -->
-<div id="de">
+<div id="de" class="lang-content">
     <h1>Datenschutzerkl&auml;rung</h1>
     <p><strong>LUCID</strong> &mdash; Hexagonales Puzzlespiel<br>
     Herausgeber: Californy Lana</p>
 
-    <h2>Zusammenfassung</h2>
-    <div class="highlight">
+    <h2 class="reveal">Zusammenfassung</h2>
+    <div class="highlight reveal">
         <strong>LUCID erhebt keine pers&ouml;nlichen Daten.</strong><br>
         Das Spiel funktioniert vollst&auml;ndig offline. Es werden keine Informationen an Server, Dritte oder den Herausgeber &uuml;bermittelt.
     </div>
 
-    <h2>Lokal gespeicherte Daten</h2>
-    <p>LUCID speichert ausschlie&szlig;lich Spieldaten auf Ihrem Ger&auml;t:</p>
-    <ul>
+    <h2 class="reveal">Lokal gespeicherte Daten</h2>
+    <p class="reveal">LUCID speichert ausschlie&szlig;lich Spieldaten auf Ihrem Ger&auml;t:</p>
+    <ul class="reveal">
         <li><strong>Einstellungen</strong>: Ton (ein/aus), Vibration (ein/aus), Sprache</li>
         <li><strong>Fortschritt</strong>: Abgeschlossene Lektionen, freigeschaltete Level</li>
         <li><strong>Statistiken</strong>: Gespielte Partien, Siege, Bestleistungen, Z&uuml;ge, Zeiten pro Level</li>
         <li><strong>Kettenmodus</strong>: Aktueller Spielstand, bester Lauf</li>
     </ul>
-    <p>Diese Daten werden lokal &uuml;ber das Unity-PlayerPrefs-System gespeichert und verlassen niemals Ihr Ger&auml;t.</p>
+    <p class="reveal">Diese Daten werden lokal &uuml;ber das Unity-PlayerPrefs-System gespeichert und verlassen niemals Ihr Ger&auml;t.</p>
 
-    <h2>Keine Erhebung pers&ouml;nlicher Daten</h2>
-    <p>LUCID erhebt, speichert und &uuml;bermittelt keine pers&ouml;nlichen Daten, insbesondere:</p>
-    <ul>
+    <div class="lens-flare"></div>
+
+    <h2 class="reveal">Keine Erhebung pers&ouml;nlicher Daten</h2>
+    <p class="reveal">LUCID erhebt, speichert und &uuml;bermittelt keine pers&ouml;nlichen Daten, insbesondere:</p>
+    <ul class="reveal">
         <li>Keine Namen, E-Mails oder Kennungen</li>
         <li>Keine Standortdaten</li>
         <li>Keine Werbe-Identifikatoren</li>
         <li>Keine aus der Ferne &uuml;bermittelten Nutzungsdaten</li>
     </ul>
 
-    <h2>Kein Netzwerkzugriff</h2>
-    <p>Das Spiel ben&ouml;tigt keine Internetverbindung und kommuniziert mit keinem Server. Es enth&auml;lt keine Analyse-, Werbe- oder Tracking-SDKs.</p>
+    <h2 class="reveal">Kein Netzwerkzugriff</h2>
+    <p class="reveal">Das Spiel ben&ouml;tigt keine Internetverbindung und kommuniziert mit keinem Server. Es enth&auml;lt keine Analyse-, Werbe- oder Tracking-SDKs.</p>
 
-    <h2>Datenl&ouml;schung</h2>
-    <p>Sie k&ouml;nnen alle gespeicherten Daten jederzeit l&ouml;schen:</p>
-    <ul>
+    <div class="lens-flare"></div>
+
+    <h2 class="reveal">Datenl&ouml;schung</h2>
+    <p class="reveal">Sie k&ouml;nnen alle gespeicherten Daten jederzeit l&ouml;schen:</p>
+    <ul class="reveal">
         <li>Im Spiel: <strong>Statistiken &rarr; Meine Daten l&ouml;schen</strong></li>
         <li>Durch Deinstallation der App (entfernt automatisch alle lokalen Daten)</li>
     </ul>
 
-    <h2>Kinder</h2>
-    <p>Da LUCID keine pers&ouml;nlichen Daten erhebt, ist es f&uuml;r die Nutzung durch Kinder ohne Datenschutzbedenken geeignet.</p>
+    <h2 class="reveal">Kinder</h2>
+    <p class="reveal">Da LUCID keine pers&ouml;nlichen Daten erhebt, ist es f&uuml;r die Nutzung durch Kinder ohne Datenschutzbedenken geeignet.</p>
 
-    <h2>Kontakt</h2>
-    <p>Bei Fragen: <strong>californylana@gmail.com</strong></p>
+    <h2 class="reveal">Kontakt</h2>
+    <p class="reveal">Bei Fragen: <strong>californylana@gmail.com</strong></p>
 
-    <p class="date">Letzte Aktualisierung: 2025-02-16</p>
+    <p class="date reveal">Letzte Aktualisierung: 2025-02-16</p>
 </div>
 
 <!-- ===================== PORTUGU&Ecirc;S ===================== -->
-<div id="pt">
+<div id="pt" class="lang-content">
     <h1>Pol&iacute;tica de Privacidade</h1>
     <p><strong>LUCID</strong> &mdash; Jogo de puzzle hexagonal<br>
     Editor: Californy Lana</p>
 
-    <h2>Resumo</h2>
-    <div class="highlight">
+    <h2 class="reveal">Resumo</h2>
+    <div class="highlight reveal">
         <strong>O LUCID n&atilde;o coleta nenhum dado pessoal.</strong><br>
         O jogo funciona inteiramente offline. Nenhuma informa&ccedil;&atilde;o &eacute; enviada a servidores, terceiros ou ao editor.
     </div>
 
-    <h2>Dados armazenados localmente</h2>
-    <p>O LUCID salva apenas dados de jogo no seu dispositivo:</p>
-    <ul>
+    <h2 class="reveal">Dados armazenados localmente</h2>
+    <p class="reveal">O LUCID salva apenas dados de jogo no seu dispositivo:</p>
+    <ul class="reveal">
         <li><strong>Prefer&ecirc;ncias</strong>: som (ligado/desligado), vibra&ccedil;&atilde;o (ligado/desligado), idioma</li>
         <li><strong>Progresso</strong>: li&ccedil;&otilde;es conclu&iacute;das, n&iacute;veis desbloqueados</li>
         <li><strong>Estat&iacute;sticas</strong>: partidas jogadas, vit&oacute;rias, melhores pontua&ccedil;&otilde;es, turnos, tempos por n&iacute;vel</li>
         <li><strong>Modo corrente</strong>: progresso atual, melhor run</li>
     </ul>
-    <p>Esses dados s&atilde;o armazenados localmente pelo sistema PlayerPrefs do Unity e nunca saem do seu dispositivo.</p>
+    <p class="reveal">Esses dados s&atilde;o armazenados localmente pelo sistema PlayerPrefs do Unity e nunca saem do seu dispositivo.</p>
 
-    <h2>Nenhuma coleta de dados pessoais</h2>
-    <p>O LUCID n&atilde;o coleta, armazena ou transmite nenhum dado pessoal, incluindo:</p>
-    <ul>
+    <div class="lens-flare"></div>
+
+    <h2 class="reveal">Nenhuma coleta de dados pessoais</h2>
+    <p class="reveal">O LUCID n&atilde;o coleta, armazena ou transmite nenhum dado pessoal, incluindo:</p>
+    <ul class="reveal">
         <li>Nenhum nome, e-mail ou identificador</li>
         <li>Nenhum dado de localiza&ccedil;&atilde;o</li>
         <li>Nenhum identificador publicit&aacute;rio</li>
         <li>Nenhum dado de uso transmitido remotamente</li>
     </ul>
 
-    <h2>Sem acesso &agrave; rede</h2>
-    <p>O jogo n&atilde;o requer conex&atilde;o com a Internet e n&atilde;o se comunica com nenhum servidor. N&atilde;o inclui nenhum SDK de an&aacute;lise, publicidade ou rastreamento.</p>
+    <h2 class="reveal">Sem acesso &agrave; rede</h2>
+    <p class="reveal">O jogo n&atilde;o requer conex&atilde;o com a Internet e n&atilde;o se comunica com nenhum servidor. N&atilde;o inclui nenhum SDK de an&aacute;lise, publicidade ou rastreamento.</p>
 
-    <h2>Exclus&atilde;o de dados</h2>
-    <p>Voc&ecirc; pode excluir todos os dados salvos a qualquer momento:</p>
-    <ul>
+    <div class="lens-flare"></div>
+
+    <h2 class="reveal">Exclus&atilde;o de dados</h2>
+    <p class="reveal">Voc&ecirc; pode excluir todos os dados salvos a qualquer momento:</p>
+    <ul class="reveal">
         <li>No jogo: <strong>Estat&iacute;sticas &rarr; Excluir meus dados</strong></li>
         <li>Desinstalando o aplicativo (remove automaticamente todos os dados locais)</li>
     </ul>
 
-    <h2>Crian&ccedil;as</h2>
-    <p>Como o LUCID n&atilde;o coleta nenhum dado pessoal, &eacute; seguro para uso por crian&ccedil;as sem preocupa&ccedil;&otilde;es com privacidade.</p>
+    <h2 class="reveal">Crian&ccedil;as</h2>
+    <p class="reveal">Como o LUCID n&atilde;o coleta nenhum dado pessoal, &eacute; seguro para uso por crian&ccedil;as sem preocupa&ccedil;&otilde;es com privacidade.</p>
 
-    <h2>Contato</h2>
-    <p>Para qualquer d&uacute;vida: <strong>californylana@gmail.com</strong></p>
+    <h2 class="reveal">Contato</h2>
+    <p class="reveal">Para qualquer d&uacute;vida: <strong>californylana@gmail.com</strong></p>
 
-    <p class="date">&Uacute;ltima atualiza&ccedil;&atilde;o: 2025-02-16</p>
+    <p class="date reveal">&Uacute;ltima atualiza&ccedil;&atilde;o: 2025-02-16</p>
 </div>
 
 <!-- ===================== ITALIANO ===================== -->
-<div id="it">
+<div id="it" class="lang-content">
     <h1>Informativa sulla Privacy</h1>
     <p><strong>LUCID</strong> &mdash; Gioco di puzzle esagonale<br>
     Editore: Californy Lana</p>
 
-    <h2>Riepilogo</h2>
-    <div class="highlight">
+    <h2 class="reveal">Riepilogo</h2>
+    <div class="highlight reveal">
         <strong>LUCID non raccoglie alcun dato personale.</strong><br>
         Il gioco funziona interamente offline. Nessuna informazione viene inviata a server, terze parti o all'editore.
     </div>
 
-    <h2>Dati memorizzati localmente</h2>
-    <p>LUCID salva solo dati di gioco sul tuo dispositivo:</p>
-    <ul>
+    <h2 class="reveal">Dati memorizzati localmente</h2>
+    <p class="reveal">LUCID salva solo dati di gioco sul tuo dispositivo:</p>
+    <ul class="reveal">
         <li><strong>Preferenze</strong>: audio (on/off), vibrazione (on/off), lingua</li>
         <li><strong>Progressi</strong>: lezioni completate, livelli sbloccati</li>
         <li><strong>Statistiche</strong>: partite giocate, vittorie, migliori punteggi, turni, tempi per livello</li>
         <li><strong>Modalit&agrave; catena</strong>: salvataggio partita in corso, miglior run</li>
     </ul>
-    <p>Questi dati sono memorizzati localmente tramite il sistema PlayerPrefs di Unity e non lasciano mai il tuo dispositivo.</p>
+    <p class="reveal">Questi dati sono memorizzati localmente tramite il sistema PlayerPrefs di Unity e non lasciano mai il tuo dispositivo.</p>
 
-    <h2>Nessuna raccolta di dati personali</h2>
-    <p>LUCID non raccoglie, memorizza o trasmette alcun dato personale, inclusi:</p>
-    <ul>
+    <div class="lens-flare"></div>
+
+    <h2 class="reveal">Nessuna raccolta di dati personali</h2>
+    <p class="reveal">LUCID non raccoglie, memorizza o trasmette alcun dato personale, inclusi:</p>
+    <ul class="reveal">
         <li>Nessun nome, email o identificativo</li>
         <li>Nessun dato di posizione</li>
         <li>Nessun identificativo pubblicitario</li>
         <li>Nessun dato di utilizzo trasmesso da remoto</li>
     </ul>
 
-    <h2>Nessun accesso alla rete</h2>
-    <p>Il gioco non richiede connessione Internet e non comunica con alcun server. Non include SDK di analisi, pubblicit&agrave; o tracciamento.</p>
+    <h2 class="reveal">Nessun accesso alla rete</h2>
+    <p class="reveal">Il gioco non richiede connessione Internet e non comunica con alcun server. Non include SDK di analisi, pubblicit&agrave; o tracciamento.</p>
 
-    <h2>Cancellazione dei dati</h2>
-    <p>Puoi eliminare tutti i dati salvati in qualsiasi momento:</p>
-    <ul>
+    <div class="lens-flare"></div>
+
+    <h2 class="reveal">Cancellazione dei dati</h2>
+    <p class="reveal">Puoi eliminare tutti i dati salvati in qualsiasi momento:</p>
+    <ul class="reveal">
         <li>Nel gioco: <strong>Statistiche &rarr; Cancella i miei dati</strong></li>
         <li>Disinstallando l'app (rimuove automaticamente tutti i dati locali)</li>
     </ul>
 
-    <h2>Bambini</h2>
-    <p>Poich&eacute; LUCID non raccoglie alcun dato personale, &egrave; sicuro per l'uso da parte dei bambini senza preoccupazioni sulla privacy.</p>
+    <h2 class="reveal">Bambini</h2>
+    <p class="reveal">Poich&eacute; LUCID non raccoglie alcun dato personale, &egrave; sicuro per l'uso da parte dei bambini senza preoccupazioni sulla privacy.</p>
 
-    <h2>Contatto</h2>
-    <p>Per qualsiasi domanda: <strong>californylana@gmail.com</strong></p>
+    <h2 class="reveal">Contatto</h2>
+    <p class="reveal">Per qualsiasi domanda: <strong>californylana@gmail.com</strong></p>
 
-    <p class="date">Ultimo aggiornamento: 2025-02-16</p>
+    <p class="date reveal">Ultimo aggiornamento: 2025-02-16</p>
 </div>
 
 </div>
 
-<!-- Footer -->
-<div class="footer">
-    <a href="index.html">Home</a>
-    <a href="support.html">Support</a>
-    <a href="mailto:californylana@gmail.com">Contact</a>
-</div>
+<!-- FOOTER -->
+<footer>
+    <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="support.html">Support</a>
+        <a href="mailto:californylana@gmail.com">Contact</a>
+    </div>
+    <p>&copy; 2025-2026 Californy Lana. All rights reserved.</p>
+</footer>
 
 <script>
 var langCycle = ['fr', 'en', 'es', 'de', 'pt', 'it'];
+
+var pageTitles = {
+    fr: 'Politique de confidentialit\u00e9',
+    en: 'Privacy Policy',
+    es: 'Pol\u00edtica de Privacidad',
+    de: 'Datenschutzerkl\u00e4rung',
+    pt: 'Pol\u00edtica de Privacidade',
+    it: 'Informativa sulla Privacy'
+};
+
+var pageSubtitles = {
+    fr: 'LUCID \u2014 Jeu de puzzle hexagonal',
+    en: 'LUCID \u2014 Hexagonal puzzle game',
+    es: 'LUCID \u2014 Juego de puzzle hexagonal',
+    de: 'LUCID \u2014 Hexagonales Puzzlespiel',
+    pt: 'LUCID \u2014 Jogo de puzzle hexagonal',
+    it: 'LUCID \u2014 Gioco di puzzle esagonale'
+};
 
 function detectLang() {
     var saved = localStorage.getItem('lucid-lang');
@@ -379,12 +776,40 @@ var currentLang = detectLang();
 function setLang(lang) {
     currentLang = lang;
     localStorage.setItem('lucid-lang', lang);
+
+    // Show/hide language content blocks
     langCycle.forEach(function(l) {
         var el = document.getElementById(l);
-        if (el) el.style.display = l === lang ? 'block' : 'none';
+        if (el) {
+            if (l === lang) {
+                el.style.display = 'block';
+                el.classList.add('active');
+            } else {
+                el.style.display = 'none';
+                el.classList.remove('active');
+            }
+        }
     });
+
+    // Update nav button
     document.getElementById('langBtn').textContent = lang.toUpperCase();
     document.documentElement.lang = lang;
+
+    // Update header
+    var titleEl = document.getElementById('pageTitle');
+    var subtitleEl = document.getElementById('pageSubtitle');
+    if (titleEl && pageTitles[lang]) titleEl.textContent = pageTitles[lang];
+    if (subtitleEl && pageSubtitles[lang]) subtitleEl.textContent = pageSubtitles[lang];
+
+    // Update active tab
+    document.querySelectorAll('.lang-tab').forEach(function(tab) {
+        tab.classList.toggle('active', tab.getAttribute('data-lang') === lang);
+    });
+
+    // Re-observe reveal elements for the newly visible content
+    document.querySelectorAll('.lang-content.active .reveal:not(.revealed)').forEach(function(el) {
+        revealObserver.observe(el);
+    });
 }
 
 function toggleLang() {
@@ -392,6 +817,25 @@ function toggleLang() {
     setLang(langCycle[(idx + 1) % langCycle.length]);
 }
 
+// === Nav scroll effect ===
+window.addEventListener('scroll', function() {
+    document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+// === Scroll reveal ===
+var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+        if (e.isIntersecting) {
+            e.target.classList.add('revealed');
+        }
+    });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(function(el) {
+    revealObserver.observe(el);
+});
+
+// Initialize
 setLang(currentLang);
 </script>
 </body>

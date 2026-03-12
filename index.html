@@ -24,11 +24,13 @@
             --red: #ff1040;
             --gold: #ffd700;
             --bg-deep: #050510;
-            --bg-card: #0a0a1a;
-            --bg-card-hover: #0f0f25;
+            --bg-card: rgba(8,8,24,0.7);
+            --bg-card-hover: rgba(16,16,40,0.85);
             --text: #c8c8d8;
             --text-dim: #707088;
         }
+
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -36,6 +38,114 @@
             color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
+        }
+
+        /* === GLOBAL BACKGROUND === */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: url('fond_credits.png') center/cover no-repeat;
+            z-index: -2;
+        }
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(
+                180deg,
+                rgba(5,5,16,0.6) 0%,
+                rgba(5,5,16,0.75) 30%,
+                rgba(5,5,16,0.85) 60%,
+                rgba(5,5,16,0.7) 100%
+            );
+            z-index: -1;
+        }
+
+        /* === NAV === */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(5,5,16,0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,255,200,0.04);
+            transition: all 0.4s ease;
+        }
+        nav.scrolled {
+            background: rgba(5,5,16,0.92);
+            border-bottom-color: rgba(0,255,200,0.1);
+            padding: 10px 40px;
+        }
+
+        .nav-logo {
+            font-family: 'Orbitron', monospace;
+            font-weight: 900;
+            font-size: 1.3rem;
+            color: var(--cyan);
+            text-decoration: none;
+            letter-spacing: 0.15em;
+            text-shadow: 0 0 20px rgba(0,255,200,0.3);
+        }
+
+        .nav-links { display: flex; align-items: center; gap: 0; }
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            margin-left: 32px;
+            transition: color 0.3s;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 0; right: 0;
+            height: 1px;
+            background: var(--cyan);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+        .nav-links a:hover { color: var(--cyan); }
+        .nav-links a:hover::after { transform: scaleX(1); }
+
+        .lang-toggle {
+            background: transparent;
+            border: 1px solid rgba(0,255,200,0.3);
+            color: var(--cyan);
+            font-family: 'Orbitron', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            padding: 6px 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 28px;
+        }
+        .lang-toggle:hover {
+            background: rgba(0,255,200,0.12);
+            border-color: var(--cyan);
+            box-shadow: 0 0 15px rgba(0,255,200,0.2);
+        }
+
+        /* Hamburger mobile */
+        .nav-hamburger {
+            display: none;
+            background: none; border: none;
+            cursor: pointer; padding: 4px;
+        }
+        .nav-hamburger span {
+            display: block; width: 24px; height: 2px;
+            background: var(--cyan); margin: 5px 0;
+            transition: all 0.3s;
         }
 
         /* === HERO === */
@@ -47,207 +157,213 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 100px 24px 40px;
+            padding: 120px 24px 80px;
             overflow: hidden;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(ellipse 80% 60% at 50% 40%, rgba(0,255,200,0.06) 0%, transparent 60%),
-                radial-gradient(ellipse 60% 50% at 30% 70%, rgba(128,64,255,0.04) 0%, transparent 50%),
-                radial-gradient(ellipse 50% 40% at 70% 30%, rgba(224,0,255,0.03) 0%, transparent 50%);
-            pointer-events: none;
+        /* Floating particles */
+        .hero-particles {
+            position: absolute; inset: 0;
+            overflow: hidden; pointer-events: none;
         }
-
-        /* Animated grid background */
-        .hero-grid {
+        .hero-particles .p {
             position: absolute;
-            inset: 0;
-            opacity: 0.04;
-            background-image:
-                linear-gradient(rgba(0,255,200,0.3) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0,255,200,0.3) 1px, transparent 1px);
-            background-size: 60px 60px;
-            animation: gridDrift 20s linear infinite;
+            width: 2px; height: 2px;
+            background: rgba(0,255,200,0.6);
+            border-radius: 50%;
+            animation: floatUp linear infinite;
         }
-        @keyframes gridDrift {
-            from { transform: translate(0, 0); }
-            to { transform: translate(60px, 60px); }
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
         }
 
         .hero-title {
             font-family: 'Orbitron', monospace;
-            font-size: clamp(4rem, 12vw, 8rem);
+            font-size: clamp(5rem, 14vw, 10rem);
             font-weight: 900;
-            letter-spacing: 0.15em;
+            letter-spacing: 0.2em;
             color: var(--cyan);
             text-shadow:
-                0 0 40px rgba(0,255,200,0.3),
-                0 0 80px rgba(0,255,200,0.15),
-                0 0 120px rgba(0,255,200,0.05);
-            position: relative;
-            z-index: 1;
-            animation: titleGlow 3s ease-in-out infinite alternate;
+                0 0 40px rgba(0,255,200,0.4),
+                0 0 80px rgba(0,255,200,0.2),
+                0 0 160px rgba(0,255,200,0.1);
+            position: relative; z-index: 1;
+            animation: titlePulse 4s ease-in-out infinite alternate;
         }
-        @keyframes titleGlow {
-            from { text-shadow: 0 0 40px rgba(0,255,200,0.3), 0 0 80px rgba(0,255,200,0.15); }
-            to { text-shadow: 0 0 60px rgba(0,255,200,0.5), 0 0 120px rgba(0,255,200,0.25); }
+        @keyframes titlePulse {
+            from { text-shadow: 0 0 40px rgba(0,255,200,0.4), 0 0 80px rgba(0,255,200,0.2), 0 0 160px rgba(0,255,200,0.1); filter: brightness(1); }
+            to { text-shadow: 0 0 60px rgba(0,255,200,0.6), 0 0 120px rgba(0,255,200,0.35), 0 0 200px rgba(0,255,200,0.15); filter: brightness(1.1); }
         }
 
         .hero-subtitle {
             font-family: 'Orbitron', monospace;
-            font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+            font-size: clamp(0.9rem, 2.5vw, 1.3rem);
             font-weight: 400;
-            letter-spacing: 0.3em;
+            letter-spacing: 0.4em;
             color: var(--text-dim);
-            margin-top: 16px;
+            margin-top: 12px;
             text-transform: uppercase;
-            position: relative;
-            z-index: 1;
+            position: relative; z-index: 1;
         }
 
         .hero-tagline {
-            font-size: clamp(1.1rem, 3vw, 1.4rem);
+            font-size: clamp(1.1rem, 2.8vw, 1.4rem);
             color: var(--text);
-            margin-top: 32px;
-            max-width: 600px;
-            position: relative;
-            z-index: 1;
+            margin-top: 36px;
+            max-width: 640px;
+            position: relative; z-index: 1;
             font-weight: 300;
+            line-height: 1.8;
         }
 
         .hero-cta {
             margin-top: 48px;
-            position: relative;
-            z-index: 1;
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-            justify-content: center;
+            position: relative; z-index: 1;
+            display: flex; gap: 20px;
+            flex-wrap: wrap; justify-content: center;
         }
 
         .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 16px 36px;
-            border-radius: 50px;
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 18px 42px;
+            border-radius: 4px;
             text-decoration: none;
             font-family: 'Orbitron', monospace;
             font-size: 0.95rem;
             font-weight: 700;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.1em;
             transition: all 0.3s ease;
             position: relative;
         }
 
         .btn-primary {
-            background: var(--cyan);
+            background: linear-gradient(135deg, var(--cyan), #00d4a8);
             color: var(--bg-deep);
-            box-shadow: 0 0 30px rgba(0,255,200,0.3), inset 0 0 30px rgba(255,255,255,0.1);
+            box-shadow: 0 0 30px rgba(0,255,200,0.3), 0 4px 20px rgba(0,0,0,0.3);
         }
         .btn-primary:hover {
-            box-shadow: 0 0 50px rgba(0,255,200,0.5), inset 0 0 30px rgba(255,255,255,0.15);
-            transform: translateY(-2px);
+            box-shadow: 0 0 50px rgba(0,255,200,0.5), 0 4px 30px rgba(0,0,0,0.4);
+            transform: translateY(-3px);
         }
 
         .btn-secondary {
-            background: transparent;
+            background: rgba(0,255,200,0.05);
             color: var(--cyan);
-            border: 1.5px solid rgba(0,255,200,0.4);
+            border: 1.5px solid rgba(0,255,200,0.3);
         }
         .btn-secondary:hover {
             border-color: var(--cyan);
-            background: rgba(0,255,200,0.08);
-            transform: translateY(-2px);
+            background: rgba(0,255,200,0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 0 25px rgba(0,255,200,0.15);
         }
 
-        /* Hero banner image */
+        /* Hero banner */
         .hero-banner {
-            position: relative;
-            z-index: 1;
-            margin-top: 48px;
-            max-width: 700px;
-            width: 90%;
-            border-radius: 16px;
+            position: relative; z-index: 1;
+            margin-top: 56px;
+            max-width: 720px; width: 90%;
+            border-radius: 8px;
             overflow: hidden;
-            border: 1px solid rgba(0,255,200,0.15);
+            border: 1px solid rgba(0,255,200,0.12);
             box-shadow:
-                0 0 60px rgba(0,255,200,0.1),
-                0 20px 60px rgba(0,0,0,0.5);
+                0 0 80px rgba(0,255,200,0.08),
+                0 30px 80px rgba(0,0,0,0.6);
         }
-        .hero-banner img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
+        .hero-banner img { width: 100%; height: auto; display: block; }
 
         .scroll-hint {
             position: absolute;
-            bottom: 32px;
-            left: 50%;
+            bottom: 40px; left: 50%;
             transform: translateX(-50%);
             color: var(--text-dim);
-            font-size: 0.8rem;
-            letter-spacing: 0.15em;
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
             text-transform: uppercase;
-            animation: bounce 2s ease-in-out infinite;
+            animation: scrollBounce 2.5s ease-in-out infinite;
+            z-index: 1;
         }
         .scroll-hint::after {
             content: '';
             display: block;
-            width: 1px;
-            height: 40px;
+            width: 1px; height: 48px;
             background: linear-gradient(to bottom, var(--text-dim), transparent);
-            margin: 12px auto 0;
+            margin: 14px auto 0;
         }
-        @keyframes bounce {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(8px); }
+        @keyframes scrollBounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.6; }
+            50% { transform: translateX(-50%) translateY(10px); opacity: 1; }
         }
 
         /* === SECTIONS === */
-        section {
-            padding: 100px 24px;
+        .section-full {
+            position: relative;
+            padding: 120px 24px;
+            overflow: hidden;
+        }
+        .section-inner {
             max-width: 1200px;
             margin: 0 auto;
         }
 
+        /* Section separator — lens flare */
+        .section-full::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 10%; right: 10%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0,255,200,0.4), rgba(255,255,255,0.6), rgba(0,255,200,0.4), transparent);
+            box-shadow: 0 0 20px rgba(0,255,200,0.3), 0 0 60px rgba(0,255,200,0.1);
+        }
+
         .section-title {
             font-family: 'Orbitron', monospace;
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-size: clamp(2rem, 5vw, 3rem);
             font-weight: 700;
             text-align: center;
             margin-bottom: 16px;
             color: #fff;
+            text-shadow: 0 0 30px rgba(255,255,255,0.1);
         }
 
         .section-subtitle {
             text-align: center;
             color: var(--text-dim);
             font-size: 1.1rem;
-            margin-bottom: 64px;
+            margin-bottom: 72px;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
         }
 
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* === FEATURES === */
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 28px;
         }
 
         .feature-card {
             background: var(--bg-card);
-            border: 1px solid rgba(0,255,200,0.08);
-            border-radius: 16px;
-            padding: 36px 28px;
-            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(0,255,200,0.06);
+            border-radius: 8px;
+            padding: 40px 32px;
+            transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
         }
@@ -258,67 +374,75 @@
             height: 2px;
             background: linear-gradient(90deg, transparent, var(--cyan), transparent);
             opacity: 0;
-            transition: opacity 0.3s;
+            transition: opacity 0.4s;
         }
         .feature-card:hover {
             background: var(--bg-card-hover);
             border-color: rgba(0,255,200,0.2);
-            transform: translateY(-4px);
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px rgba(0,255,200,0.05);
         }
         .feature-card:hover::before { opacity: 1; }
 
         .feature-icon {
-            font-size: 2.2rem;
-            margin-bottom: 16px;
+            font-size: 2.8rem;
+            margin-bottom: 20px;
             display: block;
         }
 
         .feature-card h3 {
             font-family: 'Orbitron', monospace;
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: var(--cyan);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .feature-card p {
             color: var(--text-dim);
             font-size: 0.95rem;
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
         /* === GAMEPLAY === */
-        .gameplay {
-            background: linear-gradient(180deg, transparent, rgba(0,255,200,0.02), transparent);
+        .gameplay-section {
+            background: linear-gradient(180deg, rgba(0,255,200,0.02), transparent, rgba(128,64,255,0.02));
         }
 
         .mechanics-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 32px;
-            margin-top: 48px;
+            display: flex;
+            flex-direction: column;
+            gap: 48px;
         }
 
         .mechanic {
-            text-align: center;
-            padding: 24px;
+            display: flex;
+            align-items: center;
+            gap: 48px;
+            padding: 40px;
+            background: var(--bg-card);
+            backdrop-filter: blur(8px);
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.04);
+            transition: all 0.4s ease;
+        }
+        .mechanic:nth-child(even) { flex-direction: row-reverse; }
+        .mechanic:hover {
+            border-color: rgba(0,255,200,0.12);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
         }
 
         .mechanic-icon {
-            width: 72px;
-            height: 72px;
-            margin: 0 auto 20px;
+            width: 100px; height: 100px;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2.4rem;
+            flex-shrink: 0;
             position: relative;
         }
         .mechanic-icon::after {
             content: '';
-            position: absolute;
-            inset: -3px;
+            position: absolute; inset: -4px;
             border-radius: 50%;
             border: 1.5px solid;
             opacity: 0.3;
@@ -333,216 +457,202 @@
         .mechanic-lucidity .mechanic-icon { background: rgba(255,16,64,0.1); }
         .mechanic-lucidity .mechanic-icon::after { border-color: var(--red); }
 
-        .mechanic h3 {
+        .mechanic-content { flex: 1; }
+        .mechanic-content h3 {
             font-family: 'Orbitron', monospace;
-            font-size: 1rem;
-            margin-bottom: 8px;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
             color: #fff;
         }
-        .mechanic p {
+        .mechanic-content p {
             color: var(--text-dim);
-            font-size: 0.9rem;
+            font-size: 1rem;
+            line-height: 1.7;
         }
 
         /* === MODES === */
+        .modes-section {
+            background: linear-gradient(180deg, transparent, rgba(128,64,255,0.03), transparent);
+        }
+
         .modes-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
         .mode-card {
+            display: flex;
+            align-items: center;
+            gap: 32px;
             background: var(--bg-card);
-            border: 1px solid rgba(128,64,255,0.15);
-            border-radius: 16px;
-            padding: 40px 32px;
-            text-align: center;
-            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+            border-radius: 8px;
+            padding: 32px 40px;
+            border: 1px solid rgba(128,64,255,0.08);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .mode-card::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 4px;
+            border-radius: 4px 0 0 4px;
         }
         .mode-card:hover {
-            border-color: rgba(128,64,255,0.4);
-            transform: translateY(-4px);
+            transform: translateX(8px);
+            border-color: rgba(128,64,255,0.2);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
         }
 
         .mode-card .level-name {
             font-family: 'Orbitron', monospace;
             font-size: 1.4rem;
             font-weight: 700;
-            margin-bottom: 8px;
+            min-width: 200px;
         }
-
         .mode-card .level-desc {
             color: var(--text-dim);
             font-size: 0.95rem;
+            flex: 1;
         }
 
         .mode-card.reve .level-name { color: #00b8ff; }
+        .mode-card.reve::before { background: #00b8ff; }
         .mode-card.songe .level-name { color: var(--violet); }
+        .mode-card.songe::before { background: var(--violet); }
         .mode-card.lucide .level-name { color: var(--magenta); }
+        .mode-card.lucide::before { background: var(--magenta); }
         .mode-card.chain .level-name { color: var(--red); }
+        .mode-card.chain::before { background: var(--red); }
         .mode-card.daily .level-name { color: var(--gold); }
-
-        .mode-card .difficulty-bar {
-            height: 3px;
-            border-radius: 2px;
-            margin: 16px auto;
-            width: 80%;
-        }
-        .mode-card.reve .difficulty-bar { background: linear-gradient(90deg, #00b8ff 30%, transparent); }
-        .mode-card.songe .difficulty-bar { background: linear-gradient(90deg, var(--violet) 55%, transparent); }
-        .mode-card.lucide .difficulty-bar { background: linear-gradient(90deg, var(--magenta) 80%, transparent); }
-        .mode-card.chain .difficulty-bar { background: linear-gradient(90deg, var(--red) 100%); }
-        .mode-card.daily .difficulty-bar { background: linear-gradient(90deg, var(--gold) 60%, transparent); }
+        .mode-card.daily::before { background: var(--gold); }
 
         /* === SCREENSHOTS === */
         .screenshots-scroll {
             display: flex;
-            gap: 20px;
+            gap: 24px;
             overflow-x: auto;
-            padding: 20px 0;
+            padding: 24px 0;
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
         }
         .screenshots-scroll::-webkit-scrollbar { height: 4px; }
-        .screenshots-scroll::-webkit-scrollbar-track { background: var(--bg-card); border-radius: 2px; }
+        .screenshots-scroll::-webkit-scrollbar-track { background: rgba(0,255,200,0.05); border-radius: 2px; }
         .screenshots-scroll::-webkit-scrollbar-thumb { background: var(--cyan-dim); border-radius: 2px; }
 
         .screenshot-item {
-            min-width: 240px;
-            height: 420px;
-            border-radius: 16px;
+            min-width: 260px;
+            height: 460px;
+            border-radius: 8px;
             scroll-snap-align: center;
             flex-shrink: 0;
             overflow: hidden;
-            border: 1px solid rgba(0,255,200,0.1);
-            transition: all 0.3s ease;
+            border: 1px solid rgba(0,255,200,0.08);
+            transition: all 0.4s ease;
+            cursor: pointer;
         }
         .screenshot-item:hover {
-            border-color: rgba(0,255,200,0.3);
-            transform: scale(1.02);
+            border-color: rgba(0,255,200,0.25);
+            transform: scale(1.04);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(0,255,200,0.06);
         }
         .screenshot-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
+            width: 100%; height: 100%;
+            object-fit: cover; display: block;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed; inset: 0;
+            z-index: 200;
+            background: rgba(0,0,0,0.92);
+            backdrop-filter: blur(20px);
+            align-items: center; justify-content: center;
+            cursor: pointer;
+        }
+        .lightbox.active { display: flex; }
+        .lightbox img {
+            max-height: 90vh; max-width: 90vw;
+            border-radius: 8px;
+            box-shadow: 0 0 80px rgba(0,255,200,0.1);
         }
 
         /* === DOWNLOAD === */
-        .download {
+        .download-section {
             text-align: center;
-            padding: 120px 24px;
-            position: relative;
+            background: linear-gradient(180deg, transparent, rgba(0,255,200,0.03), transparent);
         }
-        .download::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(ellipse 70% 50% at 50% 50%, rgba(0,255,200,0.04), transparent);
-            pointer-events: none;
-        }
-
-        .download .section-title { margin-bottom: 24px; }
-        .download p { color: var(--text-dim); margin-bottom: 40px; font-size: 1.1rem; }
-
-        .price-tag {
-            font-family: 'Orbitron', monospace;
-            font-size: 1.2rem;
-            color: var(--cyan);
-            margin-bottom: 8px;
+        .download-section .section-title { margin-bottom: 20px; }
+        .download-section .download-desc {
+            color: var(--text-dim);
+            margin-bottom: 48px;
+            font-size: 1.15rem;
         }
 
         /* === FOOTER === */
         footer {
-            border-top: 1px solid rgba(0,255,200,0.08);
-            padding: 40px 24px;
+            position: relative;
+            padding: 48px 24px;
             text-align: center;
             color: var(--text-dim);
             font-size: 0.85rem;
+        }
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 15%; right: 15%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0,255,200,0.2), transparent);
         }
 
         footer a {
             color: var(--cyan-dim);
             text-decoration: none;
-            margin: 0 16px;
+            margin: 0 20px;
+            transition: color 0.3s;
         }
         footer a:hover { color: var(--cyan); }
-
-        .footer-links { margin-bottom: 16px; }
-
-        /* === NAV === */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            padding: 16px 32px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(5,5,16,0.85);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(0,255,200,0.06);
-            transition: all 0.3s;
-        }
-
-        .nav-logo {
-            font-family: 'Orbitron', monospace;
-            font-weight: 900;
-            font-size: 1.2rem;
-            color: var(--cyan);
-            text-decoration: none;
-            letter-spacing: 0.1em;
-        }
-
-        .nav-links a {
-            color: var(--text-dim);
-            text-decoration: none;
-            font-size: 0.85rem;
-            letter-spacing: 0.05em;
-            margin-left: 32px;
-            transition: color 0.2s;
-        }
-        .nav-links a:hover { color: var(--cyan); }
-
-        /* === LANG TOGGLE === */
-        .lang-toggle {
-            background: transparent;
-            border: 1px solid rgba(0,255,200,0.3);
-            color: var(--cyan);
-            font-family: 'Orbitron', monospace;
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            padding: 6px 12px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-left: 24px;
-            flex-shrink: 0;
-        }
-        .lang-toggle:hover {
-            background: rgba(0,255,200,0.1);
-            border-color: var(--cyan);
-        }
+        .footer-links { margin-bottom: 20px; }
 
         /* === RESPONSIVE === */
+        @media (max-width: 900px) {
+            .mechanic { flex-direction: column !important; text-align: center; gap: 24px; padding: 32px 24px; }
+            .mode-card { flex-direction: column; text-align: center; gap: 12px; padding: 28px 24px; }
+            .mode-card .level-name { min-width: auto; }
+        }
+
         @media (max-width: 768px) {
-            nav { padding: 10px 12px; flex-wrap: wrap; gap: 6px 0; }
-            .nav-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 2px 0; }
-            .nav-links a { margin-left: 12px; font-size: 0.72rem; }
-            .lang-toggle { margin-left: 12px; font-size: 0.68rem; padding: 4px 10px; }
-            .hero { padding-top: 130px; }
-            section { padding: 64px 16px; }
+            nav { padding: 12px 16px; }
+            nav.scrolled { padding: 8px 16px; }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%; left: 0; right: 0;
+                background: rgba(5,5,16,0.98);
+                backdrop-filter: blur(30px);
+                -webkit-backdrop-filter: blur(30px);
+                flex-direction: column;
+                padding: 16px;
+                border-bottom: 1px solid rgba(0,255,200,0.1);
+            }
+            .nav-links.open { display: flex; }
+            .nav-links a { margin: 8px 0; margin-left: 0; font-size: 1rem; }
+            .lang-toggle { margin: 12px 0 0; margin-left: 0; }
+            .nav-hamburger { display: block; }
+
+            .hero { padding: 100px 16px 60px; }
+            .section-full { padding: 80px 16px; }
             .features-grid { grid-template-columns: 1fr; }
-            .modes-grid { grid-template-columns: 1fr; }
             .hero-cta { flex-direction: column; align-items: center; }
         }
+
         @media (max-width: 400px) {
-            .nav-links a { margin-left: 8px; font-size: 0.68rem; }
-            .lang-toggle { margin-left: 8px; }
-            .hero { padding-top: 140px; }
+            .hero { padding-top: 90px; }
+            .hero-title { letter-spacing: 0.1em; }
         }
     </style>
 </head>
@@ -551,12 +661,15 @@
 <!-- NAV -->
 <nav>
     <a href="index.html" class="nav-logo">LUCID</a>
+    <button class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+        <span></span><span></span><span></span>
+    </button>
     <div class="nav-links">
         <a href="#features" data-i18n="nav.features">Features</a>
         <a href="#gameplay" data-i18n="nav.gameplay">Gameplay</a>
         <a href="#modes" data-i18n="nav.modes">Modes</a>
+        <a href="#screenshots">Screenshots</a>
         <a href="#download" data-i18n="nav.download">Download</a>
-        <a href="beta.html" style="color:#e000ff">Beta</a>
         <a href="support.html">Support</a>
         <button class="lang-toggle" onclick="toggleLang()">FR</button>
     </div>
@@ -564,12 +677,12 @@
 
 <!-- HERO -->
 <div class="hero">
-    <div class="hero-grid"></div>
+    <div class="hero-particles" id="particles"></div>
     <h1 class="hero-title">LUCID</h1>
     <p class="hero-subtitle" data-i18n="hero.subtitle">Strategic Hex Puzzle</p>
     <p class="hero-tagline" data-i18n="hero.tagline">Your mind is fracturing. Stabilize the grid, contain the Rift, and master your lucidity before the chaos consumes everything.</p>
     <div class="hero-cta">
-        <a href="https://play.google.com/apps/testing/com.californylana.lucid" class="btn btn-primary" data-i18n="hero.cta" target="_blank" rel="noopener">&#9654; Get on Google Play</a>
+        <a href="https://play.google.com/store/apps/details?id=com.californylana.lucid" class="btn btn-primary" data-i18n="hero.cta" target="_blank" rel="noopener">&#9654; Get on Google Play</a>
         <a href="#gameplay" class="btn btn-secondary" data-i18n="hero.learn">Learn more</a>
     </div>
     <div class="hero-banner">
@@ -579,164 +692,182 @@
 </div>
 
 <!-- FEATURES -->
-<section id="features">
-    <h2 class="section-title" data-i18n="features.title">Features</h2>
-    <p class="section-subtitle" data-i18n="features.subtitle">A pure tactical puzzle &mdash; no filler, no timers, no ads. Just you against the grid.</p>
+<div class="section-full" id="features">
+    <div class="section-inner">
+        <h2 class="section-title reveal" data-i18n="features.title">Features</h2>
+        <p class="section-subtitle reveal" data-i18n="features.subtitle">A pure tactical puzzle &mdash; no filler, no timers, no ads. Just you against the grid.</p>
 
-    <div class="features-grid">
-        <div class="feature-card">
-            <span class="feature-icon">&#11042;</span>
-            <h3 data-i18n="features.hex.title">Hex Grid Tactics</h3>
-            <p data-i18n="features.hex.desc">Every cell on the hexagonal grid matters. Activate, move, or sacrifice Nodes to stabilize your surroundings and push back the entropy.</p>
-        </div>
-        <div class="feature-card">
-            <span class="feature-icon">&#9889;</span>
-            <h3 data-i18n="features.rift.title">The Rift Fights Back</h3>
-            <p data-i18n="features.rift.desc">The Rift retaliates against every move near it. Each stabilization triggers a counter-attack. Outsmart it or be overwhelmed.</p>
-        </div>
-        <div class="feature-card">
-            <span class="feature-icon">&#128279;</span>
-            <h3 data-i18n="features.chain.title">Chain Reactions</h3>
-            <p data-i18n="features.chain.desc">Catalysts invert their neighbors, stressed Nodes cascade instability. Master the chain reactions to turn chaos into order.</p>
-        </div>
-        <div class="feature-card">
-            <span class="feature-icon">&#127911;</span>
-            <h3 data-i18n="features.audio.title">Synthwave Soundtrack</h3>
-            <p data-i18n="features.audio.desc">Handcrafted procedural audio and synthwave music immerse you in a neon cyberpunk dreamscape.</p>
-        </div>
-        <div class="feature-card">
-            <span class="feature-icon">&#128274;</span>
-            <h3 data-i18n="features.offline.title">100% Offline</h3>
-            <p data-i18n="features.offline.desc">No accounts. No ads. No data collection. No internet required. Your game, your device, your privacy.</p>
-        </div>
-        <div class="feature-card">
-            <span class="feature-icon">&#127922;</span>
-            <h3 data-i18n="features.seed.title">Seed Replay</h3>
-            <p data-i18n="features.seed.desc">Every board has a unique seed. Share it with friends to challenge them on the exact same puzzle.</p>
-        </div>
-        <div class="feature-card">
-            <span class="feature-icon">&#128197;</span>
-            <h3 data-i18n="features.daily.title">Daily Challenge</h3>
-            <p data-i18n="features.daily.desc">Three fresh puzzles every day &mdash; one per difficulty. Track your streak, share your results, and compare with friends.</p>
-        </div>
-        <div class="feature-card">
-            <span class="feature-icon">&#127942;</span>
-            <h3 data-i18n="features.badges.title">Achievements</h3>
-            <p data-i18n="features.badges.desc">100 badges to unlock across all modes: speedruns, economy plays, daily streaks, chain records, and mastery milestones.</p>
-        </div>
-        <div class="feature-card">
-            <span class="feature-icon">&#128228;</span>
-            <h3 data-i18n="features.share.title">Native Sharing</h3>
-            <p data-i18n="features.share.desc">Share your results with one tap. The native share sheet lets you send your score to any app &mdash; WhatsApp, Twitter, and more.</p>
-        </div>
-        <div class="feature-card">
-            <span class="feature-icon">&#128065;</span>
-            <h3 data-i18n="features.colorblind.title">Colorblind Mode</h3>
-            <p data-i18n="features.colorblind.desc">Deuteranopia and tritanopia support built in. Swap color palettes with one tap in the pause menu &mdash; no one left behind.</p>
-        </div>
-        <div class="feature-card">
-            <span class="feature-icon">&#128161;</span>
-            <h3 data-i18n="features.hints.title">Smart Hints</h3>
-            <p data-i18n="features.hints.desc">Stuck? Tap the hint button for a nudge in the right direction. Earn hints through gameplay and use them whenever you need &mdash; they never run out.</p>
-        </div>
-        <div class="feature-card">
-            <span class="feature-icon">&#127891;</span>
-            <h3 data-i18n="features.tutorials.title">4 Guided Lessons</h3>
-            <p data-i18n="features.tutorials.desc">Step-by-step tutorials covering basics, Rift retaliation, chain reactions, and Lucidity management. Learn at your own pace.</p>
+        <div class="features-grid">
+            <div class="feature-card reveal">
+                <span class="feature-icon">&#11042;</span>
+                <h3 data-i18n="features.hex.title">Hex Grid Tactics</h3>
+                <p data-i18n="features.hex.desc">Every cell on the hexagonal grid matters. Activate, move, or sacrifice Nodes to stabilize your surroundings and push back the entropy.</p>
+            </div>
+            <div class="feature-card reveal">
+                <span class="feature-icon">&#9889;</span>
+                <h3 data-i18n="features.rift.title">The Rift Fights Back</h3>
+                <p data-i18n="features.rift.desc">The Rift retaliates against every move near it. Each stabilization triggers a counter-attack. Outsmart it or be overwhelmed.</p>
+            </div>
+            <div class="feature-card reveal">
+                <span class="feature-icon">&#128279;</span>
+                <h3 data-i18n="features.chain.title">Chain Reactions</h3>
+                <p data-i18n="features.chain.desc">Catalysts invert their neighbors, stressed Nodes cascade instability. Master the chain reactions to turn chaos into order.</p>
+            </div>
+            <div class="feature-card reveal">
+                <span class="feature-icon">&#127911;</span>
+                <h3 data-i18n="features.audio.title">Synthwave Soundtrack</h3>
+                <p data-i18n="features.audio.desc">Handcrafted procedural audio and synthwave music immerse you in a neon cyberpunk dreamscape.</p>
+            </div>
+            <div class="feature-card reveal">
+                <span class="feature-icon">&#128274;</span>
+                <h3 data-i18n="features.offline.title">100% Offline</h3>
+                <p data-i18n="features.offline.desc">No accounts. No ads. No data collection. No internet required. Your game, your device, your privacy.</p>
+            </div>
+            <div class="feature-card reveal">
+                <span class="feature-icon">&#127922;</span>
+                <h3 data-i18n="features.seed.title">Seed Replay</h3>
+                <p data-i18n="features.seed.desc">Every board has a unique seed. Share it with friends to challenge them on the exact same puzzle.</p>
+            </div>
+            <div class="feature-card reveal">
+                <span class="feature-icon">&#128197;</span>
+                <h3 data-i18n="features.daily.title">Daily Challenge</h3>
+                <p data-i18n="features.daily.desc">Three fresh puzzles every day &mdash; one per difficulty. Track your streak, share your results, and compare with friends.</p>
+            </div>
+            <div class="feature-card reveal">
+                <span class="feature-icon">&#127942;</span>
+                <h3 data-i18n="features.badges.title">Achievements</h3>
+                <p data-i18n="features.badges.desc">100 badges to unlock across all modes: speedruns, economy plays, daily streaks, chain records, and mastery milestones.</p>
+            </div>
+            <div class="feature-card reveal">
+                <span class="feature-icon">&#128228;</span>
+                <h3 data-i18n="features.share.title">Native Sharing</h3>
+                <p data-i18n="features.share.desc">Share your results with one tap. The native share sheet lets you send your score to any app &mdash; WhatsApp, Twitter, and more.</p>
+            </div>
+            <div class="feature-card reveal">
+                <span class="feature-icon">&#128065;</span>
+                <h3 data-i18n="features.colorblind.title">Colorblind Mode</h3>
+                <p data-i18n="features.colorblind.desc">Deuteranopia and tritanopia support built in. Swap color palettes with one tap in the pause menu &mdash; no one left behind.</p>
+            </div>
+            <div class="feature-card reveal">
+                <span class="feature-icon">&#128161;</span>
+                <h3 data-i18n="features.hints.title">Smart Hints</h3>
+                <p data-i18n="features.hints.desc">Stuck? Tap the hint button for a nudge in the right direction. Earn hints through gameplay and use them whenever you need &mdash; they never run out.</p>
+            </div>
+            <div class="feature-card reveal">
+                <span class="feature-icon">&#127891;</span>
+                <h3 data-i18n="features.tutorials.title">4 Guided Lessons</h3>
+                <p data-i18n="features.tutorials.desc">Step-by-step tutorials covering basics, Rift retaliation, chain reactions, and Lucidity management. Learn at your own pace.</p>
+            </div>
         </div>
     </div>
-</section>
+</div>
 
 <!-- GAMEPLAY -->
-<section id="gameplay" class="gameplay">
-    <h2 class="section-title" data-i18n="gameplay.title">How It Works</h2>
-    <p class="section-subtitle" data-i18n="gameplay.subtitle">Four core mechanics. Infinite strategic depth.</p>
+<div class="section-full gameplay-section" id="gameplay">
+    <div class="section-inner">
+        <h2 class="section-title reveal" data-i18n="gameplay.title">How It Works</h2>
+        <p class="section-subtitle reveal" data-i18n="gameplay.subtitle">Four core mechanics. Infinite strategic depth.</p>
 
-    <div class="mechanics-list">
-        <div class="mechanic mechanic-node">
-            <div class="mechanic-icon">&#9678;</div>
-            <h3 data-i18n="gameplay.node.title">Nodes</h3>
-            <p data-i18n="gameplay.node.desc">Activate to stabilize neighbors. Move to reposition. Sacrifice to lock down threats &mdash; at a cost.</p>
-        </div>
-        <div class="mechanic mechanic-catalyst">
-            <div class="mechanic-icon">&#10022;</div>
-            <h3 data-i18n="gameplay.catalyst.title">Catalysts</h3>
-            <p data-i18n="gameplay.catalyst.desc">Single-use powerhouses. Invert the state of all adjacent cells. High risk, high reward.</p>
-        </div>
-        <div class="mechanic mechanic-rift">
-            <div class="mechanic-icon">&#9670;</div>
-            <h3 data-i18n="gameplay.rift.title">The Rift</h3>
-            <p data-i18n="gameplay.rift.desc">The source of chaos. Indestructible. Retaliates when you stabilize nearby. Contain it to win.</p>
-        </div>
-        <div class="mechanic mechanic-lucidity">
-            <div class="mechanic-icon">&#9673;</div>
-            <h3 data-i18n="gameplay.lucidity.title">Lucidity</h3>
-            <p data-i18n="gameplay.lucidity.desc">Every action costs Lucidity. Run out and your mind collapses. Efficient play earns bonuses.</p>
+        <div class="mechanics-list">
+            <div class="mechanic mechanic-node reveal">
+                <div class="mechanic-icon">&#9678;</div>
+                <div class="mechanic-content">
+                    <h3 data-i18n="gameplay.node.title">Nodes</h3>
+                    <p data-i18n="gameplay.node.desc">Activate to stabilize neighbors. Move to reposition. Sacrifice to lock down threats &mdash; at a cost.</p>
+                </div>
+            </div>
+            <div class="mechanic mechanic-catalyst reveal">
+                <div class="mechanic-icon">&#10022;</div>
+                <div class="mechanic-content">
+                    <h3 data-i18n="gameplay.catalyst.title">Catalysts</h3>
+                    <p data-i18n="gameplay.catalyst.desc">Single-use powerhouses. Invert the state of all adjacent cells. High risk, high reward.</p>
+                </div>
+            </div>
+            <div class="mechanic mechanic-rift reveal">
+                <div class="mechanic-icon">&#9670;</div>
+                <div class="mechanic-content">
+                    <h3 data-i18n="gameplay.rift.title">The Rift</h3>
+                    <p data-i18n="gameplay.rift.desc">The source of chaos. Indestructible. Retaliates when you stabilize nearby. Contain it to win.</p>
+                </div>
+            </div>
+            <div class="mechanic mechanic-lucidity reveal">
+                <div class="mechanic-icon">&#9673;</div>
+                <div class="mechanic-content">
+                    <h3 data-i18n="gameplay.lucidity.title">Lucidity</h3>
+                    <p data-i18n="gameplay.lucidity.desc">Every action costs Lucidity. Run out and your mind collapses. Efficient play earns bonuses.</p>
+                </div>
+            </div>
         </div>
     </div>
-</section>
+</div>
 
 <!-- GAME MODES -->
-<section id="modes">
-    <h2 class="section-title" data-i18n="modes.title">Game Modes</h2>
-    <p class="section-subtitle" data-i18n="modes.subtitle">From accessible to extreme. Find your challenge.</p>
+<div class="section-full modes-section" id="modes">
+    <div class="section-inner">
+        <h2 class="section-title reveal" data-i18n="modes.title">Game Modes</h2>
+        <p class="section-subtitle reveal" data-i18n="modes.subtitle">From accessible to extreme. Find your challenge.</p>
 
-    <div class="modes-grid">
-        <div class="mode-card reve">
-            <div class="level-name" data-i18n="modes.reve.name">DREAM</div>
-            <div class="difficulty-bar"></div>
-            <p class="level-desc" data-i18n="modes.reve.desc">Gentle introduction. Generous lucidity, few threats. Learn the fundamentals.</p>
-        </div>
-        <div class="mode-card songe">
-            <div class="level-name" data-i18n="modes.songe.name">REVERIE</div>
-            <div class="difficulty-bar"></div>
-            <p class="level-desc" data-i18n="modes.songe.desc">Tighter resources, more instability. Every move counts.</p>
-        </div>
-        <div class="mode-card lucide">
-            <div class="level-name" data-i18n="modes.lucide.name">LUCID</div>
-            <div class="difficulty-bar"></div>
-            <p class="level-desc" data-i18n="modes.lucide.desc">Extreme difficulty. Minimal lucidity, maximum chaos. For the dedicated.</p>
-        </div>
-        <div class="mode-card chain">
-            <div class="level-name" data-i18n="modes.chain.name">CHAIN MODE</div>
-            <div class="difficulty-bar"></div>
-            <p class="level-desc" data-i18n="modes.chain.desc">Infinite escalating arenas. One defeat ends it all. How far can you go?</p>
-        </div>
-        <div class="mode-card daily">
-            <div class="level-name" data-i18n="modes.daily.name">DAILY CHALLENGE</div>
-            <div class="difficulty-bar"></div>
-            <p class="level-desc" data-i18n="modes.daily.desc">Three unique puzzles every day. Same seed for all players. Build your streak and share your scores.</p>
+        <div class="modes-grid">
+            <div class="mode-card reve reveal">
+                <div class="level-name" data-i18n="modes.reve.name">DREAM</div>
+                <p class="level-desc" data-i18n="modes.reve.desc">Gentle introduction. Generous lucidity, few threats. Learn the fundamentals.</p>
+            </div>
+            <div class="mode-card songe reveal">
+                <div class="level-name" data-i18n="modes.songe.name">REVERIE</div>
+                <p class="level-desc" data-i18n="modes.songe.desc">Tighter resources, more instability. Every move counts.</p>
+            </div>
+            <div class="mode-card lucide reveal">
+                <div class="level-name" data-i18n="modes.lucide.name">LUCID</div>
+                <p class="level-desc" data-i18n="modes.lucide.desc">Extreme difficulty. Minimal lucidity, maximum chaos. For the dedicated.</p>
+            </div>
+            <div class="mode-card chain reveal">
+                <div class="level-name" data-i18n="modes.chain.name">CHAIN MODE</div>
+                <p class="level-desc" data-i18n="modes.chain.desc">Infinite escalating arenas. One defeat ends it all. How far can you go?</p>
+            </div>
+            <div class="mode-card daily reveal">
+                <div class="level-name" data-i18n="modes.daily.name">DAILY CHALLENGE</div>
+                <p class="level-desc" data-i18n="modes.daily.desc">Three unique puzzles every day. Same seed for all players. Build your streak and share your scores.</p>
+            </div>
         </div>
     </div>
-</section>
+</div>
 
 <!-- SCREENSHOTS -->
-<section id="screenshots">
-    <h2 class="section-title" data-i18n="screenshots.title">Screenshots</h2>
-    <p class="section-subtitle" data-i18n="screenshots.subtitle">A glimpse into the dreamscape.</p>
+<div class="section-full" id="screenshots">
+    <div class="section-inner">
+        <h2 class="section-title reveal" data-i18n="screenshots.title">Screenshots</h2>
+        <p class="section-subtitle reveal" data-i18n="screenshots.subtitle">A glimpse into the dreamscape.</p>
 
-    <div class="screenshots-scroll">
-        <div class="screenshot-item"><img src="screenshots/menu.jpg" alt="LUCID Main Menu" loading="lazy"></div>
-        <div class="screenshot-item"><img src="screenshots/gameplay-1.jpg" alt="LUCID Gameplay - Hex Grid" loading="lazy"></div>
-        <div class="screenshot-item"><img src="screenshots/gameplay-2.jpg" alt="LUCID Gameplay - Actions" loading="lazy"></div>
-        <div class="screenshot-item"><img src="screenshots/daily.jpg" alt="LUCID Daily Challenge" loading="lazy"></div>
-        <div class="screenshot-item"><img src="screenshots/victory.jpg" alt="LUCID Victory" loading="lazy"></div>
-        <div class="screenshot-item"><img src="screenshots/defeat.jpg" alt="LUCID Defeat" loading="lazy"></div>
-        <div class="screenshot-item"><img src="screenshots/stats.jpg" alt="LUCID Statistics" loading="lazy"></div>
-        <div class="screenshot-item"><img src="screenshots/badges.jpg" alt="LUCID Badges - 100 Achievements" loading="lazy"></div>
-        <div class="screenshot-item"><img src="screenshots/pause.jpg" alt="LUCID Pause Menu" loading="lazy"></div>
-        <div class="screenshot-item"><img src="screenshots/seed.jpg" alt="LUCID Seed Mode" loading="lazy"></div>
+        <div class="screenshots-scroll reveal">
+            <div class="screenshot-item"><img src="screenshots/menu.jpg" alt="LUCID Main Menu" loading="lazy"></div>
+            <div class="screenshot-item"><img src="screenshots/gameplay-1.jpg" alt="LUCID Gameplay - Hex Grid" loading="lazy"></div>
+            <div class="screenshot-item"><img src="screenshots/gameplay-2.jpg" alt="LUCID Gameplay - Actions" loading="lazy"></div>
+            <div class="screenshot-item"><img src="screenshots/daily.jpg" alt="LUCID Daily Challenge" loading="lazy"></div>
+            <div class="screenshot-item"><img src="screenshots/victory.jpg" alt="LUCID Victory" loading="lazy"></div>
+            <div class="screenshot-item"><img src="screenshots/defeat.jpg" alt="LUCID Defeat" loading="lazy"></div>
+            <div class="screenshot-item"><img src="screenshots/stats.jpg" alt="LUCID Statistics" loading="lazy"></div>
+            <div class="screenshot-item"><img src="screenshots/badges.jpg" alt="LUCID Badges - 100 Achievements" loading="lazy"></div>
+            <div class="screenshot-item"><img src="screenshots/pause.jpg" alt="LUCID Pause Menu" loading="lazy"></div>
+            <div class="screenshot-item"><img src="screenshots/seed.jpg" alt="LUCID Seed Mode" loading="lazy"></div>
+        </div>
     </div>
-</section>
+</div>
 
 <!-- DOWNLOAD -->
-<section id="download" class="download">
-    <h2 class="section-title" data-i18n="download.title">Ready to Enter the Dream?</h2>
-    <p data-i18n="download.desc">Free to play &mdash; unlock Chain Mode, Seeds &amp; Stats with a single purchase.</p>
-    <div class="hero-cta">
-        <a href="https://play.google.com/apps/testing/com.californylana.lucid" class="btn btn-primary" data-i18n="hero.cta" target="_blank" rel="noopener">&#9654; Google Play</a>
+<div class="section-full download-section" id="download">
+    <div class="section-inner">
+        <h2 class="section-title reveal" data-i18n="download.title">Ready to Enter the Dream?</h2>
+        <p class="download-desc reveal" data-i18n="download.desc">Free to play &mdash; unlock Chain Mode, Seeds &amp; Stats with a single purchase.</p>
+        <div class="hero-cta reveal">
+            <a href="https://play.google.com/store/apps/details?id=com.californylana.lucid" class="btn btn-primary" data-i18n="hero.cta" target="_blank" rel="noopener">&#9654; Google Play</a>
+        </div>
     </div>
-</section>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="this.classList.remove('active')">
+    <img id="lightbox-img" src="" alt="">
+</div>
 
 <!-- FOOTER -->
 <footer>
@@ -749,6 +880,7 @@
 </footer>
 
 <script>
+// === i18n ===
 const i18n = {
     fr: {
         'nav.features': 'Fonctionnalit\u00e9s',
@@ -881,264 +1013,137 @@ const i18n = {
         'footer.copy': '\u00a9 2025-2026 Californy Lana. All rights reserved.'
     },
     es: {
-        'nav.features': 'Caracter\u00edsticas',
-        'nav.gameplay': 'Jugabilidad',
-        'nav.modes': 'Modos',
-        'nav.download': 'Descargar',
+        'nav.features': 'Caracter\u00edsticas', 'nav.gameplay': 'Jugabilidad', 'nav.modes': 'Modos', 'nav.download': 'Descargar',
         'hero.subtitle': 'Puzzle Hex Estrat\u00e9gico',
         'hero.tagline': 'Tu mente se fractura. Estabiliza la cuadr\u00edcula, contiene la Fisura y domina tu lucidez antes de que el caos lo consuma todo.',
-        'hero.cta': '\u25b6 Descargar en Google Play',
-        'hero.learn': 'Saber m\u00e1s',
-        'hero.scroll': 'Deslizar',
+        'hero.cta': '\u25b6 Descargar en Google Play', 'hero.learn': 'Saber m\u00e1s', 'hero.scroll': 'Deslizar',
         'features.title': 'Caracter\u00edsticas',
         'features.subtitle': 'Un puro puzzle t\u00e1ctico \u2014 sin relleno, sin cron\u00f3metros, sin anuncios. Solo t\u00fa contra la cuadr\u00edcula.',
-        'features.hex.title': 'T\u00e1ctica Hexagonal',
-        'features.hex.desc': 'Cada celda de la cuadr\u00edcula hexagonal importa. Activa, mueve o sacrifica Nodos para estabilizar tu entorno y frenar la entrop\u00eda.',
-        'features.rift.title': 'La Fisura Contraataca',
-        'features.rift.desc': 'La Fisura toma represalias con cada acci\u00f3n cercana. Cada estabilizaci\u00f3n provoca un contraataque. Sup\u00e9rala o ser\u00e1s superado.',
-        'features.chain.title': 'Reacciones en Cadena',
-        'features.chain.desc': 'Los Catalizadores invierten a sus vecinos, los Nodos estresados propagan inestabilidad. Domina las reacciones en cadena para transformar el caos en orden.',
-        'features.audio.title': 'Banda Sonora Synthwave',
-        'features.audio.desc': 'Audio procedural artesanal y m\u00fasica synthwave para una inmersi\u00f3n en un paisaje on\u00edrico cyberpunk ne\u00f3n.',
-        'features.offline.title': '100% Sin Conexi\u00f3n',
-        'features.offline.desc': 'Sin cuentas. Sin anuncios. Sin recolecci\u00f3n de datos. Sin internet. Tu juego, tu dispositivo, tu privacidad.',
-        'features.seed.title': 'Rejugar por Seed',
-        'features.seed.desc': 'Cada tablero tiene un seed \u00fanico. Comp\u00e1rtelo con amigos para desafiarlos en exactamente el mismo puzzle.',
-        'features.daily.title': 'Desaf\u00edo Diario',
-        'features.daily.desc': 'Tres puzzles nuevos cada d\u00eda \u2014 uno por dificultad. Sigue tu racha, comparte tus resultados y compite con amigos.',
-        'features.badges.title': 'Logros',
-        'features.badges.desc': '100 insignias para desbloquear en todos los modos: speedruns, econom\u00eda, rachas diarias, r\u00e9cords de cadena y maestr\u00eda.',
-        'features.share.title': 'Compartir Nativo',
-        'features.share.desc': 'Comparte tus resultados con un toque. El men\u00fa de compartir nativo te permite enviar tu puntuaci\u00f3n a cualquier app \u2014 WhatsApp, Twitter, etc.',
-        'features.colorblind.title': 'Modo Dalt\u00f3nico',
-        'features.colorblind.desc': 'Soporte para deuteranop\u00eda y tritanop\u00eda integrado. Cambia la paleta de colores con un toque en el men\u00fa de pausa \u2014 nadie queda fuera.',
-        'features.hints.title': 'Pistas Inteligentes',
-        'features.hints.desc': '\u00bfAtascado? Toca el bot\u00f3n de pista para recibir ayuda. Gana pistas jugando y \u00fasalas cuando quieras \u2014 nunca se agotan.',
-        'features.tutorials.title': '4 Lecciones Guiadas',
-        'features.tutorials.desc': 'Tutoriales paso a paso cubriendo lo b\u00e1sico, la represalia de la Fisura, las reacciones en cadena y la gesti\u00f3n de la Lucidez.',
-        'gameplay.title': 'C\u00f3mo Funciona',
-        'gameplay.subtitle': 'Cuatro mec\u00e1nicas fundamentales. Profundidad estrat\u00e9gica infinita.',
-        'gameplay.node.title': 'Nodos',
-        'gameplay.node.desc': 'Activa para estabilizar vecinos. Mueve para reposicionar. Sacrifica para bloquear amenazas \u2014 a un precio.',
-        'gameplay.catalyst.title': 'Catalizadores',
-        'gameplay.catalyst.desc': 'Potentes de un solo uso. Invierten el estado de todas las celdas adyacentes. Alto riesgo, alta recompensa.',
-        'gameplay.rift.title': 'La Fisura',
-        'gameplay.rift.desc': 'La fuente del caos. Indestructible. Contraataca cuando estabilizas cerca. Conti\u00e9nela para ganar.',
-        'gameplay.lucidity.title': 'Lucidez',
-        'gameplay.lucidity.desc': 'Cada acci\u00f3n cuesta Lucidez. Si se agota, tu mente colapsa. Jugar eficientemente otorga bonificaciones.',
-        'modes.title': 'Modos de Juego',
-        'modes.subtitle': 'De accesible a extremo. Encuentra tu desaf\u00edo.',
-        'modes.reve.name': 'SUE\u00d1O',
-        'modes.reve.desc': 'Introducci\u00f3n suave. Lucidez generosa, pocas amenazas. Aprende los fundamentos.',
-        'modes.songe.name': 'ENSUE\u00d1O',
-        'modes.songe.desc': 'Recursos limitados, m\u00e1s inestabilidad. Cada movimiento cuenta.',
-        'modes.lucide.name': 'L\u00daCIDO',
-        'modes.lucide.desc': 'Dificultad extrema. Lucidez m\u00ednima, caos m\u00e1ximo. Para los dedicados.',
-        'modes.chain.name': 'MODO CADENA',
-        'modes.chain.desc': 'Arenas infinitas y crecientes. Una derrota lo termina todo. \u00bfHasta d\u00f3nde llegar\u00e1s?',
-        'modes.daily.name': 'DESAF\u00cdO DIARIO',
-        'modes.daily.desc': 'Tres puzzles \u00fanicos cada d\u00eda. Mismo seed para todos. Construye tu racha y comparte tus puntuaciones.',
-        'screenshots.title': 'Capturas de Pantalla',
-        'screenshots.subtitle': 'Un vistazo al paisaje on\u00edrico.',
-        'download.title': '\u00bfListo para Entrar al Sue\u00f1o?',
-        'download.desc': 'Gratis \u2014 desbloquea el Modo Cadena, Seeds y Estad\u00edsticas con una sola compra.',
-        'footer.privacy': 'Pol\u00edtica de Privacidad',
-        'footer.copy': '\u00a9 2025-2026 Californy Lana. Todos los derechos reservados.'
+        'features.hex.title': 'T\u00e1ctica Hexagonal', 'features.hex.desc': 'Cada celda de la cuadr\u00edcula hexagonal importa. Activa, mueve o sacrifica Nodos para estabilizar tu entorno y frenar la entrop\u00eda.',
+        'features.rift.title': 'La Fisura Contraataca', 'features.rift.desc': 'La Fisura toma represalias con cada acci\u00f3n cercana. Cada estabilizaci\u00f3n provoca un contraataque. Sup\u00e9rala o ser\u00e1s superado.',
+        'features.chain.title': 'Reacciones en Cadena', 'features.chain.desc': 'Los Catalizadores invierten a sus vecinos, los Nodos estresados propagan inestabilidad. Domina las reacciones en cadena para transformar el caos en orden.',
+        'features.audio.title': 'Banda Sonora Synthwave', 'features.audio.desc': 'Audio procedural artesanal y m\u00fasica synthwave para una inmersi\u00f3n en un paisaje on\u00edrico cyberpunk ne\u00f3n.',
+        'features.offline.title': '100% Sin Conexi\u00f3n', 'features.offline.desc': 'Sin cuentas. Sin anuncios. Sin recolecci\u00f3n de datos. Sin internet. Tu juego, tu dispositivo, tu privacidad.',
+        'features.seed.title': 'Rejugar por Seed', 'features.seed.desc': 'Cada tablero tiene un seed \u00fanico. Comp\u00e1rtelo con amigos para desafiarlos en exactamente el mismo puzzle.',
+        'features.daily.title': 'Desaf\u00edo Diario', 'features.daily.desc': 'Tres puzzles nuevos cada d\u00eda \u2014 uno por dificultad. Sigue tu racha, comparte tus resultados y compite con amigos.',
+        'features.badges.title': 'Logros', 'features.badges.desc': '100 insignias para desbloquear en todos los modos: speedruns, econom\u00eda, rachas diarias, r\u00e9cords de cadena y maestr\u00eda.',
+        'features.share.title': 'Compartir Nativo', 'features.share.desc': 'Comparte tus resultados con un toque. El men\u00fa de compartir nativo te permite enviar tu puntuaci\u00f3n a cualquier app \u2014 WhatsApp, Twitter, etc.',
+        'features.colorblind.title': 'Modo Dalt\u00f3nico', 'features.colorblind.desc': 'Soporte para deuteranop\u00eda y tritanop\u00eda integrado. Cambia la paleta de colores con un toque en el men\u00fa de pausa \u2014 nadie queda fuera.',
+        'features.hints.title': 'Pistas Inteligentes', 'features.hints.desc': '\u00bfAtascado? Toca el bot\u00f3n de pista para recibir ayuda. Gana pistas jugando y \u00fasalas cuando quieras \u2014 nunca se agotan.',
+        'features.tutorials.title': '4 Lecciones Guiadas', 'features.tutorials.desc': 'Tutoriales paso a paso cubriendo lo b\u00e1sico, la represalia de la Fisura, las reacciones en cadena y la gesti\u00f3n de la Lucidez.',
+        'gameplay.title': 'C\u00f3mo Funciona', 'gameplay.subtitle': 'Cuatro mec\u00e1nicas fundamentales. Profundidad estrat\u00e9gica infinita.',
+        'gameplay.node.title': 'Nodos', 'gameplay.node.desc': 'Activa para estabilizar vecinos. Mueve para reposicionar. Sacrifica para bloquear amenazas \u2014 a un precio.',
+        'gameplay.catalyst.title': 'Catalizadores', 'gameplay.catalyst.desc': 'Potentes de un solo uso. Invierten el estado de todas las celdas adyacentes. Alto riesgo, alta recompensa.',
+        'gameplay.rift.title': 'La Fisura', 'gameplay.rift.desc': 'La fuente del caos. Indestructible. Contraataca cuando estabilizas cerca. Conti\u00e9nela para ganar.',
+        'gameplay.lucidity.title': 'Lucidez', 'gameplay.lucidity.desc': 'Cada acci\u00f3n cuesta Lucidez. Si se agota, tu mente colapsa. Jugar eficientemente otorga bonificaciones.',
+        'modes.title': 'Modos de Juego', 'modes.subtitle': 'De accesible a extremo. Encuentra tu desaf\u00edo.',
+        'modes.reve.name': 'SUE\u00d1O', 'modes.reve.desc': 'Introducci\u00f3n suave. Lucidez generosa, pocas amenazas. Aprende los fundamentos.',
+        'modes.songe.name': 'ENSUE\u00d1O', 'modes.songe.desc': 'Recursos limitados, m\u00e1s inestabilidad. Cada movimiento cuenta.',
+        'modes.lucide.name': 'L\u00daCIDO', 'modes.lucide.desc': 'Dificultad extrema. Lucidez m\u00ednima, caos m\u00e1ximo. Para los dedicados.',
+        'modes.chain.name': 'MODO CADENA', 'modes.chain.desc': 'Arenas infinitas y crecientes. Una derrota lo termina todo. \u00bfHasta d\u00f3nde llegar\u00e1s?',
+        'modes.daily.name': 'DESAF\u00cdO DIARIO', 'modes.daily.desc': 'Tres puzzles \u00fanicos cada d\u00eda. Mismo seed para todos. Construye tu racha y comparte tus puntuaciones.',
+        'screenshots.title': 'Capturas de Pantalla', 'screenshots.subtitle': 'Un vistazo al paisaje on\u00edrico.',
+        'download.title': '\u00bfListo para Entrar al Sue\u00f1o?', 'download.desc': 'Gratis \u2014 desbloquea el Modo Cadena, Seeds y Estad\u00edsticas con una sola compra.',
+        'footer.privacy': 'Pol\u00edtica de Privacidad', 'footer.copy': '\u00a9 2025-2026 Californy Lana. Todos los derechos reservados.'
     },
     de: {
-        'nav.features': 'Features',
-        'nav.gameplay': 'Gameplay',
-        'nav.modes': 'Modi',
-        'nav.download': 'Herunterladen',
+        'nav.features': 'Features', 'nav.gameplay': 'Gameplay', 'nav.modes': 'Modi', 'nav.download': 'Herunterladen',
         'hero.subtitle': 'Strategisches Hex-Puzzle',
         'hero.tagline': 'Dein Verstand zerbricht. Stabilisiere das Gitter, d\u00e4mme den Riss ein und meistere deine Klarheit, bevor das Chaos alles verschlingt.',
-        'hero.cta': '\u25b6 Bei Google Play herunterladen',
-        'hero.learn': 'Mehr erfahren',
-        'hero.scroll': 'Scrollen',
-        'features.title': 'Features',
-        'features.subtitle': 'Ein reines Taktik-Puzzle \u2014 kein F\u00fcller, keine Timer, keine Werbung. Nur du gegen das Gitter.',
-        'features.hex.title': 'Hex-Gitter-Taktik',
-        'features.hex.desc': 'Jede Zelle des hexagonalen Gitters z\u00e4hlt. Aktiviere, bewege oder opfere Knoten, um deine Umgebung zu stabilisieren und die Entropie zur\u00fcckzudr\u00e4ngen.',
-        'features.rift.title': 'Der Riss schl\u00e4gt zur\u00fcck',
-        'features.rift.desc': 'Der Riss vergilt jede Aktion in seiner N\u00e4he. Jede Stabilisierung l\u00f6st einen Gegenschlag aus. \u00dcberliste ihn oder werde \u00fcberw\u00e4ltigt.',
-        'features.chain.title': 'Kettenreaktionen',
-        'features.chain.desc': 'Katalysatoren kehren ihre Nachbarn um, gestresste Knoten verbreiten Instabilit\u00e4t. Meistere die Kettenreaktionen, um Chaos in Ordnung zu verwandeln.',
-        'features.audio.title': 'Synthwave-Soundtrack',
-        'features.audio.desc': 'Handgemachtes prozedurales Audio und Synthwave-Musik f\u00fcr ein immersives Neon-Cyberpunk-Traumerlebnis.',
-        'features.offline.title': '100% Offline',
-        'features.offline.desc': 'Keine Konten. Keine Werbung. Keine Datenerfassung. Kein Internet n\u00f6tig. Dein Spiel, dein Ger\u00e4t, deine Privatsph\u00e4re.',
-        'features.seed.title': 'Seed-Wiederholung',
-        'features.seed.desc': 'Jedes Spielfeld hat einen einzigartigen Seed. Teile ihn mit Freunden, um sie mit exakt demselben Puzzle herauszufordern.',
-        'features.daily.title': 'T\u00e4gliche Herausforderung',
-        'features.daily.desc': 'Drei frische Puzzles jeden Tag \u2014 eins pro Schwierigkeitsstufe. Verfolge deine Serie, teile deine Ergebnisse und miss dich mit Freunden.',
-        'features.badges.title': 'Abzeichen',
-        'features.badges.desc': '100 Abzeichen in allen Modi freischalten: Speedruns, Sparsamkeit, t\u00e4gliche Serien, Kettenrekorde und Meisterschaftsmeilensteine.',
-        'features.share.title': 'Natives Teilen',
-        'features.share.desc': 'Teile deine Ergebnisse mit einem Tippen. Die native Teilen-Funktion sendet deinen Score an jede App \u2014 WhatsApp, Twitter und mehr.',
-        'features.colorblind.title': 'Farbenblind-Modus',
-        'features.colorblind.desc': 'Deuteranopie- und Tritanopie-Unterst\u00fctzung integriert. Wechsle die Farbpalette mit einem Tippen im Pause-Men\u00fc \u2014 niemand wird vergessen.',
-        'features.hints.title': 'Intelligente Hinweise',
-        'features.hints.desc': 'Stuck? Tippe auf den Hinweis-Button f\u00fcr einen Schubs. Verdiene Hinweise durchs Spielen und nutze sie wann du willst \u2014 sie gehen nie aus.',
-        'features.tutorials.title': '4 gef\u00fchrte Lektionen',
-        'features.tutorials.desc': 'Schritt-f\u00fcr-Schritt-Tutorials zu den Grundlagen, der Vergeltung des Risses, Kettenreaktionen und Klarheit-Management.',
-        'gameplay.title': 'Wie es funktioniert',
-        'gameplay.subtitle': 'Vier Kernmechaniken. Unendliche strategische Tiefe.',
-        'gameplay.node.title': 'Knoten',
-        'gameplay.node.desc': 'Aktiviere, um Nachbarn zu stabilisieren. Bewege, um umzupositionieren. Opfere, um Bedrohungen zu verriegeln \u2014 zu einem Preis.',
-        'gameplay.catalyst.title': 'Katalysatoren',
-        'gameplay.catalyst.desc': 'Einmal-Kraftpakete. Kehren den Zustand aller benachbarten Zellen um. Hohes Risiko, hohe Belohnung.',
-        'gameplay.rift.title': 'Der Riss',
-        'gameplay.rift.desc': 'Die Quelle des Chaos. Unzerst\u00f6rbar. Vergilt, wenn du in der N\u00e4he stabilisierst. D\u00e4mme ihn ein, um zu gewinnen.',
-        'gameplay.lucidity.title': 'Klarheit',
-        'gameplay.lucidity.desc': 'Jede Aktion kostet Klarheit. Geht sie aus, bricht dein Verstand zusammen. Effizientes Spielen bringt Boni.',
-        'modes.title': 'Spielmodi',
-        'modes.subtitle': 'Von zug\u00e4nglich bis extrem. Finde deine Herausforderung.',
-        'modes.reve.name': 'TRAUM',
-        'modes.reve.desc': 'Sanfte Einf\u00fchrung. Gro\u00dfz\u00fcgige Klarheit, wenige Bedrohungen. Lerne die Grundlagen.',
-        'modes.songe.name': 'VISION',
-        'modes.songe.desc': 'Knappe Ressourcen, mehr Instabilit\u00e4t. Jeder Zug z\u00e4hlt.',
-        'modes.lucide.name': 'LUZID',
-        'modes.lucide.desc': 'Extreme Schwierigkeit. Minimale Klarheit, maximales Chaos. F\u00fcr die Entschlossenen.',
-        'modes.chain.name': 'KETTENMODUS',
-        'modes.chain.desc': 'Unendlich eskalierende Arenen. Eine Niederlage beendet alles. Wie weit kommst du?',
-        'modes.daily.name': 'TAGESHERAUSFORDERUNG',
-        'modes.daily.desc': 'Drei einzigartige Puzzles jeden Tag. Gleicher Seed f\u00fcr alle Spieler. Baue deine Serie auf und teile deine Punkte.',
-        'screenshots.title': 'Screenshots',
-        'screenshots.subtitle': 'Ein Blick in die Traumlandschaft.',
-        'download.title': 'Bereit, den Traum zu betreten?',
-        'download.desc': 'Kostenlos spielbar \u2014 schalte den Kettenmodus, Seeds und Statistiken mit einem einzigen Kauf frei.',
-        'footer.privacy': 'Datenschutzrichtlinie',
-        'footer.copy': '\u00a9 2025-2026 Californy Lana. Alle Rechte vorbehalten.'
+        'hero.cta': '\u25b6 Bei Google Play herunterladen', 'hero.learn': 'Mehr erfahren', 'hero.scroll': 'Scrollen',
+        'features.title': 'Features', 'features.subtitle': 'Ein reines Taktik-Puzzle \u2014 kein F\u00fcller, keine Timer, keine Werbung. Nur du gegen das Gitter.',
+        'features.hex.title': 'Hex-Gitter-Taktik', 'features.hex.desc': 'Jede Zelle des hexagonalen Gitters z\u00e4hlt. Aktiviere, bewege oder opfere Knoten, um deine Umgebung zu stabilisieren und die Entropie zur\u00fcckzudr\u00e4ngen.',
+        'features.rift.title': 'Der Riss schl\u00e4gt zur\u00fcck', 'features.rift.desc': 'Der Riss vergilt jede Aktion in seiner N\u00e4he. Jede Stabilisierung l\u00f6st einen Gegenschlag aus. \u00dcberliste ihn oder werde \u00fcberw\u00e4ltigt.',
+        'features.chain.title': 'Kettenreaktionen', 'features.chain.desc': 'Katalysatoren kehren ihre Nachbarn um, gestresste Knoten verbreiten Instabilit\u00e4t. Meistere die Kettenreaktionen, um Chaos in Ordnung zu verwandeln.',
+        'features.audio.title': 'Synthwave-Soundtrack', 'features.audio.desc': 'Handgemachtes prozedurales Audio und Synthwave-Musik f\u00fcr ein immersives Neon-Cyberpunk-Traumerlebnis.',
+        'features.offline.title': '100% Offline', 'features.offline.desc': 'Keine Konten. Keine Werbung. Keine Datenerfassung. Kein Internet n\u00f6tig. Dein Spiel, dein Ger\u00e4t, deine Privatsph\u00e4re.',
+        'features.seed.title': 'Seed-Wiederholung', 'features.seed.desc': 'Jedes Spielfeld hat einen einzigartigen Seed. Teile ihn mit Freunden, um sie mit exakt demselben Puzzle herauszufordern.',
+        'features.daily.title': 'T\u00e4gliche Herausforderung', 'features.daily.desc': 'Drei frische Puzzles jeden Tag \u2014 eins pro Schwierigkeitsstufe. Verfolge deine Serie, teile deine Ergebnisse und miss dich mit Freunden.',
+        'features.badges.title': 'Abzeichen', 'features.badges.desc': '100 Abzeichen in allen Modi freischalten: Speedruns, Sparsamkeit, t\u00e4gliche Serien, Kettenrekorde und Meisterschaftsmeilensteine.',
+        'features.share.title': 'Natives Teilen', 'features.share.desc': 'Teile deine Ergebnisse mit einem Tippen. Die native Teilen-Funktion sendet deinen Score an jede App \u2014 WhatsApp, Twitter und mehr.',
+        'features.colorblind.title': 'Farbenblind-Modus', 'features.colorblind.desc': 'Deuteranopie- und Tritanopie-Unterst\u00fctzung integriert. Wechsle die Farbpalette mit einem Tippen im Pause-Men\u00fc \u2014 niemand wird vergessen.',
+        'features.hints.title': 'Intelligente Hinweise', 'features.hints.desc': 'Stuck? Tippe auf den Hinweis-Button f\u00fcr einen Schubs. Verdiene Hinweise durchs Spielen und nutze sie wann du willst \u2014 sie gehen nie aus.',
+        'features.tutorials.title': '4 gef\u00fchrte Lektionen', 'features.tutorials.desc': 'Schritt-f\u00fcr-Schritt-Tutorials zu den Grundlagen, der Vergeltung des Risses, Kettenreaktionen und Klarheit-Management.',
+        'gameplay.title': 'Wie es funktioniert', 'gameplay.subtitle': 'Vier Kernmechaniken. Unendliche strategische Tiefe.',
+        'gameplay.node.title': 'Knoten', 'gameplay.node.desc': 'Aktiviere, um Nachbarn zu stabilisieren. Bewege, um umzupositionieren. Opfere, um Bedrohungen zu verriegeln \u2014 zu einem Preis.',
+        'gameplay.catalyst.title': 'Katalysatoren', 'gameplay.catalyst.desc': 'Einmal-Kraftpakete. Kehren den Zustand aller benachbarten Zellen um. Hohes Risiko, hohe Belohnung.',
+        'gameplay.rift.title': 'Der Riss', 'gameplay.rift.desc': 'Die Quelle des Chaos. Unzerst\u00f6rbar. Vergilt, wenn du in der N\u00e4he stabilisierst. D\u00e4mme ihn ein, um zu gewinnen.',
+        'gameplay.lucidity.title': 'Klarheit', 'gameplay.lucidity.desc': 'Jede Aktion kostet Klarheit. Geht sie aus, bricht dein Verstand zusammen. Effizientes Spielen bringt Boni.',
+        'modes.title': 'Spielmodi', 'modes.subtitle': 'Von zug\u00e4nglich bis extrem. Finde deine Herausforderung.',
+        'modes.reve.name': 'TRAUM', 'modes.reve.desc': 'Sanfte Einf\u00fchrung. Gro\u00dfz\u00fcgige Klarheit, wenige Bedrohungen. Lerne die Grundlagen.',
+        'modes.songe.name': 'VISION', 'modes.songe.desc': 'Knappe Ressourcen, mehr Instabilit\u00e4t. Jeder Zug z\u00e4hlt.',
+        'modes.lucide.name': 'LUZID', 'modes.lucide.desc': 'Extreme Schwierigkeit. Minimale Klarheit, maximales Chaos. F\u00fcr die Entschlossenen.',
+        'modes.chain.name': 'KETTENMODUS', 'modes.chain.desc': 'Unendlich eskalierende Arenen. Eine Niederlage beendet alles. Wie weit kommst du?',
+        'modes.daily.name': 'TAGESHERAUSFORDERUNG', 'modes.daily.desc': 'Drei einzigartige Puzzles jeden Tag. Gleicher Seed f\u00fcr alle Spieler. Baue deine Serie auf und teile deine Punkte.',
+        'screenshots.title': 'Screenshots', 'screenshots.subtitle': 'Ein Blick in die Traumlandschaft.',
+        'download.title': 'Bereit, den Traum zu betreten?', 'download.desc': 'Kostenlos spielbar \u2014 schalte den Kettenmodus, Seeds und Statistiken mit einem einzigen Kauf frei.',
+        'footer.privacy': 'Datenschutzrichtlinie', 'footer.copy': '\u00a9 2025-2026 Californy Lana. Alle Rechte vorbehalten.'
     },
     pt: {
-        'nav.features': 'Recursos',
-        'nav.gameplay': 'Gameplay',
-        'nav.modes': 'Modos',
-        'nav.download': 'Baixar',
+        'nav.features': 'Recursos', 'nav.gameplay': 'Gameplay', 'nav.modes': 'Modos', 'nav.download': 'Baixar',
         'hero.subtitle': 'Puzzle Hex Estrat\u00e9gico',
         'hero.tagline': 'Sua mente est\u00e1 se fragmentando. Estabilize a grade, contenha a Fenda e domine sua lucidez antes que o caos consuma tudo.',
-        'hero.cta': '\u25b6 Baixar no Google Play',
-        'hero.learn': 'Saiba mais',
-        'hero.scroll': 'Rolar',
-        'features.title': 'Recursos',
-        'features.subtitle': 'Um puro puzzle t\u00e1tico \u2014 sem enrolação, sem cron\u00f4metros, sem an\u00fancios. S\u00f3 voc\u00ea contra a grade.',
-        'features.hex.title': 'T\u00e1tica Hexagonal',
-        'features.hex.desc': 'Cada c\u00e9lula da grade hexagonal importa. Ative, mova ou sacrifique N\u00f3s para estabilizar seu ambiente e conter a entropia.',
-        'features.rift.title': 'A Fenda Contra-Ataca',
-        'features.rift.desc': 'A Fenda retalia cada a\u00e7\u00e3o pr\u00f3xima. Cada estabiliza\u00e7\u00e3o dispara um contra-ataque. Supere-a ou seja esmagado.',
-        'features.chain.title': 'Rea\u00e7\u00f5es em Cadeia',
-        'features.chain.desc': 'Catalisadores invertem seus vizinhos, N\u00f3s estressados propagam instabilidade. Domine as rea\u00e7\u00f5es em cadeia para transformar caos em ordem.',
-        'features.audio.title': 'Trilha Synthwave',
-        'features.audio.desc': '\u00c1udio procedural artesanal e m\u00fasica synthwave para uma imers\u00e3o em uma paisagem on\u00edrica cyberpunk neon.',
-        'features.offline.title': '100% Offline',
-        'features.offline.desc': 'Sem contas. Sem an\u00fancios. Sem coleta de dados. Sem internet. Seu jogo, seu dispositivo, sua privacidade.',
-        'features.seed.title': 'Replay por Seed',
-        'features.seed.desc': 'Cada tabuleiro tem um seed \u00fanico. Compartilhe com amigos para desafi\u00e1-los no exato mesmo puzzle.',
-        'features.daily.title': 'Desafio Di\u00e1rio',
-        'features.daily.desc': 'Tr\u00eas puzzles novos todos os dias \u2014 um por dificuldade. Acompanhe sua sequ\u00eancia, compartilhe seus resultados e desafie amigos.',
-        'features.badges.title': 'Conquistas',
-        'features.badges.desc': '100 medalhas para desbloquear em todos os modos: speedruns, economia, sequ\u00eancias di\u00e1rias, recordes de cadeia e marcos de mestria.',
-        'features.share.title': 'Compartilhamento Nativo',
-        'features.share.desc': 'Compartilhe seus resultados com um toque. O compartilhamento nativo envia seu score para qualquer app \u2014 WhatsApp, Twitter e mais.',
-        'features.colorblind.title': 'Modo Dalt\u00f4nico',
-        'features.colorblind.desc': 'Suporte a deuteranopia e tritanopia integrado. Troque a paleta de cores com um toque no menu de pausa \u2014 ningu\u00e9m fica de fora.',
-        'features.hints.title': 'Dicas Inteligentes',
-        'features.hints.desc': 'Travado? Toque no bot\u00e3o de dica para uma ajuda. Ganhe dicas jogando e use quando quiser \u2014 elas nunca acabam.',
-        'features.tutorials.title': '4 Li\u00e7\u00f5es Guiadas',
-        'features.tutorials.desc': 'Tutoriais passo a passo cobrindo o b\u00e1sico, a retalia\u00e7\u00e3o da Fenda, rea\u00e7\u00f5es em cadeia e gest\u00e3o de Lucidez.',
-        'gameplay.title': 'Como Funciona',
-        'gameplay.subtitle': 'Quatro mec\u00e2nicas fundamentais. Profundidade estrat\u00e9gica infinita.',
-        'gameplay.node.title': 'N\u00f3s',
-        'gameplay.node.desc': 'Ative para estabilizar vizinhos. Mova para reposicionar. Sacrifique para travar amea\u00e7as \u2014 a um custo.',
-        'gameplay.catalyst.title': 'Catalisadores',
-        'gameplay.catalyst.desc': 'Pot\u00eancias de uso \u00fanico. Invertem o estado de todas as c\u00e9lulas adjacentes. Alto risco, alta recompensa.',
-        'gameplay.rift.title': 'A Fenda',
-        'gameplay.rift.desc': 'A fonte do caos. Indestrut\u00edvel. Retalia quando voc\u00ea estabiliza por perto. Contenha-a para vencer.',
-        'gameplay.lucidity.title': 'Lucidez',
-        'gameplay.lucidity.desc': 'Cada a\u00e7\u00e3o custa Lucidez. Se acabar, sua mente colapsa. Jogar eficientemente rende b\u00f4nus.',
-        'modes.title': 'Modos de Jogo',
-        'modes.subtitle': 'Do acess\u00edvel ao extremo. Encontre seu desafio.',
-        'modes.reve.name': 'SONHO',
-        'modes.reve.desc': 'Introdu\u00e7\u00e3o suave. Lucidez generosa, poucas amea\u00e7as. Aprenda os fundamentos.',
-        'modes.songe.name': 'DEVANEIO',
-        'modes.songe.desc': 'Recursos limitados, mais instabilidade. Cada movimento conta.',
-        'modes.lucide.name': 'L\u00daCIDO',
-        'modes.lucide.desc': 'Dificuldade extrema. Lucidez m\u00ednima, caos m\u00e1ximo. Para os dedicados.',
-        'modes.chain.name': 'MODO CADEIA',
-        'modes.chain.desc': 'Arenas infinitas e escalantes. Uma derrota encerra tudo. At\u00e9 onde voc\u00ea chega?',
-        'modes.daily.name': 'DESAFIO DI\u00c1RIO',
-        'modes.daily.desc': 'Tr\u00eas puzzles \u00fanicos todos os dias. Mesmo seed para todos. Construa sua sequ\u00eancia e compartilhe suas pontua\u00e7\u00f5es.',
-        'screenshots.title': 'Capturas de Tela',
-        'screenshots.subtitle': 'Um vislumbre da paisagem on\u00edrica.',
-        'download.title': 'Pronto para Entrar no Sonho?',
-        'download.desc': 'Gr\u00e1tis \u2014 desbloqueie o Modo Cadeia, Seeds e Estat\u00edsticas com uma \u00fanica compra.',
-        'footer.privacy': 'Pol\u00edtica de Privacidade',
-        'footer.copy': '\u00a9 2025-2026 Californy Lana. Todos os direitos reservados.'
+        'hero.cta': '\u25b6 Baixar no Google Play', 'hero.learn': 'Saiba mais', 'hero.scroll': 'Rolar',
+        'features.title': 'Recursos', 'features.subtitle': 'Um puro puzzle t\u00e1tico \u2014 sem enrola\u00e7\u00e3o, sem cron\u00f4metros, sem an\u00fancios. S\u00f3 voc\u00ea contra a grade.',
+        'features.hex.title': 'T\u00e1tica Hexagonal', 'features.hex.desc': 'Cada c\u00e9lula da grade hexagonal importa. Ative, mova ou sacrifique N\u00f3s para estabilizar seu ambiente e conter a entropia.',
+        'features.rift.title': 'A Fenda Contra-Ataca', 'features.rift.desc': 'A Fenda retalia cada a\u00e7\u00e3o pr\u00f3xima. Cada estabiliza\u00e7\u00e3o dispara um contra-ataque. Supere-a ou seja esmagado.',
+        'features.chain.title': 'Rea\u00e7\u00f5es em Cadeia', 'features.chain.desc': 'Catalisadores invertem seus vizinhos, N\u00f3s estressados propagam instabilidade. Domine as rea\u00e7\u00f5es em cadeia para transformar caos em ordem.',
+        'features.audio.title': 'Trilha Synthwave', 'features.audio.desc': '\u00c1udio procedural artesanal e m\u00fasica synthwave para uma imers\u00e3o em uma paisagem on\u00edrica cyberpunk neon.',
+        'features.offline.title': '100% Offline', 'features.offline.desc': 'Sem contas. Sem an\u00fancios. Sem coleta de dados. Sem internet. Seu jogo, seu dispositivo, sua privacidade.',
+        'features.seed.title': 'Replay por Seed', 'features.seed.desc': 'Cada tabuleiro tem um seed \u00fanico. Compartilhe com amigos para desafi\u00e1-los no exato mesmo puzzle.',
+        'features.daily.title': 'Desafio Di\u00e1rio', 'features.daily.desc': 'Tr\u00eas puzzles novos todos os dias \u2014 um por dificuldade. Acompanhe sua sequ\u00eancia, compartilhe seus resultados e desafie amigos.',
+        'features.badges.title': 'Conquistas', 'features.badges.desc': '100 medalhas para desbloquear em todos os modos: speedruns, economia, sequ\u00eancias di\u00e1rias, recordes de cadeia e marcos de mestria.',
+        'features.share.title': 'Compartilhamento Nativo', 'features.share.desc': 'Compartilhe seus resultados com um toque. O compartilhamento nativo envia seu score para qualquer app \u2014 WhatsApp, Twitter e mais.',
+        'features.colorblind.title': 'Modo Dalt\u00f4nico', 'features.colorblind.desc': 'Suporte a deuteranopia e tritanopia integrado. Troque a paleta de cores com um toque no menu de pausa \u2014 ningu\u00e9m fica de fora.',
+        'features.hints.title': 'Dicas Inteligentes', 'features.hints.desc': 'Travado? Toque no bot\u00e3o de dica para uma ajuda. Ganhe dicas jogando e use quando quiser \u2014 elas nunca acabam.',
+        'features.tutorials.title': '4 Li\u00e7\u00f5es Guiadas', 'features.tutorials.desc': 'Tutoriais passo a passo cobrindo o b\u00e1sico, a retalia\u00e7\u00e3o da Fenda, rea\u00e7\u00f5es em cadeia e gest\u00e3o de Lucidez.',
+        'gameplay.title': 'Como Funciona', 'gameplay.subtitle': 'Quatro mec\u00e2nicas fundamentais. Profundidade estrat\u00e9gica infinita.',
+        'gameplay.node.title': 'N\u00f3s', 'gameplay.node.desc': 'Ative para estabilizar vizinhos. Mova para reposicionar. Sacrifique para travar amea\u00e7as \u2014 a um custo.',
+        'gameplay.catalyst.title': 'Catalisadores', 'gameplay.catalyst.desc': 'Pot\u00eancias de uso \u00fanico. Invertem o estado de todas as c\u00e9lulas adjacentes. Alto risco, alta recompensa.',
+        'gameplay.rift.title': 'A Fenda', 'gameplay.rift.desc': 'A fonte do caos. Indestrut\u00edvel. Retalia quando voc\u00ea estabiliza por perto. Contenha-a para vencer.',
+        'gameplay.lucidity.title': 'Lucidez', 'gameplay.lucidity.desc': 'Cada a\u00e7\u00e3o custa Lucidez. Se acabar, sua mente colapsa. Jogar eficientemente rende b\u00f4nus.',
+        'modes.title': 'Modos de Jogo', 'modes.subtitle': 'Do acess\u00edvel ao extremo. Encontre seu desafio.',
+        'modes.reve.name': 'SONHO', 'modes.reve.desc': 'Introdu\u00e7\u00e3o suave. Lucidez generosa, poucas amea\u00e7as. Aprenda os fundamentos.',
+        'modes.songe.name': 'DEVANEIO', 'modes.songe.desc': 'Recursos limitados, mais instabilidade. Cada movimento conta.',
+        'modes.lucide.name': 'L\u00daCIDO', 'modes.lucide.desc': 'Dificuldade extrema. Lucidez m\u00ednima, caos m\u00e1ximo. Para os dedicados.',
+        'modes.chain.name': 'MODO CADEIA', 'modes.chain.desc': 'Arenas infinitas e escalantes. Uma derrota encerra tudo. At\u00e9 onde voc\u00ea chega?',
+        'modes.daily.name': 'DESAFIO DI\u00c1RIO', 'modes.daily.desc': 'Tr\u00eas puzzles \u00fanicos todos os dias. Mesmo seed para todos. Construa sua sequ\u00eancia e compartilhe suas pontua\u00e7\u00f5es.',
+        'screenshots.title': 'Capturas de Tela', 'screenshots.subtitle': 'Um vislumbre da paisagem on\u00edrica.',
+        'download.title': 'Pronto para Entrar no Sonho?', 'download.desc': 'Gr\u00e1tis \u2014 desbloqueie o Modo Cadeia, Seeds e Estat\u00edsticas com uma \u00fanica compra.',
+        'footer.privacy': 'Pol\u00edtica de Privacidade', 'footer.copy': '\u00a9 2025-2026 Californy Lana. Todos os direitos reservados.'
     },
     it: {
-        'nav.features': 'Caratteristiche',
-        'nav.gameplay': 'Gameplay',
-        'nav.modes': 'Modalit\u00e0',
-        'nav.download': 'Scarica',
+        'nav.features': 'Caratteristiche', 'nav.gameplay': 'Gameplay', 'nav.modes': 'Modalit\u00e0', 'nav.download': 'Scarica',
         'hero.subtitle': 'Puzzle Hex Strategico',
         'hero.tagline': 'La tua mente si sta fratturando. Stabilizza la griglia, contieni la Faglia e padroneggia la tua lucidit\u00e0 prima che il caos consumi tutto.',
-        'hero.cta': '\u25b6 Scarica su Google Play',
-        'hero.learn': 'Scopri di pi\u00f9',
-        'hero.scroll': 'Scorri',
-        'features.title': 'Caratteristiche',
-        'features.subtitle': 'Un puro puzzle tattico \u2014 niente riempitivi, niente timer, niente pubblicit\u00e0. Solo tu contro la griglia.',
-        'features.hex.title': 'Tattica Esagonale',
-        'features.hex.desc': 'Ogni cella della griglia esagonale conta. Attiva, sposta o sacrifica i Nodi per stabilizzare il tuo ambiente e respingere l\u2019entropia.',
-        'features.rift.title': 'La Faglia Colpisce',
-        'features.rift.desc': 'La Faglia si vendica di ogni azione vicina. Ogni stabilizzazione innesca un contrattacco. Superala o sarai sopraffatto.',
-        'features.chain.title': 'Reazioni a Catena',
-        'features.chain.desc': 'I Catalizzatori invertono i loro vicini, i Nodi stressati propagano instabilit\u00e0. Padroneggia le reazioni a catena per trasformare il caos in ordine.',
-        'features.audio.title': 'Colonna Sonora Synthwave',
-        'features.audio.desc': 'Audio procedurale artigianale e musica synthwave per un\u2019immersione in un paesaggio onirico cyberpunk neon.',
-        'features.offline.title': '100% Offline',
-        'features.offline.desc': 'Nessun account. Nessuna pubblicit\u00e0. Nessuna raccolta dati. Nessun internet. Il tuo gioco, il tuo dispositivo, la tua privacy.',
-        'features.seed.title': 'Replay via Seed',
-        'features.seed.desc': 'Ogni tabellone ha un seed unico. Condividilo con gli amici per sfidarli sullo stesso identico puzzle.',
-        'features.daily.title': 'Sfida Giornaliera',
-        'features.daily.desc': 'Tre puzzle nuovi ogni giorno \u2014 uno per difficolt\u00e0. Segui la tua serie, condividi i risultati e sfida gli amici.',
-        'features.badges.title': 'Traguardi',
-        'features.badges.desc': '100 medaglie da sbloccare in tutte le modalit\u00e0: speedrun, risparmio, serie giornaliere, record di catena e tappe di maestria.',
-        'features.share.title': 'Condivisione Nativa',
-        'features.share.desc': 'Condividi i tuoi risultati con un tocco. La condivisione nativa invia il tuo punteggio a qualsiasi app \u2014 WhatsApp, Twitter e altro.',
-        'features.colorblind.title': 'Modalit\u00e0 Daltonismo',
-        'features.colorblind.desc': 'Supporto per deuteranopia e tritanopia integrato. Cambia la palette colori con un tocco nel menu pausa \u2014 nessuno viene dimenticato.',
-        'features.hints.title': 'Suggerimenti Intelligenti',
-        'features.hints.desc': 'Bloccato? Tocca il pulsante suggerimento per un aiuto. Guadagna suggerimenti giocando e usali quando vuoi \u2014 non finiscono mai.',
-        'features.tutorials.title': '4 Lezioni Guidate',
-        'features.tutorials.desc': 'Tutorial passo passo che coprono le basi, la ritorsione della Faglia, le reazioni a catena e la gestione della Lucidit\u00e0.',
-        'gameplay.title': 'Come Funziona',
-        'gameplay.subtitle': 'Quattro meccaniche fondamentali. Profondit\u00e0 strategica infinita.',
-        'gameplay.node.title': 'Nodi',
-        'gameplay.node.desc': 'Attiva per stabilizzare i vicini. Sposta per riposizionare. Sacrifica per bloccare le minacce \u2014 a un costo.',
-        'gameplay.catalyst.title': 'Catalizzatori',
-        'gameplay.catalyst.desc': 'Potenze monouso. Invertono lo stato di tutte le celle adiacenti. Alto rischio, alta ricompensa.',
-        'gameplay.rift.title': 'La Faglia',
-        'gameplay.rift.desc': 'La fonte del caos. Indistruttibile. Si vendica quando stabilizzi nelle vicinanze. Contienila per vincere.',
-        'gameplay.lucidity.title': 'Lucidit\u00e0',
-        'gameplay.lucidity.desc': 'Ogni azione costa Lucidit\u00e0. Se finisce, la tua mente crolla. Giocare in modo efficiente fa guadagnare bonus.',
-        'modes.title': 'Modalit\u00e0 di Gioco',
-        'modes.subtitle': 'Da accessibile a estremo. Trova la tua sfida.',
-        'modes.reve.name': 'SOGNO',
-        'modes.reve.desc': 'Introduzione dolce. Lucidit\u00e0 generosa, poche minacce. Impara i fondamenti.',
-        'modes.songe.name': 'VISIONE',
-        'modes.songe.desc': 'Risorse limitate, pi\u00f9 instabilit\u00e0. Ogni mossa conta.',
-        'modes.lucide.name': 'LUCIDO',
-        'modes.lucide.desc': 'Difficolt\u00e0 estrema. Lucidit\u00e0 minima, caos massimo. Per i pi\u00f9 determinati.',
-        'modes.chain.name': 'MODALIT\u00c0 CATENA',
-        'modes.chain.desc': 'Arene infinite in escalation. Una sconfitta e finisce tutto. Quanto lontano arrivi?',
-        'modes.daily.name': 'SFIDA GIORNALIERA',
-        'modes.daily.desc': 'Tre puzzle unici ogni giorno. Stesso seed per tutti i giocatori. Costruisci la tua serie e condividi i punteggi.',
-        'screenshots.title': 'Screenshot',
-        'screenshots.subtitle': 'Uno sguardo al paesaggio onirico.',
-        'download.title': 'Pronto a Entrare nel Sogno?',
-        'download.desc': 'Gratis \u2014 sblocca la Modalit\u00e0 Catena, Seeds e Statistiche con un singolo acquisto.',
-        'footer.privacy': 'Informativa sulla Privacy',
-        'footer.copy': '\u00a9 2025-2026 Californy Lana. Tutti i diritti riservati.'
+        'hero.cta': '\u25b6 Scarica su Google Play', 'hero.learn': 'Scopri di pi\u00f9', 'hero.scroll': 'Scorri',
+        'features.title': 'Caratteristiche', 'features.subtitle': 'Un puro puzzle tattico \u2014 niente riempitivi, niente timer, niente pubblicit\u00e0. Solo tu contro la griglia.',
+        'features.hex.title': 'Tattica Esagonale', 'features.hex.desc': 'Ogni cella della griglia esagonale conta. Attiva, sposta o sacrifica i Nodi per stabilizzare il tuo ambiente e respingere l\u2019entropia.',
+        'features.rift.title': 'La Faglia Colpisce', 'features.rift.desc': 'La Faglia si vendica di ogni azione vicina. Ogni stabilizzazione innesca un contrattacco. Superala o sarai sopraffatto.',
+        'features.chain.title': 'Reazioni a Catena', 'features.chain.desc': 'I Catalizzatori invertono i loro vicini, i Nodi stressati propagano instabilit\u00e0. Padroneggia le reazioni a catena per trasformare il caos in ordine.',
+        'features.audio.title': 'Colonna Sonora Synthwave', 'features.audio.desc': 'Audio procedurale artigianale e musica synthwave per un\u2019immersione in un paesaggio onirico cyberpunk neon.',
+        'features.offline.title': '100% Offline', 'features.offline.desc': 'Nessun account. Nessuna pubblicit\u00e0. Nessuna raccolta dati. Nessun internet. Il tuo gioco, il tuo dispositivo, la tua privacy.',
+        'features.seed.title': 'Replay via Seed', 'features.seed.desc': 'Ogni tabellone ha un seed unico. Condividilo con gli amici per sfidarli sullo stesso identico puzzle.',
+        'features.daily.title': 'Sfida Giornaliera', 'features.daily.desc': 'Tre puzzle nuovi ogni giorno \u2014 uno per difficolt\u00e0. Segui la tua serie, condividi i risultati e sfida gli amici.',
+        'features.badges.title': 'Traguardi', 'features.badges.desc': '100 medaglie da sbloccare in tutte le modalit\u00e0: speedrun, risparmio, serie giornaliere, record di catena e tappe di maestria.',
+        'features.share.title': 'Condivisione Nativa', 'features.share.desc': 'Condividi i tuoi risultati con un tocco. La condivisione nativa invia il tuo punteggio a qualsiasi app \u2014 WhatsApp, Twitter e altro.',
+        'features.colorblind.title': 'Modalit\u00e0 Daltonismo', 'features.colorblind.desc': 'Supporto per deuteranopia e tritanopia integrato. Cambia la palette colori con un tocco nel menu pausa \u2014 nessuno viene dimenticato.',
+        'features.hints.title': 'Suggerimenti Intelligenti', 'features.hints.desc': 'Bloccato? Tocca il pulsante suggerimento per un aiuto. Guadagna suggerimenti giocando e usali quando vuoi \u2014 non finiscono mai.',
+        'features.tutorials.title': '4 Lezioni Guidate', 'features.tutorials.desc': 'Tutorial passo passo che coprono le basi, la ritorsione della Faglia, le reazioni a catena e la gestione della Lucidit\u00e0.',
+        'gameplay.title': 'Come Funziona', 'gameplay.subtitle': 'Quattro meccaniche fondamentali. Profondit\u00e0 strategica infinita.',
+        'gameplay.node.title': 'Nodi', 'gameplay.node.desc': 'Attiva per stabilizzare i vicini. Sposta per riposizionare. Sacrifica per bloccare le minacce \u2014 a un costo.',
+        'gameplay.catalyst.title': 'Catalizzatori', 'gameplay.catalyst.desc': 'Potenze monouso. Invertono lo stato di tutte le celle adiacenti. Alto rischio, alta ricompensa.',
+        'gameplay.rift.title': 'La Faglia', 'gameplay.rift.desc': 'La fonte del caos. Indistruttibile. Si vendica quando stabilizzi nelle vicinanze. Contienila per vincere.',
+        'gameplay.lucidity.title': 'Lucidit\u00e0', 'gameplay.lucidity.desc': 'Ogni azione costa Lucidit\u00e0. Se finisce, la tua mente crolla. Giocare in modo efficiente fa guadagnare bonus.',
+        'modes.title': 'Modalit\u00e0 di Gioco', 'modes.subtitle': 'Da accessibile a estremo. Trova la tua sfida.',
+        'modes.reve.name': 'SOGNO', 'modes.reve.desc': 'Introduzione dolce. Lucidit\u00e0 generosa, poche minacce. Impara i fondamenti.',
+        'modes.songe.name': 'VISIONE', 'modes.songe.desc': 'Risorse limitate, pi\u00f9 instabilit\u00e0. Ogni mossa conta.',
+        'modes.lucide.name': 'LUCIDO', 'modes.lucide.desc': 'Difficolt\u00e0 estrema. Lucidit\u00e0 minima, caos massimo. Per i pi\u00f9 determinati.',
+        'modes.chain.name': 'MODALIT\u00c0 CATENA', 'modes.chain.desc': 'Arene infinite in escalation. Una sconfitta e finisce tutto. Quanto lontano arrivi?',
+        'modes.daily.name': 'SFIDA GIORNALIERA', 'modes.daily.desc': 'Tre puzzle unici ogni giorno. Stesso seed per tutti i giocatori. Costruisci la tua serie e condividi i punteggi.',
+        'screenshots.title': 'Screenshot', 'screenshots.subtitle': 'Uno sguardo al paesaggio onirico.',
+        'download.title': 'Pronto a Entrare nel Sogno?', 'download.desc': 'Gratis \u2014 sblocca la Modalit\u00e0 Catena, Seeds e Statistiche con un singolo acquisto.',
+        'footer.privacy': 'Informativa sulla Privacy', 'footer.copy': '\u00a9 2025-2026 Californy Lana. Tutti i diritti riservati.'
     }
 };
 
@@ -1176,18 +1181,54 @@ function toggleLang() {
     applyLang(langCycle[(idx + 1) % langCycle.length]);
 }
 
-// Smooth scroll
+// === Nav scroll effect ===
+window.addEventListener('scroll', () => {
+    document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+// === Scroll reveal ===
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// === Particles ===
+(function() {
+    const container = document.getElementById('particles');
+    if (!container) return;
+    for (let i = 0; i < 30; i++) {
+        const p = document.createElement('div');
+        p.className = 'p';
+        p.style.left = Math.random() * 100 + '%';
+        p.style.animationDuration = (8 + Math.random() * 12) + 's';
+        p.style.animationDelay = (Math.random() * 10) + 's';
+        p.style.width = p.style.height = (1 + Math.random() * 2) + 'px';
+        container.appendChild(p);
+    }
+})();
+
+// === Lightbox ===
+document.querySelectorAll('.screenshot-item img').forEach(img => {
+    img.addEventListener('click', () => {
+        document.getElementById('lightbox-img').src = img.src;
+        document.getElementById('lightbox').classList.add('active');
+    });
+});
+
+// === Smooth scroll (anchor links) ===
 document.querySelectorAll('a[href^="#"]').forEach(a => {
     const href = a.getAttribute('href');
-    if (href === '#') return; // Skip bare '#' (invalid selector)
+    if (href === '#') return;
     a.addEventListener('click', e => {
         e.preventDefault();
         const target = document.querySelector(href);
         if (target) target.scrollIntoView({ behavior: 'smooth' });
+        // Close mobile menu
+        document.querySelector('.nav-links').classList.remove('open');
     });
 });
 
-// Apply saved or detected language on load
+// Apply language on load
 applyLang(currentLang);
 </script>
 
